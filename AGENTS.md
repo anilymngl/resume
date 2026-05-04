@@ -92,6 +92,18 @@ Example:
 - turning fun local projects into fake enterprise products
 - bloating `AGENTS.md` with details that belong in the docs
 
+## Git & Deployment Strategy
+
+This repository relies on GitHub Pages "Classic Pages Config" to host the live resume directly from the `main` branch. 
+
+**Rule: `main` is production.**
+Every merge to `main` instantly triggers a deployment to `https://anilymngl.github.io/resume/`.
+
+**Workflow:**
+1. **Never edit `main` directly.** Always create a "story branch" detailing the intent of the changes (e.g., `feature/q2-2026-positioning-update` or `fix/remove-jargon`).
+2. **Make granular, meaningful commits.** Do not just write "updated resume." Commit by logical change (e.g., `refactor(html): implement skills grid` or `content: dejargon BlueCloud bullets`).
+3. **Merge via Pull Request.** Open a PR on GitHub to visualize the diff and perform the final `red-team-checklist.md` validation before publishing.
+
 ## Before Editing
 
 Ask:
