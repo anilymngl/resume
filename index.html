@@ -11,6 +11,218 @@
     rel="stylesheet"
   />
   <style>
+    /* ===== Screen styles: calm, senior, flat ===== */
+    @media screen {
+      body {
+        font-size: 15px;
+        line-height: 1.55;
+        color: #334155;
+      }
+
+      /* Narrower content, no outer card stack */
+      .resume-root {
+        padding: 2rem 1.5rem !important;
+      }
+
+      /* Header: softer card */
+      .resume-header {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0;
+        box-shadow: none !important;
+        border-radius: 0.5rem !important;
+        padding: 1.5rem 1.5rem !important;
+      }
+
+      /* Body sections: flatten, use subtle dividers */
+      .resume-root > div:not(.resume-header) {
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 1.25rem 0 !important;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .resume-root > div:not(.resume-header):last-child {
+        border-bottom: none;
+      }
+
+      /* Section H2 — clear, slightly smaller, with subtle underline */
+      .resume-root h2 {
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #475569 !important;
+        margin-bottom: 0.9rem !important;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid #cbd5e1;
+      }
+
+      /* Employer name */
+      .professional-experience h3 {
+        font-size: 1.05rem !important;
+        color: #0f172a !important;
+        margin-bottom: 0.25rem;
+      }
+
+      /* Sub-role (h4) — clearer hierarchy */
+      .professional-experience h4 {
+        font-size: 0.975rem !important;
+        color: #1e293b !important;
+        margin-top: 0.25rem;
+      }
+      .professional-experience h4 span {
+        font-weight: 400 !important;
+        color: #64748b !important;
+      }
+
+      /* More air between the two BlueCloud sub-roles */
+      .professional-experience .mt-6 {
+        margin-top: 1.75rem !important;
+      }
+
+      /* Header subtitle — less dominant, less likely to wrap */
+      .resume-header p.text-lg {
+        font-size: 0.95rem !important;
+        font-weight: 400 !important;
+        color: #64748b !important;
+        letter-spacing: 0.01em;
+        margin-bottom: 0.85rem !important;
+      }
+
+      /* Bullet readability */
+      .professional-experience ul {
+        padding-left: 1.1rem !important;
+      }
+      .professional-experience li {
+        margin-bottom: 0.5rem !important;
+        line-height: 1.62 !important;
+      }
+
+      /* Remove the italic role callout box styling (kept content, flattened visual) */
+      .professional-experience .italic.bg-slate-50 {
+        background: transparent !important;
+        padding: 0 !important;
+        margin-top: 0.35rem !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 0.875rem;
+        color: #64748b !important;
+      }
+
+      /* Soften the left-border quote style on bullet groups */
+      .professional-experience .border-l-2 {
+        border-left-width: 2px !important;
+        border-color: #e2e8f0 !important;
+        padding-left: 0.85rem !important;
+      }
+
+      /* Role team descriptor */
+      .role-blurb {
+        color: #64748b !important;
+        font-size: 0.875rem !important;
+        font-style: italic;
+        margin: 0.25rem 0 0.75rem !important;
+      }
+
+      /* Workstream sub-project blocks inside a role */
+      .role-workstreams {
+        display: flex;
+        flex-direction: column;
+        gap: 1.65rem;
+      }
+      .workstream-title {
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+        margin: 0 0 0.35rem 0 !important;
+        letter-spacing: 0.01em;
+      }
+      .workstream ul {
+        margin: 0 !important;
+        padding-left: 1.1rem !important;
+      }
+      .workstream li {
+        margin-bottom: 0.4rem !important;
+        line-height: 1.62 !important;
+      }
+
+      /* Projects: structured layout — title / descriptor / labeled meta */
+      .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+      }
+      .project-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .project-title {
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+      }
+      .project-desc {
+        color: #334155;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .project-meta {
+        font-size: 0.875rem;
+        color: #475569;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .project-meta strong {
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      /* ===== Skills: 2-col grid, flatter pills ===== */
+      .skills-grid > div {
+        margin-bottom: 0.75rem !important;
+      }
+      @media (min-width: 768px) {
+        .skills-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 2rem;
+          row-gap: 0.75rem;
+        }
+        .skills-grid > div {
+          margin-bottom: 0.25rem !important;
+        }
+        /* Longest bucket (Applications & Delivery) spans full width on last row */
+        .skills-grid > div:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+      .skills-grid h3 {
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #475569 !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .skills-grid .flex.flex-wrap.gap-2 {
+        gap: 0.35rem !important;
+      }
+      .skills-grid .flex.flex-wrap.gap-2 span {
+        background: #f1f5f9 !important;
+        color: #334155 !important;
+        border-radius: 0.25rem !important;
+        padding: 0.2rem 0.5rem !important;
+        font-size: 0.78rem !important;
+        font-weight: 400 !important;
+        transition: none !important;
+      }
+      .skills-grid .flex.flex-wrap.gap-2 span:hover {
+        background: #f1f5f9 !important;
+      }
+    }
+
+    /* ===== Print styles ===== */
     @media print {
       body {
         width: 100%;
@@ -18,58 +230,92 @@
         padding: 0;
         background: white !important;
         color: black !important;
+        font-size: 10.5pt;
+        line-height: 1.4;
       }
-      
-      .max-w-5xl {
+
+      .resume-root {
         max-width: none !important;
-        padding: 0.75in !important;
+        padding: 0.6in 0.7in !important;
         margin: 0 auto !important;
       }
 
-      .space-y-6 > * + * {
-        margin-top: 1.25rem !important;
+      .resume-root > div {
+        background: white !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0.5rem 0 !important;
+        border-bottom: 1px solid #cbd5e1 !important;
+      }
+      .resume-root > div:last-child { border-bottom: none !important; }
+
+      .resume-header {
+        border: none !important;
+        padding: 0 0 0.5rem 0 !important;
+        margin-bottom: 0.25rem !important;
       }
 
-      h2, h3 {
+      h1 { font-size: 18pt !important; margin-bottom: 0.15rem !important; }
+      .resume-header p.text-lg { font-size: 11pt !important; margin-bottom: 0.35rem !important; }
+      h2 {
+        font-size: 10pt !important;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        border-bottom: 1px solid #64748b !important;
+        padding-bottom: 0.1rem;
+        margin: 0.6rem 0 0.35rem !important;
         break-after: avoid !important;
-        margin-top: 1.5rem !important;
-        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
       }
+      h3 { font-size: 11pt !important; margin-top: 0.25rem !important; }
+      h4 { font-size: 10.5pt !important; }
 
       .list-disc {
-        margin-left: 1.25rem !important;
+        margin-left: 1rem !important;
         page-break-inside: avoid !important;
       }
-
-      .text-3xl { font-size: 1.75rem !important; }
-      .text-xl { font-size: 1.35rem !important; }
-      .text-lg { font-size: 1.15rem !important; }
-      
-      .flex.flex-wrap.gap-2 span {
-        padding: 0.35rem 0.85rem !important;
-        margin: 0.25rem !important;
-        border: 1px solid #444 !important;
-        background: white !important;
-        color: black !important;
-        font-weight: 500 !important;
-      }
-
-      .space-y-4 {
-        margin-bottom: 1.25rem !important;
-      }
-
       .list-disc li {
-        margin-bottom: 0.5rem !important;
-        line-height: 1.5 !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.35 !important;
       }
 
       .professional-experience > div {
         page-break-inside: avoid !important;
       }
+      .professional-experience .italic.bg-slate-50 {
+        background: transparent !important;
+        padding: 0 !important;
+        font-size: 9.5pt !important;
+      }
+      .professional-experience .border-l-2 {
+        border-left: none !important;
+        padding-left: 0 !important;
+      }
+
+      /* Flatten pills as compact bordered chips */
+      .flex.flex-wrap.gap-2 span {
+        padding: 0.1rem 0.45rem !important;
+        margin: 0.1rem 0.2rem 0.1rem 0 !important;
+        border: 1px solid #94a3b8 !important;
+        background: white !important;
+        color: black !important;
+        border-radius: 0.2rem !important;
+        font-size: 9pt !important;
+        font-weight: 400 !important;
+      }
+
+      /* Two-column skills in print too */
+      .skills-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        column-gap: 1.25rem !important;
+        row-gap: 0.25rem !important;
+      }
 
       .flex.flex-wrap.justify-center.gap-4 {
         justify-content: space-around !important;
-        margin-bottom: 1rem !important;
+        margin-bottom: 0.25rem !important;
+        font-size: 9.5pt !important;
       }
 
       a {
@@ -78,39 +324,16 @@
         word-break: break-all !important;
       }
 
-      .bg-white, .bg-slate-50, .dark\:bg-slate-800 {
-        background-color: white !important;
-        box-shadow: none !important;
-        border: none !important;
-      }
-      
-      .dark\:bg-gray-900,
-      .dark\:bg-slate-800,
-      .dark\:bg-slate-700 {
+      .bg-white, .bg-slate-50, .bg-slate-100,
+      .dark\:bg-gray-900, .dark\:bg-slate-800, .dark\:bg-slate-700 {
         background-color: white !important;
       }
-      
-      .dark\:text-slate-100,
-      .dark\:text-slate-200,
-      .dark\:text-slate-300 {
+      .dark\:text-slate-100, .dark\:text-slate-200, .dark\:text-slate-300,
+      .text-slate-600, .text-slate-700, .text-slate-800 {
         color: black !important;
       }
-      
-      .shadow-md,
-      .shadow-sm {
-        box-shadow: none !important;
-      }
-      
-      .rounded-lg,
-      .rounded-full {
-        border-radius: 0 !important;
-      }
-      
-      .text-slate-600,
-      .text-slate-700,
-      .text-slate-800 {
-        color: black !important;
-      }
+      .shadow-md, .shadow-sm { box-shadow: none !important; }
+      .rounded-lg, .rounded-full { border-radius: 0 !important; }
     }
   </style>
   <script>
@@ -120,13 +343,13 @@
   </script>
 </head>
 <body class="bg-white dark:bg-gray-900">
-  <div class="max-w-5xl mx-auto p-6 space-y-6">
+  <div class="resume-root max-w-4xl mx-auto p-6 space-y-6">
     <!-- Header Section -->
-    <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+    <div class="resume-header bg-slate-50 dark:bg-slate-800 p-6 rounded-lg shadow-sm">
       <div class="text-center mb-6">
         <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">ANIL YAMANGIL</h1>
         <p class="text-lg text-slate-600 dark:text-slate-300 mb-4">
-          Senior Data &amp; Analytics Professional (Enterprise LLM Enthusiast)
+          Senior AI/ML Engineer | Applied AI, Data Engineering &amp; Enterprise Analytics
         </p>
         <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-600 dark:text-slate-300">
           <a href="mailto:yamangilanil@gmail.com" class="flex items-center gap-1 hover:text-slate-500 dark:hover:text-slate-400 transition-colors">
@@ -154,81 +377,99 @@
     <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
       <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Professional Summary</h2>
       <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-        A Senior Data &amp; Analytics specialist with 5+ years of experience in building end-to-end solutions. Expert in data engineering, machine learning, and enterprise analytics across diverse industries including retail and real estate. Passionate about emerging AI/ML advances, particularly large language models (LLMs) and their enterprise applications. Proven track record in mentoring teams, driving innovation, and delivering impactful solutions through cloud-based platforms.
+        Senior AI/ML Engineer with 8+ years across enterprise data engineering, analytics, retail optimization, decision systems, and applied AI. Experienced in translating messy business constraints into reliable pipelines, governed metrics, and decision-ready datasets on Snowflake and Databricks. Recent work focuses on Snowflake-based applied AI, including Cortex Analyst, Snowflake's text-to-SQL engine over Semantic Views; Cortex Search, Snowflake's managed fuzzy/semantic search and retrieval service; retrieval evaluation tooling; Snowflake-persisted scoring workflows; and Streamlit-based review interfaces. Earlier work includes production retail optimization, forecasting, replenishment systems, and enterprise analytics delivery across real estate technology and retail.
       </p>
     </div>
 
     <!-- Professional Experience -->
-    <div class="bg-white shadow-md rounded-lg p-4">
+    <div class="bg-white shadow-md rounded-lg p-4 professional-experience">
       <h2 class="text-xl font-semibold text-slate-800">Professional Experience</h2>
-      <div class="space-y-8">
-        <!-- BlueCloud -->
+      <div class="space-y-8 mt-4">
+        <!-- BlueCloud AI/ML -->
         <div class="space-y-4">
           <h3 class="font-semibold text-slate-800">
-            BlueCloud, Tampa, US (Remote)
+            BlueCloud, Tampa, US (Remote) | Aug 2022 – Present
           </h3>
-          <p class="text-slate-600">Senior Analytics Consultant & Engineer</p>
-          <span class="text-slate-600">Aug 2022 – Present</span>
-          <p class="text-slate-600 mt-2 italic bg-slate-50 p-4 rounded-lg">
-            Serving Client: JLL Technologies – Senior Data Consultant & Data Engineer
-          </p>
-          <div class="pl-4 border-l-2 border-slate-200 space-y-4">
-            <h4 class="font-medium text-slate-700 mb-2">
-              Technical Leadership &amp; Architecture
-            </h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-              <li>
-                Assisted in transitioning critical business systems to Snowflake
-                and Databricks, minimizing disruption and supporting large-scale
-                data operations.
-              </li>
-              <li>
-                Led schema design sessions, establishing consistent data modeling
-                standards across multiple business units.
-              </li>
-            </ul>
-            <h4 class="font-medium text-slate-700 mb-2">Strategic Consulting</h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-              <li>
-                Served as an internal data consultant, advising on analytics
-                roadmaps and data architecture.
-              </li>
-              <li>
-                Championed best practices in data engineering, resulting in smoother
-                data flows and improved governance.
-              </li>
-            </ul>
-            <h4 class="font-medium text-slate-700 mb-2">
-              Team Development &amp; Mentorship
-            </h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-              <li>
-                Mentored data engineers and analysts on pipeline optimization and
-                data engineering best practices.
-              </li>
-              <li>
-                Organized training sessions on advanced data engineering topics and
-                cloud-native platforms.
-              </li>
-            </ul>
-            <h4 class="font-medium text-slate-700 mb-2">
-              Project Delivery &amp; Impact
-            </h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-              <li>
-                Built and maintained Tableau dashboards for executive-level metrics,
-                enabling data-driven decisions across multiple operational teams.
-              </li>
-              <li>
-                Optimized ETL processes, significantly improving processing speeds
-                and reliability in mission-critical pipelines.
-              </li>
-              <li>
-                Provided analytics insights that guided resource allocation and
-                operational efficiencies within JLL's real estate technology
-                ecosystem.
-              </li>
-            </ul>
+          <div class="mt-4">
+            <h4 class="font-medium text-slate-800">Senior AI/ML Engineer <span class="text-slate-600 font-normal">| Jan 2026 – Present</span></h4>
+            <p class="role-blurb">AI/ML Team — Cortex Analyst text-to-SQL, Cortex Search retrieval, and Snowflake Semantic Views</p>
+            <div class="pl-4 border-l-2 border-slate-200 mt-2">
+              <div class="role-workstreams">
+                <div class="workstream">
+                  <h5 class="workstream-title">Cortex Search Evaluation Framework — managed search/retrieval</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Built the benchmark design, deterministic retrieval scoring, Snowflake persistence layer, and TruLens/Snowsight observability integration for a client-facing Cortex Search evaluation framework.
+                    </li>
+                    <li>
+                      Implemented corpus-first benchmark cases built from known source records, retrieval scorers for target hit@k, rank, filter correctness, duplicate saturation, and latency, plus Snowflake tables for evaluation runs, test cases, and scores.
+                    </li>
+                    <li>
+                      Built a Cortex Code Agent SDK workflow for classifying evaluation failures using read-only SQL tool guardrails, structured findings with confidence scores, SQL evidence references, and four failure categories: benchmark, evaluator, service, and workflow.
+                    </li>
+                  </ul>
+                </div>
+                <div class="workstream">
+                  <h5 class="workstream-title">Cortex Analyst Evaluation Framework — text-to-SQL over Semantic Views</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Built scoring, review, and failure-classification workflows for a Cortex Analyst evaluation harness over Snowflake Semantic Views.
+                    </li>
+                    <li>
+                      Separated scoring for data results, SQL logic, and answer quality; added semantic judge checks, high-confidence override rules, and structured tuning backlogs for Semantic View fixes.
+                    </li>
+                    <li>
+                      Built a Streamlit operator console for benchmark browsing, batch and single-question runs, generated-SQL / response / result inspection, cross-run comparison, performance analytics, golden-SQL validation, and EXPLAIN-plan review.
+                    </li>
+                  </ul>
+                </div>
+                <div class="workstream">
+                  <h5 class="workstream-title">Semantic View Factory — internal accelerator for Snowflake metric/relationship modeling</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Prototyped an internal Snowflake Semantic View accelerator using staged schema discovery, join/grain checks, deterministic YAML assembly, quality gates, and golden-test / regression-test workflows.
+                    </li>
+                  </ul>
+                </div>
+                <div class="workstream">
+                  <h5 class="workstream-title">Research, Documentation &amp; Client Enablement</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Authored client-facing research and technical deliverables across both Cortex Search and Cortex Analyst workstreams — benchmark design specs, scoring architecture documents, notes on judge behavior and model upgrades, stress-test cases for non-additive metrics and fan-out risks, technical and c-level presentations, operations runbooks, and console documentation.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <h4 class="font-medium text-slate-800">Senior Analytics Consultant & Engineer <span class="text-slate-600 font-normal">| Client: JLL Technologies | Aug 2022 – Dec 2025</span></h4>
+            <div class="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
+              <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li>
+                  Maintained and improved reliability for Snowflake and Databricks analytics pipelines used across multiple teams and business domains.
+                </li>
+                <li>
+                  Built and optimized ELT/ETL workflows using SQL, Python, PySpark, and Databricks job/orchestration patterns, focusing on performance, stability, and maintainability.
+                </li>
+                <li>
+                  Defined and improved schema design and data modeling standards, aligning stakeholders on metric definitions and reducing downstream reporting ambiguity.
+                </li>
+                <li>
+                  Introduced data quality validation and monitoring patterns to reduce silent reporting regressions.
+                </li>
+                <li>
+                  Delivered Tableau reporting on top of governed metric layers for executive visibility, operational reporting, and planning workflows.
+                </li>
+                <li>
+                  Acted as an embedded data architecture advisor, helping define modeling standards, data quality patterns, ownership boundaries, and Snowflake and Databricks delivery practices.
+                </li>
+                <li>
+                  Mentored engineers and analysts through design reviews, technical training, and delivery support.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -240,89 +481,30 @@
           <p class="text-slate-600">Senior Analytics Consultant</p>
           <span class="text-slate-600">Feb 2018 – Jun 2022</span>
           <p class="text-slate-600 mt-2 italic bg-slate-50 p-4 rounded-lg">
-            Invent Analytics was a rapidly growing startup focused on SaaS-based
-            omni-channel optimization for retailers. As a member of the client
-            solutions team, I progressed from a mid-level to senior consultant,
-            primarily coding for client-facing deliverables (about 75%), while
-            occasionally contributing to core product enhancements (about 25%).
-            This environment demanded constant juggling of client requirements,
-            code sprints, and cross-team alignment.
+            Client Solutions Team | Python, ETL, Forecasting, Retail Optimization
           </p>
           <div class="pl-4 border-l-2 border-slate-200 space-y-4">
-            <h4 class="font-medium text-slate-700 mb-2">
-              Client-Centric Analytics &amp; Implementation
-            </h4>
             <ul class="list-disc pl-5 space-y-2 text-slate-600">
               <li>
-                Spearheaded custom analytics solutions for diverse retail clients,
-                addressing complex needs in inventory, fulfillment, and pricing
-                optimization.
+                Delivered client-facing analytics, forecasting, and optimization implementations for multiple retail clients across inventory, replenishment, fulfillment, and pricing use cases.
               </li>
               <li>
-                Managed onboarding and rollout phases, tailoring the SaaS platform
-                to each client's unique business model and data sources.
+                Designed and deployed a custom inventory optimization system for a large electronics retailer transitioning to a central-warehouse model, modeling operational constraints as production decision logic.
               </li>
               <li>
-                Navigated fast-paced schedules with frequent late-night code
-                deployments, morning steering committees, and dynamic stakeholder
-                demands.
-              </li>
-            </ul>
-            <h4 class="font-medium text-slate-700 mb-2">
-              Technical Contributions
-            </h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-              <li>
-                Developed Python ETL &amp; ML pipelines integral to client reporting
-                and forecasting processes, ensuring smooth integration into
-                Invent's broader SaaS environment.
+                Delivered a production inventory optimization system with measured outcomes over roughly one year, including ~3% lost-sales reduction, 7%+ availability improvement, and ~10% inventory-turnover improvement.
               </li>
               <li>
-                Collaborated with the product development team to refine and
-                periodically extend core optimization algorithms, bridging client
-                feature requests with the evolving product roadmap.
+                Built Python/SQL ETL, ML, simulation, forecasting, reporting, and integration pipelines within Invent's broader SaaS optimization platform.
               </li>
               <li>
-                Balanced short-term customizations against the platform's long-term
-                vision, focusing on maintainability and reusability.
-              </li>
-            </ul>
-            <h4 class="font-medium text-slate-700 mb-2">
-              Cross-Functional &amp; Startup Challenges
-            </h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-              <li>
-                Partnered closely with DevOps engineers, data scientists, and
-                front-end teams, translating user feedback into actionable product
-                changes.
+                Led end-to-end client implementation work from data onboarding and configuration through rollout, UAT, production support, and stakeholder alignment.
               </li>
               <li>
-                Led micro-trainings and code review sessions for junior consultants,
-                instilling best practices in data manipulation, forecasting, and
-                optimization.
+                Partnered with product and engineering teams to refine optimization algorithms while balancing client-specific requirements with platform maintainability.
               </li>
               <li>
-                Maintained close communication with client leadership—often bridging
-                gaps between business priorities and technical feasibility.
-              </li>
-            </ul>
-            <h4 class="font-medium text-slate-700 mb-2">
-              Advancement &amp; Leadership
-            </h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-              <li>
-                Progressed to a senior role, overseeing small squads on
-                tight-deadline projects, ensuring high-impact releases were
-                delivered with quality.
-              </li>
-              <li>
-                Mentored new team members in analytics methods and client engagement
-                strategies, fostering a culture of continuous improvement.
-              </li>
-              <li>
-                Contributed to Invent's reputation as a trusted AI-driven solution
-                provider, enabling retailers to integrate real-time analytics into
-                daily decision-making.
+                Led squads of 2–4 people across concurrent client engagements and mentored junior consultants through code reviews and micro-trainings.
               </li>
             </ul>
           </div>
@@ -338,16 +520,10 @@
           <div class="pl-4 border-l-2 border-slate-200 space-y-4">
             <ul class="list-disc pl-5 space-y-2 text-slate-600">
               <li>
-                Led Oracle Service Cloud implementations for clients in the UAE and
-                Turkey, streamlining their customer-service processes.
+                Supported Oracle Service Cloud implementations for clients in the UAE and Turkey.
               </li>
               <li>
-                Managed vendor web portal and mobile application development,
-                focusing on improved user experiences and operational agility.
-              </li>
-              <li>
-                Deployed Human Capital Management Fusion Application solutions,
-                aligning HR workflows with overall enterprise strategies.
+                Coordinated vendor web portal and mobile application development.
               </li>
             </ul>
           </div>
@@ -377,7 +553,7 @@
     <!-- Education -->
     <div class="bg-white shadow-md rounded-lg p-4">
       <h2 class="text-xl font-semibold text-slate-800">Education</h2>
-      <div class="space-y-4">
+      <div class="space-y-4 mt-4">
         <div>
           <h3 class="font-medium text-slate-800">
             Bachelor of Science in Industrial Engineering (Dual Diploma Program)
@@ -395,35 +571,34 @@
             Istanbul Technical University, Turkey (2011–2016)
           </p>
           <p class="text-slate-600">Minor in Mathematics </p>
-		  <p class="text-slate-600">GPA: 3.03 </p>
+          <p class="text-slate-600">GPA: 3.03 </p>
         </div>
       </div>
     </div>
 
-    <!-- Highlights & Interests -->
+    <!-- Selected Independent Technical Projects -->
     <div class="bg-white shadow-md rounded-lg p-4">
-      <h2 class="text-xl font-semibold text-slate-800">Highlights &amp; Interests</h2>
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-medium text-slate-700">Generative AI Enthusiasm</h3>
-          <p class="text-slate-600">
-            Exploring LLM-based workflows—prototyping text analysis and enterprise
-            data solutions.
-          </p>
-        </div>
-        <div>
-          <h3 class="font-medium text-slate-700">Cross-Industry Impact</h3>
-          <p class="text-slate-600">
-            Experience in retail, real estate, and consulting, adapting analytics
-            to diverse challenges.
-          </p>
-        </div>
-        <div>
-          <h3 class="font-medium text-slate-700">Team-Focused Leadership</h3>
-          <p class="text-slate-600">
-            Fostering collaborative culture and aligning stakeholders around
-            data-driven goals.
-          </p>
+      <h2 class="text-xl font-semibold text-slate-800">Independent Fun & Technical Projects — Local Prototypes</h2>
+      <div class="space-y-4 mt-4">
+        <div class="projects-list">
+          <div class="project-item">
+            <div class="project-title">RAG Glassbox / Local RAG Case Study</div>
+            <p class="project-desc">A laptop-local workbench for testing RAG systems and comparing retrieval strategies with measurable results.</p>
+            <p class="project-meta"><strong>Stack:</strong> BM25 + Milvus Lite hybrid retrieval, cross-encoder reranking, span-aware exact-match/F1 scoring, guarded LLM judge with exact-answer checks, SQLite telemetry, SHA256 signatures to detect index drift, Streamlit run-diff and context-audit views.</p>
+            <p class="project-meta"><strong>Result:</strong> Recall@10 on fictional-entity queries improved from ~0.43 (dense-only) to ~0.85 (sparse + rerank).</p>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Cognos Studio — Turkish-first thinking-game engine</div>
+            <p class="project-desc">A mobile/web app where players solve short intellectual challenges in Turkish and receive fair, explainable AI scoring.</p>
+            <p class="project-meta"><strong>Stack:</strong> React 19, TypeScript, Capacitor, Gemini, local Ollama, Playwright.</p>
+            <p class="project-meta"><strong>Architecture:</strong> provider layer for switching between Gemini and local Ollama, strict/style-blind judging flow with arbiter logic, scoring rules tied to rubric thresholds, structured JSON recovery, call budgeting, and a UI that shows judging steps during slow local inference.</p>
+            <p class="project-meta"><strong>Tests:</strong> unit, typed-contract, Playwright e2e, and a headless judge-calibration harness ("Evalception").</p>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Signal Ledger — source-traceable editorial pipeline prototype</div>
+            <p class="project-desc">A pipeline that turns raw social-media posts into a traceable daily news brief — every AI output can be traced back to its original source post.</p>
+            <p class="project-meta"><strong>Stack:</strong> SQLAlchemy/Alembic schema, raw post-payload persistence, PydanticAI-typed signal extraction on local Ollama (gemma3), and rule-based anchor-consistency logic for repairing story groups — preventing runaway merges where loosely related stories collapse into one cluster.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -431,74 +606,84 @@
     <!-- Core Competencies -->
     <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
       <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-6">Core Competencies</h2>
+      <div class="skills-grid">
 
-      <!-- Data Engineering & Infrastructure -->
+      <!-- Snowflake & Applied AI -->
       <div class="mb-6">
         <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
-          Data Engineering &amp; Infrastructure
+          Snowflake &amp; Data Platforms
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Agents</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Analyst / Text-to-SQL</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Search / Retrieval</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake Semantic Views / Metrics Layer</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Streamlit in Snowflake</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake AI Observability (TruLens)</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Databricks</span>
+        </div>
+      </div>
+
+      <!-- Data Engineering -->
+      <div class="mb-6">
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
+          Data Engineering
         </h3>
         <div class="flex flex-wrap gap-2">
           <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Python</span>
           <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">SQL</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">R</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Git</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Docker</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Airflow</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">PySpark</span>
           <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">ETL/ELT</span>
-        </div>
-      </div>
-
-      <!-- Cloud & Enterprise Platforms -->
-      <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">Cloud &amp; Enterprise</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Databricks</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Airflow</span>
           <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Azure Data Factory</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Azure DevOps</span>
           <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Delta Lake</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">AWS S3/EMR</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">BigQuery</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Docker</span>
         </div>
       </div>
 
-      <!-- Machine Learning & Analytics -->
+      <!-- Applied AI Engineering -->
       <div class="mb-6">
         <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
-          Machine Learning &amp; Analytics
+          Applied AI Engineering
         </h3>
         <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Production Forecasting</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Custom agent workflows / Cortex Code SDK</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Deterministic Retrieval Scoring</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">LLM-as-Judge</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Agent-assisted failure analysis</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Typed LLM outputs with Pydantic</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Ablation Studies</span>
+        </div>
+      </div>
+
+      <!-- Analytics & ML -->
+      <div class="mb-6">
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
+          Analytics &amp; Decision Systems
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Forecasting</span>
           <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Time Series Analysis</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Optimization</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Statistical Analysis</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">MLflow</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Neural Networks</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Inventory Optimization</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Tableau</span>
         </div>
       </div>
 
-      <!-- LLM & Modern Data -->
+      <!-- Applications & Delivery -->
       <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
-          LLM &amp; Modern Data
-        </h3>
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">Applications &amp; Delivery</h3>
         <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">LangChain</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Vector DBs</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Text Analysis</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">LLM Application Design</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Prompt Engineering</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Streamlit</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">FastAPI</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">React</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">TypeScript</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">CI/CD</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Code Review</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Technical Documentation</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Stakeholder Management</span>
         </div>
       </div>
-
-      <!-- Leadership -->
-      <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">Leadership</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Technical Mentoring</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Stakeholder Alignment</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Training &amp; Documentation</span>
-        </div>
       </div>
     </div>
   </div>
