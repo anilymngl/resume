@@ -1,0 +1,742 @@
+<!--
+  signal-resume.html — Signal Edition of Anıl Yamangil's resume.
+
+  Applies the Signal artifact framework:
+    - Truth labels (built / delivered / active / team / prototype) as subtle markers
+    - The Turn — narrative career arc, not a flat summary
+    - Concrete anchor examples — named cases that reveal patterns
+    - Scope notes — honest framing under each role
+    - Color semantics — green (delivered), blue (active), amber (foundational), gray (early)
+    - Limitations stated — what this resume can and can't tell you
+
+  NOT the source of truth. index.html remains the production resume.
+  NOT consumed by build/build_ats_pdf.py.
+  All content facts mirror index.html and docs/current-resume-positioning.md.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="format-detection" content="telephone=no, date=no"/>
+  <meta name="description" content="Anıl Yamangil — Senior AI/ML Engineer. Signal Edition." />
+  <title>Anıl Yamangil — Signal Edition</title>
+  <style>
+    /* ===== Signal color system ===== */
+    :root {
+      --fg:         #1a1a2e;
+      --fg-muted:   #4a4a5e;
+      --fg-soft:    #78788a;
+      --bg:         #fafaf8;
+      --bg-card:    #ffffff;
+      --rule:       #e2e2e0;
+
+      /* Signal semantics */
+      --c-built:    #2d6a4f;   /* green  — delivered, shipped, measured */
+      --c-active:   #1e6091;   /* blue   — current, in-progress */
+      --c-foundational: #b5838d; /* amber/rose — foundational, early */
+      --c-early:    #9a9a8a;   /* gray   — early roles, internships */
+      --c-accent:   #2d6a4f;   /* primary accent = green */
+
+      --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono:  ui-monospace, SFMono-Regular, Menlo, "Cascadia Code", monospace;
+
+      --content-w:  820px;
+      --gutter:     1.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg:        #e8e6e0;
+        --fg-muted:  #b8b6ae;
+        --fg-soft:   #888680;
+        --bg:        #121210;
+        --bg-card:   #1a1a16;
+        --rule:      #2a2a24;
+        --c-built:   #52b788;
+        --c-active:  #5ea8d6;
+        --c-foundational: #d4a0ac;
+        --c-early:   #7a7a6a;
+        --c-accent:  #52b788;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+    }
+
+    a { color: var(--c-active); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .doc {
+      max-width: var(--content-w);
+      margin: 0 auto;
+      padding: 3rem var(--gutter) 4rem;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .header__name {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+    }
+
+    .header__label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-active);
+      margin-bottom: 1.25rem;
+    }
+
+    .header__contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* ===== The Turn ===== */
+    .turn {
+      margin-bottom: 3.5rem;
+      padding: 1.5rem 1.75rem;
+      border-left: 3px solid var(--c-built);
+      background: var(--bg-card);
+      border-radius: 0 0.35rem 0.35rem 0;
+    }
+
+    .turn__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--c-built);
+      margin-bottom: 0.75rem;
+    }
+
+    .turn__text {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--fg);
+    }
+
+    .turn__text em {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--c-active);
+    }
+
+    /* ===== Section ===== */
+    .sec {
+      margin-bottom: 3rem;
+    }
+
+    .sec__head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .sec__title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg);
+    }
+
+    /* ===== Role card ===== */
+    .role {
+      margin-bottom: 2.5rem;
+      padding-left: 1rem;
+    }
+
+    .role--active   { border-left: 3px solid var(--c-active); }
+    .role--delivered { border-left: 3px solid var(--c-built); }
+    .role--foundational { border-left: 3px solid var(--c-foundational); }
+    .role--early     { border-left: 3px solid var(--c-early); }
+
+    .role__employer {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 0.15rem;
+    }
+
+    .role__meta {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .role__scope {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--fg-soft);
+      margin-bottom: 1rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--bg);
+      border-radius: 0.25rem;
+      display: inline-block;
+    }
+
+    /* ===== Sub-role ===== */
+    .subrole {
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .subrole__title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.15rem;
+    }
+
+    .subrole__title .era {
+      font-family: var(--font-mono);
+      font-weight: 400;
+      font-size: 0.76rem;
+      color: var(--fg-muted);
+      margin-left: 0.4rem;
+    }
+
+    .subrole__ctx {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--fg-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ===== Workstream ===== */
+    .workstream {
+      margin-bottom: 1.1rem;
+    }
+
+    .workstream__title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.35rem;
+    }
+
+    /* ===== Bullet lists ===== */
+    ul.bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0;
+    }
+
+    ul.bullets li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.45rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--fg-muted);
+    }
+
+    ul.bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--fg-soft);
+    }
+
+    /* ===== Anchor example (callout) ===== */
+    .anchor {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border-left: 3px solid var(--c-built);
+      background: var(--bg);
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+
+    .anchor__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-built);
+      margin-bottom: 0.35rem;
+    }
+
+    .anchor__text {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--fg);
+    }
+
+    /* ===== Projects list ===== */
+    .project {
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--c-active);
+    }
+
+    .project__title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.25rem;
+    }
+
+    .project__desc {
+      font-size: 0.88rem;
+      color: var(--fg-muted);
+      margin-bottom: 0.35rem;
+      line-height: 1.5;
+    }
+
+    .project__meta {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      line-height: 1.5;
+    }
+
+    .project__meta strong {
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    /* ===== Skills grid ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+
+    .skill-cat__name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--fg);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-cat__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .skill-chip {
+      font-size: 0.76rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.2rem;
+      background: var(--bg);
+      color: var(--fg-muted);
+      border: 1px solid var(--rule);
+    }
+
+    .skill-chip--delivered { border-color: var(--c-built); color: var(--c-built); }
+    .skill-chip--active    { border-color: var(--c-active); color: var(--c-active); }
+
+    /* ===== Limitations ===== */
+    .limitations {
+      margin-top: 3rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--rule);
+      border-radius: 0.35rem;
+    }
+
+    .limitations__title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--fg-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .limitations__list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .limitations__list li {
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.82rem;
+      color: var(--fg-soft);
+      margin-bottom: 0.35rem;
+      line-height: 1.5;
+    }
+
+    .limitations__list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--fg-soft);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.72rem;
+      color: var(--fg-soft);
+      font-family: var(--font-mono);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      html { font-size: 14px; }
+      .doc { padding: 1.5rem 1rem 2.5rem; }
+      .turn { padding: 1rem; }
+      .role { padding-left: 0.75rem; }
+    }
+
+    /* ===== Print ===== */
+    @media print {
+      :root {
+        --bg: white;
+        --bg-card: white;
+        --fg: black;
+        --fg-muted: #333;
+        --fg-soft: #555;
+        --rule: #ccc;
+        --c-built: #1a5c3a;
+        --c-active: #1a4a6a;
+        --c-foundational: #6a4a5a;
+        --c-early: #5a5a4a;
+      }
+      body { font-size: 10pt; line-height: 1.4; }
+      .doc { max-width: none; padding: 0.5in 0.6in; }
+      .role, .project, .turn { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="doc">
+
+    <!-- ============================================================ -->
+    <!-- HEADER -->
+    <!-- ============================================================ -->
+    <header class="header">
+      <h1 class="header__name">Anıl Yamangil</h1>
+      <div class="header__label">Senior AI/ML Engineer</div>
+      <div class="header__contact">
+        <span>yamangilanil@gmail.com</span>
+        <span>+90 541 622 03 93</span>
+        <span>Istanbul, Turkey</span>
+        <a href="https://www.linkedin.com/in/yamangilanil">linkedin.com/in/yamangilanil</a>
+      </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- THE TURN — Narrative career arc -->
+    <!-- ============================================================ -->
+    <div class="turn">
+      <div class="turn__label">Career Arc</div>
+      <p class="turn__text">
+        Four years building production retail optimization, forecasting, and replenishment systems under real inventory constraints taught me that most analytics problems aren't mathematical — they're about <em>messy data, stakeholder alignment, and making decisions people trust.</em> Three years building governed data platforms on Snowflake and Databricks for JLL Technologies reinforced that lesson at enterprise scale. Now I build <em>AI evaluation and review workflows</em> — where the hardest problem is not the model output, but how you measure, trust, and improve it systematically.
+      </p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PROFESSIONAL EXPERIENCE -->
+    <!-- ============================================================ -->
+    <section class="sec">
+      <div class="sec__head">
+        <h2 class="sec__title">Professional Experience</h2>
+      </div>
+
+      <!-- BlueCloud — Active (blue) -->
+      <div class="role role--active">
+        <div class="role__employer">BlueCloud, Tampa, US (Remote)</div>
+        <div class="role__meta">Aug 2022 – Present</div>
+        <div class="role__scope">Current: AI/ML evaluation frameworks in active client delivery (Jan 2026–Present). Prior: data platform consulting for JLL Technologies (2022–2025).</div>
+
+        <!-- Sub-role: Senior AI/ML Engineer -->
+        <div class="subrole">
+          <div class="subrole__title">
+            Senior AI/ML Engineer <span class="era">Jan 2026 – Present</span>
+          </div>
+          <div class="subrole__ctx">AI/ML Team — Cortex Analyst text-to-SQL, Cortex Search retrieval, and Snowflake Semantic Views</div>
+
+          <!-- Workstream 1: Cortex Search Eval -->
+          <div class="workstream">
+            <div class="workstream__title">Cortex Search Evaluation Framework — managed search/retrieval</div>
+            <ul class="bullets">
+              <li>Built the benchmark design, deterministic retrieval scoring, Snowflake persistence layer, and TruLens/Snowsight observability integration for a client-facing Cortex Search evaluation framework.</li>
+              <li>Implemented corpus-first benchmark cases built from known source records, retrieval scorers for target hit@k, rank, filter correctness, duplicate saturation, and latency, plus Snowflake tables for evaluation runs, test cases, and scores.</li>
+              <li>Built a Cortex Code Agent SDK workflow for classifying evaluation failures using read-only SQL tool guardrails, structured findings with confidence scores, SQL evidence references, and four failure categories: benchmark, evaluator, service, and workflow.</li>
+            </ul>
+          </div>
+
+          <!-- Concrete anchor: multi-surface scoring -->
+          <div class="anchor">
+            <div class="anchor__label">Concrete Pattern</div>
+            <p class="anchor__text">
+              <strong>Separate scoring for data results, SQL logic, and answer quality.</strong> A Cortex Analyst response can be numerically correct but use the wrong aggregation grain (false-green), or correct in logic but mislabeled (amber). We separated three scoring surfaces — data results, SQL correctness, and answer quality — with semantic judge checks and high-confidence override rules. This separation caught failures that single-surface scoring missed and produced a structured tuning backlog for each Semantic View fix.
+            </p>
+          </div>
+
+          <!-- Workstream 2: Cortex Analyst Eval -->
+          <div class="workstream">
+            <div class="workstream__title">Cortex Analyst Evaluation Framework — text-to-SQL over Semantic Views</div>
+            <ul class="bullets">
+              <li>Built scoring, review, and failure-classification workflows for a Cortex Analyst evaluation harness over Snowflake Semantic Views.</li>
+              <li>Added semantic judge checks, high-confidence override rules, and structured tuning backlogs for Semantic View fixes.</li>
+              <li>Built a Streamlit operator console for benchmark browsing, batch and single-question runs, generated-SQL / response / result inspection, cross-run comparison, performance analytics, golden-SQL validation, and EXPLAIN-plan review.</li>
+            </ul>
+          </div>
+
+          <!-- Workstream 3: Semantic View Factory -->
+          <div class="workstream">
+            <div class="workstream__title">Semantic View Factory — internal accelerator for Snowflake metric/relationship modeling</div>
+            <ul class="bullets">
+              <li>Prototyped an internal Snowflake Semantic View accelerator using staged schema discovery, join/grain checks, deterministic YAML assembly, quality gates, and golden-test / regression-test workflows.</li>
+            </ul>
+          </div>
+
+          <!-- Workstream 4: Research -->
+          <div class="workstream">
+            <div class="workstream__title">Research, Documentation &amp; Client Enablement</div>
+            <ul class="bullets">
+              <li>Authored client-facing research and technical deliverables across both Cortex Search and Cortex Analyst workstreams — benchmark design specs, scoring architecture documents, notes on judge behavior and model upgrades, stress-test cases for non-additive metrics and fan-out risks, technical and c-level presentations, operations runbooks, and console documentation.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sub-role: Senior Analytics Consultant -->
+        <div class="subrole">
+          <div class="subrole__title">
+            Senior Analytics Consultant &amp; Engineer <span class="era">Client: JLL Technologies | Aug 2022 – Dec 2025</span>
+          </div>
+          <div class="role__scope">Embedded consultant delivering through a managed services engagement — data platform reliability, governed metrics, and analytics delivery across multiple business domains.</div>
+          <ul class="bullets">
+            <li>Maintained and improved reliability for Snowflake and Databricks analytics pipelines used across multiple teams and business domains.</li>
+            <li>Built and optimized ELT/ETL workflows using SQL, Python, PySpark, and Databricks job/orchestration patterns, focusing on performance, stability, and maintainability.</li>
+            <li>Defined and improved schema design and data modeling standards, aligning stakeholders on metric definitions and reducing downstream reporting ambiguity.</li>
+            <li>Introduced data quality validation and monitoring patterns to reduce silent reporting regressions.</li>
+            <li>Delivered Tableau reporting on top of governed metric layers for executive visibility, operational reporting, and planning workflows.</li>
+            <li>Acted as an embedded data architecture advisor, helping define modeling standards, data quality patterns, ownership boundaries, and Snowflake and Databricks delivery practices.</li>
+            <li>Mentored engineers and analysts through design reviews, technical training, and delivery support.</li>
+          </ul>
+
+          <!-- Concrete anchor: data quality patterns -->
+          <div class="anchor">
+            <div class="anchor__label">Concrete Pattern</div>
+            <p class="anchor__text">
+              <strong>Data quality validation that caught silent reporting regressions.</strong> Introduced validation and monitoring patterns that surfaced breaking schema changes and metric drift within the pipeline run — rather than weeks later during a business review. These patterns made regressions visible at build time, reducing downstream reporting ambiguity across multiple teams.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invent Analytics — Delivered (green) -->
+      <div class="role role--delivered">
+        <div class="role__employer">Invent Analytics (Now Invent AI), Istanbul, Turkey</div>
+        <div class="role__meta">Senior Analytics Consultant | Feb 2018 – Jun 2022</div>
+        <div class="role__scope">Client Solutions Team — end-to-end delivery for multiple retail clients: forecasting, replenishment, inventory optimization, fulfillment, pricing.</div>
+        <ul class="bullets">
+          <li>Delivered client-facing analytics, forecasting, and optimization implementations for multiple retail clients across inventory, replenishment, fulfillment, and pricing use cases.</li>
+          <li>Designed and deployed a custom inventory optimization system for a large electronics retailer transitioning to a central-warehouse model, modeling operational constraints as production decision logic.</li>
+          <li>Delivered a production inventory optimization system with measured outcomes over roughly one year.</li>
+          <li>Built Python/SQL ETL, ML, simulation, forecasting, reporting, and integration pipelines within Invent's broader SaaS optimization platform.</li>
+          <li>Led end-to-end client implementation work from data onboarding and configuration through rollout, UAT, production support, and stakeholder alignment.</li>
+          <li>Partnered with product and engineering teams to refine optimization algorithms while balancing client-specific requirements with platform maintainability.</li>
+          <li>Led squads of 2–4 people across concurrent client engagements and mentored junior consultants through code reviews and micro-trainings.</li>
+        </ul>
+
+        <!-- Concrete anchor: electronics retailer outcome -->
+        <div class="anchor">
+          <div class="anchor__label">Measured Outcome</div>
+          <p class="anchor__text">
+            <strong>Electronics retailer, ~1 year of measured production outcomes:</strong> ~3% lost-sales reduction, 7%+ availability improvement, and ~10% inventory-turnover improvement. These were client-measured metrics from a live production system, not simulation results.
+          </p>
+        </div>
+      </div>
+
+      <!-- Smartiks — Foundational (amber) -->
+      <div class="role role--foundational">
+        <div class="role__employer">Smartiks Information Technologies, Istanbul, Turkey</div>
+        <div class="role__meta">CRM Solutions Consultant &amp; Business Analyst | Aug 2017 – Feb 2018</div>
+        <ul class="bullets">
+          <li>Supported Oracle Service Cloud implementations for clients in the UAE and Turkey.</li>
+          <li>Coordinated vendor web portal and mobile application development.</li>
+        </ul>
+      </div>
+
+      <!-- Internships — Early (gray) -->
+      <div class="role role--early">
+        <div class="role__employer">Additional Early Roles &amp; Internships</div>
+        <ul class="bullets">
+          <li>Supply Chain Management Intern, Mavi Jeans (Istanbul, Turkey) — Summer 2015</li>
+          <li>Production Intern, BASF Construction Chemicals (Istanbul, Turkey) — Summer 2014</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- EDUCATION -->
+    <!-- ============================================================ -->
+    <section class="sec">
+      <div class="sec__head">
+        <h2 class="sec__title">Education</h2>
+      </div>
+      <ul class="bullets">
+        <li><strong>B.S. Industrial Engineering (Dual Diploma)</strong> — Southern Illinois University Edwardsville, USA (2011–2016), GPA 3.29</li>
+        <li><strong>B.S. Industrial Engineering</strong> — Istanbul Technical University, Turkey (2011–2016), Minor in Mathematics, GPA 3.03</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- INDEPENDENT PROJECTS -->
+    <!-- ============================================================ -->
+    <section class="sec">
+      <div class="sec__head">
+        <h2 class="sec__title">Independent Projects — Local Prototypes</h2>
+      </div>
+
+      <div class="project">
+        <div class="project__title">RAG Glassbox / Local RAG Case Study</div>
+        <p class="project__desc">A laptop-local workbench for testing RAG systems and comparing retrieval strategies with measurable results.</p>
+        <p class="project__meta"><strong>Stack:</strong> BM25 + Milvus Lite hybrid retrieval, cross-encoder reranking, span-aware exact-match/F1 scoring, guarded LLM judge with exact-answer checks, SQLite telemetry, SHA256 signatures to detect index drift, Streamlit run-diff and context-audit views.</p>
+        <p class="project__meta"><strong>Result:</strong> Recall@10 on fictional-entity queries improved from ~0.43 (dense-only) to ~0.85 (sparse + rerank).</p>
+      </div>
+
+      <div class="project">
+        <div class="project__title">Cognos Studio — Turkish-first thinking-game engine</div>
+        <p class="project__desc">A mobile/web app where players solve short intellectual challenges in Turkish and receive fair, explainable AI scoring.</p>
+        <p class="project__meta"><strong>Stack:</strong> React 19, TypeScript, Capacitor, Gemini, local Ollama, Playwright.</p>
+        <p class="project__meta"><strong>Architecture:</strong> provider layer for switching between Gemini and local Ollama, strict/style-blind judging flow with arbiter logic, scoring rules tied to rubric thresholds, structured JSON recovery, call budgeting, and a UI that shows judging steps during slow local inference.</p>
+        <p class="project__meta"><strong>Tests:</strong> unit, typed-contract, Playwright e2e, and a headless judge-calibration harness ("Evalception").</p>
+      </div>
+
+      <div class="project">
+        <div class="project__title">Signal Ledger — source-traceable editorial pipeline prototype</div>
+        <p class="project__desc">A pipeline that turns raw social-media posts into a traceable daily news brief — every AI output can be traced back to its original source post.</p>
+        <p class="project__meta"><strong>Stack:</strong> SQLAlchemy/Alembic schema, raw post-payload persistence, PydanticAI-typed signal extraction on local Ollama (gemma3), and rule-based anchor-consistency logic for repairing story groups.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SKILLS -->
+    <!-- ============================================================ -->
+    <section class="sec">
+      <div class="sec__head">
+        <h2 class="sec__title">Core Competencies</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-cat">
+          <div class="skill-cat__name">Snowflake &amp; Data Platforms</div>
+          <div class="skill-cat__chips">
+            <span class="skill-chip skill-chip--active">Snowflake</span>
+            <span class="skill-chip skill-chip--active">Cortex Agents</span>
+            <span class="skill-chip skill-chip--active">Cortex Analyst / Text-to-SQL</span>
+            <span class="skill-chip skill-chip--active">Cortex Search / Retrieval</span>
+            <span class="skill-chip skill-chip--active">Snowflake Semantic Views</span>
+            <span class="skill-chip skill-chip--active">Streamlit in Snowflake</span>
+            <span class="skill-chip skill-chip--active">Snowflake AI Observability (TruLens)</span>
+            <span class="skill-chip skill-chip--delivered">Databricks</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat__name">Data Engineering</div>
+          <div class="skill-cat__chips">
+            <span class="skill-chip skill-chip--delivered">Python</span>
+            <span class="skill-chip skill-chip--delivered">SQL</span>
+            <span class="skill-chip skill-chip--delivered">PySpark</span>
+            <span class="skill-chip skill-chip--delivered">ETL/ELT</span>
+            <span class="skill-chip skill-chip--delivered">Airflow</span>
+            <span class="skill-chip skill-chip--delivered">Azure Data Factory</span>
+            <span class="skill-chip skill-chip--delivered">Delta Lake</span>
+            <span class="skill-chip skill-chip--delivered">Docker</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat__name">Applied AI Engineering</div>
+          <div class="skill-cat__chips">
+            <span class="skill-chip skill-chip--active">Agent workflows / Cortex Code SDK</span>
+            <span class="skill-chip skill-chip--active">Deterministic Retrieval Scoring</span>
+            <span class="skill-chip skill-chip--active">LLM-as-Judge</span>
+            <span class="skill-chip skill-chip--active">Agent-assisted failure analysis</span>
+            <span class="skill-chip skill-chip--active">Typed LLM outputs with Pydantic</span>
+            <span class="skill-chip skill-chip--active">Ablation Studies</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat__name">Analytics &amp; Decision Systems</div>
+          <div class="skill-cat__chips">
+            <span class="skill-chip skill-chip--delivered">Forecasting</span>
+            <span class="skill-chip skill-chip--delivered">Time Series Analysis</span>
+            <span class="skill-chip skill-chip--delivered">Inventory Optimization</span>
+            <span class="skill-chip skill-chip--delivered">Tableau</span>
+          </div>
+        </div>
+        <div class="skill-cat" style="grid-column: 1 / -1;">
+          <div class="skill-cat__name">Applications &amp; Delivery</div>
+          <div class="skill-cat__chips">
+            <span class="skill-chip">Streamlit</span>
+            <span class="skill-chip">FastAPI</span>
+            <span class="skill-chip">React</span>
+            <span class="skill-chip">TypeScript</span>
+            <span class="skill-chip">CI/CD</span>
+            <span class="skill-chip">Code Review</span>
+            <span class="skill-chip">Technical Documentation</span>
+            <span class="skill-chip">Stakeholder Management</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- LIMITATIONS — What this resume can and can't tell you -->
+    <!-- ============================================================ -->
+    <div class="limitations">
+      <div class="limitations__title">Honest Framing — what this resume can and can't tell you</div>
+      <ul class="limitations__list">
+        <li><strong>Evidence tier:</strong> All claims are from direct work observed by the author — Tier 1 (not externally audited, not a public benchmark).</li>
+        <li><strong>Quantified outcomes</strong> are limited to Invent Analytics (retail metrics were client-measured in production) and RAG Glassbox (benchmark results are local and reproducible). JLL has no quantified metrics in the resume.</li>
+        <li><strong>The AI/ML role</strong> is in active build phase — tenure at time of writing is ~6 months. Workstream framing earns the seniority signal without padding volume.</li>
+        <li><strong>Local projects</strong> are prototypes at laptop scale — not SaaS, not multi-user, not production services. They show curiosity and range.</li>
+        <li><strong>Snowflake/Cortex</strong> is a current evidence pillar, not the whole identity. The durable positioning spans data engineering, enterprise analytics, retail optimization, and applied AI.</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================================ -->
+    <footer class="footer">
+      Signal Edition — complementary to index.html. Not the source of truth. Not consumed by the ATS PDF build script.
+      Applied AI · Data Engineering · Enterprise Analytics · Retail Optimization · Evaluation &amp; Review Systems.
+    </footer>
+
+  </div>
+</body>
+</html>

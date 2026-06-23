@@ -1,0 +1,225 @@
+<!--
+  experimental_art/broadsheet.html — one-page zine / broadsheet.
+
+  NOT the source of truth. NOT consumed by build/build_ats_pdf.py.
+  Pure typographic art. One curved arrow SVG threads three chapter markers.
+  ~250 words. Distilled. Honest.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anıl Yamangil — Broadsheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:   #f4efe4;
+      --fg:   #15130f;
+      --fg-muted: #5b554b;
+      --rule: #cfc7b5;
+      --accent: #8a2f0d;
+      --paper: #ebe4d0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:   #0b0a08;
+        --fg:   #ece6d6;
+        --fg-muted: #8f887a;
+        --rule: #2a2620;
+        --accent: #d77a56;
+        --paper: #14120e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 17px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .sheet {
+      max-width: 780px; margin: 0 auto;
+      padding: 4.5rem 2rem 3rem;
+      background: var(--bg);
+      position: relative;
+    }
+
+    /* Masthead */
+    .masthead { border-top: 4px double var(--fg); border-bottom: 1px solid var(--fg); padding: 0.75rem 0 0.6rem; display: flex; justify-content: space-between; align-items: baseline; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fg-muted); }
+    .masthead .left { color: var(--fg); font-weight: 500; }
+
+    /* Title */
+    h1.title {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.025em;
+      margin: 2rem 0 0.7rem;
+      font-variation-settings: "opsz" 144;
+    }
+    h1.title em { font-style: italic; font-weight: 500; color: var(--accent); font-variation-settings: "opsz" 144; }
+
+    .deck {
+      font-family: "Fraunces", serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      color: var(--fg-muted);
+      max-width: 52ch;
+      line-height: 1.4;
+      margin: 0 0 2.5rem;
+    }
+
+    /* Byline rule */
+    .byline { font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-muted); border-bottom: 1px solid var(--rule); padding-bottom: 0.8rem; margin-bottom: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    .byline span b { color: var(--fg); font-weight: 500; }
+
+    /* Drop cap paragraph */
+    .dropcap {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin: 0 0 1.5rem;
+    }
+    .dropcap::first-letter {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: 4.6rem;
+      line-height: 0.85;
+      float: left;
+      padding: 0.4rem 0.7rem 0 0;
+      color: var(--accent);
+      font-variation-settings: "opsz" 144;
+    }
+
+    /* Journey diagram */
+    .journey { margin: 2.75rem 0 2.5rem; position: relative; }
+    .journey svg { width: 100%; height: auto; display: block; }
+    .journey .chapters { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-top: -0.25rem; }
+    .journey .ch h3 { margin: 0 0 0.2rem; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+    .journey .ch h4 { margin: 0 0 0.35rem; font-family: "Fraunces", serif; font-style: italic; font-weight: 500; font-size: 1.05rem; }
+    .journey .ch p { margin: 0; font-family: "Inter", sans-serif; font-size: 0.84rem; color: var(--fg-muted); line-height: 1.5; }
+
+    /* Pull quote */
+    .pull {
+      font-family: "Fraunces", serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+      line-height: 1.3;
+      color: var(--fg);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 1.5rem 0;
+      margin: 2rem 0;
+      text-align: center;
+      font-variation-settings: "opsz" 96;
+    }
+
+    /* Two-column body */
+    .body2 { columns: 2; column-gap: 2rem; column-rule: 1px solid var(--rule); font-size: 0.98rem; line-height: 1.6; color: var(--fg); }
+    .body2 p { margin: 0 0 1rem; break-inside: avoid; }
+    .body2 p b { font-weight: 600; color: var(--accent); font-family: "Fraunces", serif; }
+
+    /* Footer / contact plate */
+    .plate { margin-top: 3rem; padding-top: 1.25rem; border-top: 4px double var(--fg); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg-muted); }
+    .plate a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .plate a:hover { color: var(--fg); }
+
+    @media (max-width: 620px) {
+      .body2 { columns: 1; }
+      .journey .chapters { grid-template-columns: 1fr; }
+      .dropcap::first-letter { font-size: 3.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <article class="sheet">
+    <div class="masthead">
+      <span class="left">Volume I · No. 1</span>
+      <span>The Long Ridge</span>
+      <span>May 2026 · Istanbul</span>
+    </div>
+
+    <h1 class="title">Not a pivot.<br /><em>An accumulation.</em></h1>
+    <p class="deck">A senior engineer's nine-year arc, from retail optimization through governed analytics to applied AI evaluation — read as one continuous line.</p>
+
+    <div class="byline">
+      <span>By <b>Anıl Yamangil</b></span>
+      <span>Senior AI/ML Engineer</span>
+      <span>Applied AI · Data · Retail</span>
+    </div>
+
+    <p class="dropcap">
+      The résumé says three roles. The work says one trajectory. Retail optimization taught the discipline of decisions that cost real money when they are wrong. The Snowflake and Databricks years taught how to make those decisions reproducible at scale. The AI work now under way is the same question under a different tool: can a system be trusted, and can you prove it.
+    </p>
+
+    <div class="journey">
+      <svg viewBox="0 0 700 120" role="img" aria-label="A curved arrow threading three chapter markers labeled Retail, Data, and AI.">
+        <defs>
+          <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)" />
+          </marker>
+        </defs>
+        <!-- Curved arrow threading three markers -->
+        <path d="M 40 70 C 140 10, 260 10, 350 60 S 560 110, 660 50"
+              stroke="var(--accent)" stroke-width="2.25" fill="none"
+              stroke-linecap="round"
+              marker-end="url(#arrowhead)" />
+        <!-- Chapter circles -->
+        <g font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">
+          <circle cx="75"  cy="47" r="11" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.75" />
+          <text x="75"  y="51" text-anchor="middle" fill="var(--accent)" font-weight="500">I</text>
+          <circle cx="350" cy="60" r="11" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.75" />
+          <text x="350" y="64" text-anchor="middle" fill="var(--accent)" font-weight="500">II</text>
+          <circle cx="620" cy="62" r="11" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.75" />
+          <text x="620" y="66" text-anchor="middle" fill="var(--accent)" font-weight="500">III</text>
+        </g>
+      </svg>
+
+      <div class="chapters">
+        <div class="ch">
+          <h3>Chapter I · 2017–2022</h3>
+          <h4>Retail, measured.</h4>
+          <p>Invent Analytics. Forecasting, replenishment, custom production decision logic. One electronics retailer: ~3% lost-sales reduction, 7%+ availability lift, ~10% inventory-turnover improvement.</p>
+        </div>
+        <div class="ch">
+          <h3>Chapter II · 2022–2025</h3>
+          <h4>A data spine.</h4>
+          <p>BlueCloud, working with JLL Technologies. Snowflake and Databricks pipelines. Governed metrics, schema standards, Tableau, reliability — the quiet years that make the loud years possible.</p>
+        </div>
+        <div class="ch">
+          <h3>Chapter III · 2026–</h3>
+          <h4>Evaluation as craft.</h4>
+          <p>BlueCloud AI/ML. Cortex Analyst evaluation (text-to-SQL over Semantic Views), Cortex Search evaluation (managed retrieval), and the Semantic View Factory — an internal modeling accelerator.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="pull">
+      “The interesting question is never <em>did the model answer</em>.<br />
+      It is <em>can we prove the answer, and defend it to the business</em>.”
+    </p>
+
+    <div class="body2">
+      <p><b>On ownership.</b> Work described here is first-person. Evaluation harnesses were built, not contributed to. Pipelines were maintained. Decisions were owned. Where ownership was shared, the wording says so.</p>
+      <p><b>On Cortex.</b> Cortex Analyst is Snowflake's text-to-SQL engine over Semantic Views; Cortex Search is Snowflake's managed retrieval service. Both are tools, not the identity — a current evidence pillar, not the whole picture.</p>
+      <p><b>On the prototypes.</b> RAG Glassbox, Cognos Studio, Signal Ledger are laptop-local workbenches. Not SaaS. Not production. They exist to learn things in public with no false enterprise framing.</p>
+      <p><b>On what's next.</b> More applied AI systems on governed data platforms. Especially the parts where model output has to survive review by people who are paid to be skeptical.</p>
+    </div>
+
+    <div class="plate">
+      <span>Anıl Yamangil</span>
+      <span>
+        <a href="mailto:yamangilanil@gmail.com">yamangilanil@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/yamangilanil">linkedin/in/yamangilanil</a>
+      </span>
+      <span>End of sheet</span>
+    </div>
+  </article>
+</body>
+</html>

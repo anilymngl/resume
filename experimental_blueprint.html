@@ -1,0 +1,1261 @@
+<!--
+  experimental_blueprint.html — engineer's field-book rendition of the resume.
+
+  NOT the source of truth. NOT consumed by build/build_ats_pdf.py.
+  All content mirrors index.html. Presentation is experimental: technical-drawing
+  typography, continuous career timeline, small system schematics per project,
+  architect's stamp at the bottom. Humor is dry and only an engineer would notice.
+  If this becomes the preferred form, promote it to index.html and re-verify
+  build/build_ats_pdf.py.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no, date=no" />
+  <title>Anıl Yamangil — Senior AI/ML Engineer · Blueprint</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:         #faf9f5;
+      --bg-2:       #f3f0e6;
+      --fg:         #181818;
+      --fg-muted:   #6d6a63;
+      --fg-soft:    #a8a49b;
+      --rule:       #c9c4b7;
+      --rule-soft:  #ddd8c9;
+      --grid:       #e4dfce;
+      --accent:     #2a4d7a;   /* blueprint blue */
+      --accent-2:   #b83a2c;   /* signature red */
+      --mono-bg:    #efece3;
+
+      --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+      --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      --content-w: 1040px;
+      --rail-w:    6.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:        #0d0e0b;
+        --bg-2:      #161714;
+        --fg:        #e8e4d9;
+        --fg-muted:  #9a9489;
+        --fg-soft:   #5f5a52;
+        --rule:      #2a2620;
+        --rule-soft: #1c1915;
+        --grid:      #1c1a15;
+        --accent:    #7aa6d6;
+        --accent-2:  #e08872;
+        --mono-bg:   #1a1713;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--sans);
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: var(--fg);
+      background-color: var(--bg);
+      background-image: radial-gradient(circle at center, var(--grid) 0.6px, transparent 0.8px);
+      background-size: 22px 22px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: border-color 120ms, color 120ms;
+    }
+    a:hover { border-color: var(--accent); color: var(--accent); }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    /* ===== Document shell ===== */
+    .doc {
+      max-width: var(--content-w);
+      margin: 0 auto;
+      padding: 4.5rem 2rem 3rem;
+      position: relative;
+    }
+
+    /* Sheet edge: thin frame on very wide viewports. Subtle, like a drawing sheet. */
+    @media (min-width: 1100px) {
+      .doc {
+        border-left: 1px solid var(--rule-soft);
+        border-right: 1px solid var(--rule-soft);
+      }
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2.25rem;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .hero__tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 0 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .hero__tag .sheet { color: var(--accent); }
+
+    .hero__name {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.75rem, 7vw, 4.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.015em;
+      margin: 0 0 1rem;
+    }
+
+    .hero__role {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      color: var(--fg-muted);
+      margin: 0 0 0.5rem;
+    }
+
+    .hero__pillars {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin: 0 0 2rem;
+    }
+    .hero__pillars span + span::before {
+      content: " · ";
+      color: var(--fg-soft);
+      margin: 0 0.4rem;
+      font-weight: 400;
+    }
+
+    .hero__contact {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+      font-style: normal;
+    }
+    .hero__contact a { border-bottom: none; }
+    .hero__contact a:hover { color: var(--accent); }
+    .hero__contact .sep { color: var(--fg-soft); }
+
+    /* ===== Section markers ===== */
+    .sec { margin-top: 4rem; }
+
+    .sec__head {
+      display: grid;
+      grid-template-columns: var(--rail-w) 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2rem;
+    }
+
+    .sec__num {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    .sec__title {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin: 0;
+    }
+
+    .sec__note {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--fg-soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ===== Summary ===== */
+    .summary {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      line-height: 1.55;
+      margin: 0;
+      padding-left: var(--rail-w);
+      padding-right: 2rem;
+    }
+    @media (max-width: 820px) {
+      .summary { padding-left: 0; padding-right: 0; }
+    }
+    .summary strong { font-weight: 500; font-style: italic; }
+
+    /* ===== Timeline rail (experience) ===== */
+    .timeline {
+      position: relative;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: calc(var(--rail-w) - 1.75rem);
+      top: 0.35rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: var(--rule);
+    }
+    @media (max-width: 820px) {
+      .timeline::before { display: none; }
+    }
+
+    .role {
+      display: grid;
+      grid-template-columns: var(--rail-w) 1fr;
+      gap: 2rem;
+      padding-bottom: 3rem;
+      position: relative;
+    }
+    .role:last-child { padding-bottom: 0; }
+
+    @media (max-width: 820px) {
+      .role { grid-template-columns: 1fr; gap: 0.75rem; }
+    }
+
+    .role__rail {
+      text-align: right;
+      position: relative;
+      padding-right: 1.6rem;
+    }
+
+    .role__year {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--fg);
+      font-weight: 500;
+      display: block;
+      letter-spacing: 0.04em;
+    }
+
+    .role__loc {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--fg-soft);
+      margin-top: 0.15rem;
+      display: block;
+      letter-spacing: 0.04em;
+    }
+
+    .role__rail::after {
+      content: "";
+      position: absolute;
+      right: -0.16rem;
+      top: 0.45rem;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      z-index: 1;
+    }
+    @media (max-width: 820px) {
+      .role__rail::after { display: none; }
+      .role__rail { text-align: left; padding-right: 0; }
+    }
+
+    .role__body { min-width: 0; }
+
+    .role__employer {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.45rem;
+      line-height: 1.2;
+      margin: 0 0 0.35rem;
+      letter-spacing: -0.005em;
+    }
+    .role__employer .role__note {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.78em;
+      color: var(--fg-soft);
+      margin-left: 0.35rem;
+    }
+
+    .role__title {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin: 0 0 0.15rem;
+    }
+    .role__title .era {
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: 0.76rem;
+      color: var(--fg-muted);
+      margin-left: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+    .role__ctx {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.93rem;
+      color: var(--fg-muted);
+      margin: 0 0 0.9rem;
+    }
+
+    .role__subroles {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .role ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0;
+    }
+    .role li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.55;
+      font-size: 0.94rem;
+    }
+    .role li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--fg-soft);
+    }
+
+    /* ===== Workstream modules (corner brackets — IC die look) ===== */
+    .workstreams {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      margin-top: 1rem;
+    }
+
+    .ws {
+      position: relative;
+      padding: 1.4rem 1.5rem 1.25rem;
+    }
+
+    .ws::before,
+    .ws::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--accent);
+    }
+    .ws::before {
+      top: 0; left: 0;
+      border-right: none;
+      border-bottom: none;
+    }
+    .ws::after {
+      bottom: 0; right: 0;
+      border-left: none;
+      border-top: none;
+    }
+
+    .ws__label {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .ws__num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .ws__title {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .ws__title .ws__tag {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.88rem;
+      color: var(--fg-muted);
+      margin-left: 0.3rem;
+    }
+
+    .ws ul { margin: 0; }
+
+    /* ===== Instrument-style callout for Invent metrics ===== */
+    .readout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1rem 0 1.5rem;
+      padding: 1rem;
+      background: var(--mono-bg);
+      border-left: 2px solid var(--accent);
+      font-family: var(--mono);
+    }
+    @media (max-width: 540px) {
+      .readout { grid-template-columns: 1fr; }
+    }
+
+    .readout__cell { text-align: left; }
+    .readout__label {
+      font-size: 0.64rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--fg-muted);
+      margin-bottom: 0.35rem;
+    }
+    .readout__value {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.35rem;
+      line-height: 1;
+      color: var(--fg);
+    }
+    .readout__value small {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: var(--fg-muted);
+      margin-left: 0.2rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== Projects ===== */
+    .project {
+      display: grid;
+      grid-template-columns: var(--rail-w) 1fr;
+      gap: 2rem;
+      padding: 2rem 0 2.25rem;
+      border-top: 1px solid var(--rule-soft);
+      position: relative;
+    }
+    .project:first-of-type { border-top: none; padding-top: 0.5rem; }
+
+    @media (max-width: 820px) {
+      .project { grid-template-columns: 1fr; gap: 0.75rem; }
+    }
+
+    .project__num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.25rem;
+      line-height: 1;
+      color: var(--fg-soft);
+      text-align: right;
+      padding-right: 1.6rem;
+    }
+    @media (max-width: 820px) {
+      .project__num { text-align: left; padding-right: 0; }
+    }
+
+    .project__body { min-width: 0; }
+
+    .project__title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.3rem;
+      line-height: 1.25;
+      margin: 0 0 0.4rem;
+      letter-spacing: -0.005em;
+    }
+    .project__title .project__tag {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.88rem;
+      color: var(--fg-muted);
+      margin-left: 0.35rem;
+    }
+
+    .project__desc {
+      font-size: 0.98rem;
+      margin: 0 0 0.9rem;
+      max-width: 56ch;
+    }
+
+    .project__schematic {
+      margin: 1.1rem 0 1.1rem;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .project__schematic svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .project__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .project__row {
+      display: grid;
+      grid-template-columns: 6.25rem 1fr;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+    @media (max-width: 540px) {
+      .project__row { grid-template-columns: 1fr; gap: 0.15rem; }
+    }
+
+    .project__row dt {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg-muted);
+      padding-top: 0.1rem;
+      margin: 0;
+    }
+    .project__row dd { margin: 0; }
+
+    .project__result {
+      display: inline-block;
+      margin-top: 0.9rem;
+      padding: 0.55rem 0.8rem;
+      background: var(--mono-bg);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      border-left: 2px solid var(--accent-2);
+    }
+
+    /* ===== Skills ===== */
+    .skills {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-left: var(--rail-w);
+    }
+    @media (max-width: 820px) { .skills { padding-left: 0; } }
+
+    .cat__label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+    }
+    .cat__items {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .cat__items span + span::before {
+      content: " · ";
+      color: var(--fg-soft);
+      margin: 0 0.2rem;
+    }
+
+    /* ===== Education ===== */
+    .edu {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .edu__item {
+      display: grid;
+      grid-template-columns: var(--rail-w) 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 820px) {
+      .edu__item { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+
+    .edu__years {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      text-align: right;
+      padding-right: 1.6rem;
+    }
+    @media (max-width: 820px) { .edu__years { text-align: left; padding-right: 0; } }
+
+    .edu__degree {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.08rem;
+      margin: 0 0 0.15rem;
+      line-height: 1.3;
+    }
+    .edu__degree .edu__note {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--fg-muted);
+    }
+    .edu__school { font-size: 0.95rem; color: var(--fg-muted); margin: 0; }
+    .edu__detail {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--fg-soft);
+      margin: 0.2rem 0 0;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== Footer / stamp ===== */
+    .stamp {
+      margin-top: 5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+    @media (max-width: 640px) {
+      .stamp { grid-template-columns: 1fr; }
+    }
+
+    .stamp__block {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--fg-muted);
+      letter-spacing: 0.06em;
+      line-height: 1.8;
+      position: relative;
+      padding: 0.9rem 1.25rem;
+    }
+    .stamp__block::before,
+    .stamp__block::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--fg-muted);
+    }
+    .stamp__block::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+    .stamp__block::after  { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+    .stamp__block strong {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--fg);
+      letter-spacing: 0;
+      text-transform: none;
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .stamp__block .stamp__row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .stamp__block .stamp__row span:last-child { color: var(--fg); }
+
+    .stamp__sig svg {
+      display: block;
+    }
+    .stamp__sig__line {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--fg-soft);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.35rem;
+      text-align: center;
+    }
+
+    .doc__foot {
+      margin-top: 2rem;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--fg-soft);
+      text-align: center;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .doc__foot .dot { color: var(--rule); margin: 0 0.75rem; }
+
+    /* ===== Print ===== */
+    @media print {
+      :root {
+        --bg: white; --fg: black; --fg-muted: #333; --fg-soft: #666;
+        --rule: #bbb; --rule-soft: #ccc; --grid: transparent;
+        --accent: black; --accent-2: black; --mono-bg: transparent;
+      }
+      body { background-image: none; background: white; }
+      .doc { padding: 0.5in 0.6in; max-width: none; border: none; }
+      .sec { margin-top: 1.25rem; }
+      .role, .project, .edu__item, .ws { page-break-inside: avoid; }
+      .timeline::before { background: #bbb; }
+      .ws::before, .ws::after,
+      .stamp__block::before, .stamp__block::after { border-color: #666; }
+      a { border: none !important; color: black !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* Utility: schematic SVG stroke colors follow theme */
+    .schematic-stroke { stroke: var(--accent); }
+    .schematic-box-fill { fill: var(--bg); }
+    .schematic-muted { stroke: var(--fg-muted); fill: var(--fg-muted); }
+    .schematic-text { fill: var(--fg); font-family: var(--mono); font-size: 10px; }
+    .schematic-text-muted { fill: var(--fg-muted); font-family: var(--mono); font-size: 9px; }
+  </style>
+</head>
+
+<body>
+  <main class="doc">
+
+    <!-- ========== Hero ========== -->
+    <header class="hero">
+      <p class="hero__tag">
+        <span>Résumé · Sheet 01 of 01</span>
+        <span class="sheet">Drawing no. AY-01 · Rev. 01</span>
+      </p>
+
+      <h1 class="hero__name">Anıl Yamangil</h1>
+      <p class="hero__role">Senior AI/ML Engineer</p>
+      <p class="hero__pillars">
+        <span>Applied AI</span><span>Data Engineering</span><span>Enterprise Analytics</span>
+      </p>
+
+      <address class="hero__contact">
+        <a href="mailto:yamangilanil@gmail.com">yamangilanil@gmail.com</a>
+        <span class="sep">/</span>
+        <a href="tel:+905416220393">+90 541 622 03 93</a>
+        <span class="sep">/</span>
+        <span>Istanbul, Turkey</span>
+        <span class="sep">/</span>
+        <a href="https://www.linkedin.com/in/yamangilanil" target="_blank" rel="noopener noreferrer">linkedin.com/in/yamangilanil</a>
+      </address>
+    </header>
+
+    <!-- ========== Summary ========== -->
+    <section class="sec" id="summary">
+      <div class="sec__head">
+        <span class="sec__num">§ A</span>
+        <h2 class="sec__title">Summary</h2>
+        <span class="sec__note">Fig. 1</span>
+      </div>
+
+      <p class="summary">
+        Senior AI/ML Engineer with <strong>8+ years</strong> across enterprise data engineering, analytics, retail optimization, decision systems, and applied AI. Experienced in translating messy business constraints into reliable pipelines, governed metrics, and decision-ready datasets on Snowflake and Databricks. Recent work focuses on Snowflake-based applied AI — Cortex Analyst (Snowflake's text-to-SQL engine over Semantic Views), Cortex Search (managed fuzzy/semantic search and retrieval), retrieval evaluation tooling, Snowflake-persisted scoring workflows, and Streamlit-based review interfaces. Earlier work includes production retail optimization, forecasting, replenishment systems, and enterprise analytics delivery across real estate technology and retail.
+      </p>
+    </section>
+
+    <!-- ========== Experience (timeline) ========== -->
+    <section class="sec" id="experience">
+      <div class="sec__head">
+        <span class="sec__num">§ B</span>
+        <h2 class="sec__title">Experience</h2>
+        <span class="sec__note">Timeline — chronological</span>
+      </div>
+
+      <div class="timeline">
+
+        <!-- BlueCloud node: 2022 – Present, two sub-roles -->
+        <div class="role">
+          <div class="role__rail">
+            <span class="role__year">2026</span>
+            <span class="role__loc">Tampa · Remote</span>
+          </div>
+          <div class="role__body">
+            <h3 class="role__employer">BlueCloud <span class="role__note">· Aug 2022 — Present</span></h3>
+
+            <div class="role__subroles">
+
+              <!-- Senior AI/ML Engineer I -->
+              <div>
+                <p class="role__title">Senior AI/ML Engineer I <span class="era">Jan 2026 — Present</span></p>
+                <p class="role__ctx">AI/ML Team — Cortex Analyst text-to-SQL, Cortex Search retrieval, and Snowflake Semantic Views.</p>
+
+                <div class="workstreams">
+
+                  <div class="ws">
+                    <div class="ws__label">
+                      <span class="ws__num">M-01</span>
+                      <h4 class="ws__title">Cortex Search Evaluation Framework <span class="ws__tag">— managed search/retrieval</span></h4>
+                    </div>
+                    <ul>
+                      <li>Built the benchmark design, deterministic retrieval scoring, Snowflake persistence layer, and TruLens/Snowsight observability integration for a client-facing Cortex Search evaluation framework.</li>
+                      <li>Implemented corpus-first benchmark cases built from known source records, retrieval scorers for target hit@k, rank, filter correctness, duplicate saturation, and latency, plus Snowflake tables for evaluation runs, test cases, and scores.</li>
+                      <li>Built a Cortex Code Agent SDK workflow for classifying evaluation failures using read-only SQL tool guardrails, structured findings with confidence scores, SQL evidence references, and four failure categories: benchmark, evaluator, service, and workflow.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ws">
+                    <div class="ws__label">
+                      <span class="ws__num">M-02</span>
+                      <h4 class="ws__title">Cortex Analyst Evaluation Framework <span class="ws__tag">— text-to-SQL over Semantic Views</span></h4>
+                    </div>
+                    <ul>
+                      <li>Built scoring, review, and failure-classification workflows for a Cortex Analyst evaluation harness over Snowflake Semantic Views.</li>
+                      <li>Separated scoring for data results, SQL logic, and answer quality; added semantic judge checks, high-confidence override rules, and structured tuning backlogs for Semantic View fixes.</li>
+                      <li>Built a Streamlit operator console for benchmark browsing, batch and single-question runs, generated-SQL / response / result inspection, cross-run comparison, performance analytics, golden-SQL validation, and EXPLAIN-plan review.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ws">
+                    <div class="ws__label">
+                      <span class="ws__num">M-03</span>
+                      <h4 class="ws__title">Semantic View Factory <span class="ws__tag">— internal accelerator for Snowflake metric/relationship modeling</span></h4>
+                    </div>
+                    <ul>
+                      <li>Prototyped an internal Snowflake Semantic View accelerator using staged schema discovery, join/grain checks, deterministic YAML assembly, quality gates, and golden-test / regression-test workflows.</li>
+                    </ul>
+                  </div>
+
+                  <div class="ws">
+                    <div class="ws__label">
+                      <span class="ws__num">M-04</span>
+                      <h4 class="ws__title">Research, Documentation &amp; Client Enablement</h4>
+                    </div>
+                    <ul>
+                      <li>Authored client-facing research and technical deliverables across both Cortex Search and Cortex Analyst workstreams — benchmark design specs, scoring architecture documents, notes on judge behavior and model upgrades, stress-test cases for non-additive metrics and fan-out risks, technical presentations, client-facing HTML decks, operations runbooks, and console documentation.</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- JLL sub-role -->
+              <div>
+                <p class="role__title">Senior Analytics Consultant &amp; Engineer <span class="era">Aug 2022 — Dec 2025</span></p>
+                <p class="role__ctx">Client: JLL Technologies.</p>
+                <ul>
+                  <li>Maintained and improved reliability for Snowflake and Databricks analytics pipelines used across multiple teams and business domains.</li>
+                  <li>Built and optimized ELT/ETL workflows using SQL, Python, PySpark, and Databricks job/orchestration patterns, focusing on performance, stability, and maintainability.</li>
+                  <li>Defined and improved schema design and data modeling standards, aligning stakeholders on metric definitions and reducing downstream reporting ambiguity.</li>
+                  <li>Introduced data quality validation and monitoring patterns to reduce silent reporting regressions.</li>
+                  <li>Delivered Tableau reporting on top of governed metric layers for executive visibility, operational reporting, and planning workflows.</li>
+                  <li>Acted as an embedded data architecture advisor, helping define modeling standards, data quality patterns, ownership boundaries, and Snowflake and Databricks delivery practices.</li>
+                  <li>Mentored engineers and analysts through design reviews, technical training, and delivery support.</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Invent Analytics -->
+        <div class="role">
+          <div class="role__rail">
+            <span class="role__year">2018</span>
+            <span class="role__loc">Istanbul</span>
+          </div>
+          <div class="role__body">
+            <h3 class="role__employer">Invent Analytics <span class="role__note">· now Invent AI</span></h3>
+            <p class="role__title">Senior Analytics Consultant <span class="era">Feb 2018 — Jun 2022</span></p>
+            <p class="role__ctx">Client Solutions Team — Python, ETL, forecasting, retail optimization.</p>
+
+            <div class="readout" aria-label="Measured production outcomes over roughly one year">
+              <div class="readout__cell">
+                <div class="readout__label">Lost sales</div>
+                <div class="readout__value">−3%<small>≈</small></div>
+              </div>
+              <div class="readout__cell">
+                <div class="readout__label">Availability</div>
+                <div class="readout__value">+7%<small>+</small></div>
+              </div>
+              <div class="readout__cell">
+                <div class="readout__label">Inventory turnover</div>
+                <div class="readout__value">+10%<small>≈</small></div>
+              </div>
+            </div>
+
+            <ul>
+              <li>Delivered client-facing analytics, forecasting, and optimization implementations for multiple retail clients across inventory, replenishment, fulfillment, and pricing use cases.</li>
+              <li>Designed and deployed a custom inventory optimization system for a large electronics retailer transitioning to a central-warehouse model, modeling operational constraints as production decision logic.</li>
+              <li>Built Python/SQL ETL, ML, simulation, forecasting, reporting, and integration pipelines within Invent's broader SaaS optimization platform.</li>
+              <li>Led end-to-end client implementation work from data onboarding and configuration through rollout, UAT, production support, and stakeholder alignment.</li>
+              <li>Partnered with product and engineering teams to refine optimization algorithms while balancing client-specific requirements with platform maintainability.</li>
+              <li>Led squads of 2–4 people across concurrent client engagements and mentored junior consultants through code reviews and micro-trainings.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Smartiks -->
+        <div class="role">
+          <div class="role__rail">
+            <span class="role__year">2017</span>
+            <span class="role__loc">Istanbul</span>
+          </div>
+          <div class="role__body">
+            <h3 class="role__employer">Smartiks Information Technologies</h3>
+            <p class="role__title">CRM Solutions Consultant &amp; Business Analyst <span class="era">Aug 2017 — Feb 2018</span></p>
+            <ul>
+              <li>Supported Oracle Service Cloud implementations for clients in the UAE and Turkey.</li>
+              <li>Coordinated vendor web portal and mobile application development.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Early roles -->
+        <div class="role">
+          <div class="role__rail">
+            <span class="role__year">2014</span>
+            <span class="role__loc">Istanbul</span>
+          </div>
+          <div class="role__body">
+            <h3 class="role__employer" style="font-size:1.1rem;">Early Roles &amp; Internships</h3>
+            <ul>
+              <li>Supply Chain Management Intern — Mavi Jeans · Summer 2015.</li>
+              <li>Production Intern — BASF Construction Chemicals · Summer 2014.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== Projects ========== -->
+    <section class="sec" id="projects">
+      <div class="sec__head">
+        <span class="sec__num">§ C</span>
+        <h2 class="sec__title">Independent Fun &amp; Technical Projects — Local Prototypes</h2>
+        <span class="sec__note">Schematics — not to scale</span>
+      </div>
+
+      <!-- P-01 RAG Glassbox -->
+      <div class="project">
+        <div class="project__num">P-01</div>
+        <div class="project__body">
+          <h3 class="project__title">RAG Glassbox / Local RAG Case Study</h3>
+          <p class="project__desc">A laptop-local workbench for testing RAG systems and comparing retrieval strategies with measurable results.</p>
+
+          <div class="project__schematic" aria-label="Retrieval pipeline schematic">
+            <svg viewBox="0 0 640 76" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="schematic-muted" />
+                </marker>
+              </defs>
+              <!-- five boxes with labels -->
+              <g stroke-width="1" fill="none">
+                <rect x="2"   y="20" width="90"  height="36" class="schematic-stroke schematic-box-fill" />
+                <rect x="120" y="20" width="90"  height="36" class="schematic-stroke schematic-box-fill" />
+                <rect x="238" y="20" width="148" height="36" class="schematic-stroke schematic-box-fill" />
+                <rect x="414" y="20" width="90"  height="36" class="schematic-stroke schematic-box-fill" />
+                <rect x="532" y="20" width="100" height="36" class="schematic-stroke schematic-box-fill" />
+              </g>
+              <g fill="none" stroke-width="1" class="schematic-muted">
+                <line x1="92"  y1="38" x2="118" y2="38" stroke="currentColor" marker-end="url(#arr1)" />
+                <line x1="210" y1="38" x2="236" y2="38" stroke="currentColor" marker-end="url(#arr1)" />
+                <line x1="386" y1="38" x2="412" y2="38" stroke="currentColor" marker-end="url(#arr1)" />
+                <line x1="504" y1="38" x2="530" y2="38" stroke="currentColor" marker-end="url(#arr1)" />
+              </g>
+              <g text-anchor="middle">
+                <text x="47"  y="43" class="schematic-text">corpus</text>
+                <text x="165" y="43" class="schematic-text">chunker</text>
+                <text x="312" y="43" class="schematic-text">BM25 + Milvus Lite</text>
+                <text x="459" y="43" class="schematic-text">rerank</text>
+                <text x="582" y="43" class="schematic-text">judge</text>
+              </g>
+              <!-- top annotation -->
+              <g text-anchor="start">
+                <text x="2"   y="12" class="schematic-text-muted">INDEXING &amp; RETRIEVAL ──────────────────────────────────────── SCORING</text>
+              </g>
+              <!-- bottom annotation -->
+              <g text-anchor="end">
+                <text x="632" y="72" class="schematic-text-muted">traces → SQLite · index-drift signatures (SHA256) · Streamlit review</text>
+              </g>
+            </svg>
+          </div>
+
+          <dl class="project__meta">
+            <div class="project__row">
+              <dt>Stack</dt>
+              <dd>BM25 + Milvus Lite hybrid retrieval, cross-encoder reranking, span-aware exact-match/F1 scoring, guarded LLM judge with exact-answer checks, SQLite telemetry, SHA256 signatures to detect index drift, Streamlit run-diff and context-audit views.</dd>
+            </div>
+          </dl>
+          <p class="project__result">
+            Result — Recall@10 on fictional-entity queries: ~0.43 (dense-only) → ~0.85 (sparse + rerank).
+          </p>
+        </div>
+      </div>
+
+      <!-- P-02 Cognos Studio -->
+      <div class="project">
+        <div class="project__num">P-02</div>
+        <div class="project__body">
+          <h3 class="project__title">Cognos Studio <span class="project__tag">— Turkish-first thinking-game engine</span></h3>
+          <p class="project__desc">A mobile/web app where players solve short intellectual challenges in Turkish and receive fair, explainable AI scoring.</p>
+
+          <div class="project__schematic" aria-label="Cognos Studio judge pipeline">
+            <svg viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="schematic-muted" />
+                </marker>
+              </defs>
+              <!-- providers (two lanes) -->
+              <g stroke-width="1" fill="none">
+                <rect x="2"   y="20"  width="110" height="32" class="schematic-stroke schematic-box-fill" />
+                <rect x="2"   y="98"  width="110" height="32" class="schematic-stroke schematic-box-fill" />
+                <!-- provider layer merge -->
+                <rect x="158" y="58" width="120" height="34" class="schematic-stroke schematic-box-fill" />
+                <!-- dual judges -->
+                <rect x="316" y="20"  width="130" height="32" class="schematic-stroke schematic-box-fill" />
+                <rect x="316" y="98"  width="130" height="32" class="schematic-stroke schematic-box-fill" />
+                <!-- arbiter -->
+                <rect x="480" y="58" width="90" height="34" class="schematic-stroke schematic-box-fill" />
+                <!-- UI -->
+                <rect x="600" y="58" width="38" height="34" class="schematic-stroke schematic-box-fill" />
+              </g>
+              <!-- connectors -->
+              <g fill="none" stroke-width="1" class="schematic-muted">
+                <!-- providers into bridge -->
+                <path d="M 112 36 Q 135 36 135 75 L 158 75" stroke="currentColor" fill="none" marker-end="url(#arr2)" />
+                <path d="M 112 114 Q 135 114 135 75 L 158 75" stroke="currentColor" fill="none" marker-end="url(#arr2)" />
+                <!-- bridge into judges -->
+                <path d="M 278 66 Q 300 66 300 36 L 316 36" stroke="currentColor" fill="none" marker-end="url(#arr2)" />
+                <path d="M 278 84 Q 300 84 300 114 L 316 114" stroke="currentColor" fill="none" marker-end="url(#arr2)" />
+                <!-- judges into arbiter -->
+                <path d="M 446 36 Q 465 36 465 70 L 480 70" stroke="currentColor" fill="none" marker-end="url(#arr2)" />
+                <path d="M 446 114 Q 465 114 465 80 L 480 80" stroke="currentColor" fill="none" marker-end="url(#arr2)" />
+                <!-- arbiter to ui -->
+                <line x1="570" y1="75" x2="598" y2="75" stroke="currentColor" marker-end="url(#arr2)" />
+              </g>
+              <g text-anchor="middle">
+                <text x="57"  y="41" class="schematic-text">Gemini API</text>
+                <text x="57"  y="119" class="schematic-text">local Ollama</text>
+                <text x="218" y="79" class="schematic-text">provider bridge</text>
+                <text x="381" y="41" class="schematic-text">strict judge</text>
+                <text x="381" y="119" class="schematic-text">style-blind judge</text>
+                <text x="525" y="79" class="schematic-text">arbiter</text>
+                <text x="619" y="79" class="schematic-text">UI</text>
+              </g>
+              <g text-anchor="start">
+                <text x="2" y="12" class="schematic-text-muted">INPUT ──────── PROVIDERS ──────── BRIDGE ──────── JUDGES ──── RESOLVE ── OUT</text>
+              </g>
+              <g text-anchor="end">
+                <text x="638" y="146" class="schematic-text-muted">structured JSON recovery · call budgeting · reasoning-step UI</text>
+              </g>
+            </svg>
+          </div>
+
+          <dl class="project__meta">
+            <div class="project__row">
+              <dt>Stack</dt>
+              <dd>React 19, TypeScript, Capacitor, Gemini, local Ollama, Playwright.</dd>
+            </div>
+            <div class="project__row">
+              <dt>Architecture</dt>
+              <dd>Provider layer for switching between Gemini and local Ollama, strict/style-blind judging flow with arbiter logic, scoring rules tied to rubric thresholds, structured JSON recovery, call budgeting, and a UI that shows judging steps during slow local inference.</dd>
+            </div>
+            <div class="project__row">
+              <dt>Tests</dt>
+              <dd>Unit, typed-contract, Playwright e2e, and a headless judge-calibration harness (&ldquo;Evalception&rdquo;).</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- P-03 Signal Ledger -->
+      <div class="project">
+        <div class="project__num">P-03</div>
+        <div class="project__body">
+          <h3 class="project__title">Signal Ledger <span class="project__tag">— source-traceable editorial pipeline prototype</span></h3>
+          <p class="project__desc">A pipeline that turns raw social-media posts into a traceable daily news brief — every AI output can be traced back to its original source post.</p>
+
+          <div class="project__schematic" aria-label="Signal Ledger pipeline">
+            <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="schematic-muted" />
+                </marker>
+              </defs>
+              <g stroke-width="1" fill="none">
+                <rect x="200" y="10"  width="200" height="30" class="schematic-stroke schematic-box-fill" />
+                <rect x="200" y="68"  width="200" height="30" class="schematic-stroke schematic-box-fill" />
+                <rect x="200" y="126" width="200" height="30" class="schematic-stroke schematic-box-fill" />
+                <rect x="200" y="184" width="200" height="30" class="schematic-stroke schematic-box-fill" />
+                <rect x="200" y="242" width="200" height="30" class="schematic-stroke schematic-box-fill" />
+              </g>
+              <g fill="none" stroke-width="1" class="schematic-muted">
+                <line x1="300" y1="40"  x2="300" y2="66"  stroke="currentColor" marker-end="url(#arr3)" />
+                <line x1="300" y1="98"  x2="300" y2="124" stroke="currentColor" marker-end="url(#arr3)" />
+                <line x1="300" y1="156" x2="300" y2="182" stroke="currentColor" marker-end="url(#arr3)" />
+                <line x1="300" y1="214" x2="300" y2="240" stroke="currentColor" marker-end="url(#arr3)" />
+              </g>
+              <g text-anchor="middle">
+                <text x="300" y="29"  class="schematic-text">raw X payloads — persist</text>
+                <text x="300" y="87"  class="schematic-text">normalize · filter · dedupe</text>
+                <text x="300" y="145" class="schematic-text">extract signals · PydanticAI · Ollama</text>
+                <text x="300" y="203" class="schematic-text">repair + group · anchor-consistency</text>
+                <text x="300" y="261" class="schematic-text">scored · labeled · newsletter draft</text>
+              </g>
+              <!-- lane labels -->
+              <g text-anchor="start">
+                <text x="10" y="29"  class="schematic-text-muted">SOURCE</text>
+                <text x="10" y="87"  class="schematic-text-muted">CLEAN</text>
+                <text x="10" y="145" class="schematic-text-muted">AI (bounded)</text>
+                <text x="10" y="203" class="schematic-text-muted">RULES</text>
+                <text x="10" y="261" class="schematic-text-muted">OUTPUT</text>
+              </g>
+              <!-- traceability arrow (right side, upward) -->
+              <g fill="none" stroke-width="1" class="schematic-muted">
+                <path d="M 420 261 Q 470 261 470 29 L 410 29" stroke="currentColor" fill="none" stroke-dasharray="4 3" marker-end="url(#arr3)" />
+              </g>
+              <g text-anchor="start">
+                <text x="478" y="143" class="schematic-text-muted">traceability</text>
+                <text x="478" y="156" class="schematic-text-muted">(draft → source)</text>
+              </g>
+            </svg>
+          </div>
+
+          <dl class="project__meta">
+            <div class="project__row">
+              <dt>Stack</dt>
+              <dd>SQLAlchemy/Alembic schema, raw post-payload persistence, PydanticAI-typed signal extraction on local Ollama (gemma3), and rule-based anchor-consistency logic for repairing story groups — preventing runaway merges where loosely related stories collapse into one cluster.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========== Skills ========== -->
+    <section class="sec" id="skills">
+      <div class="sec__head">
+        <span class="sec__num">§ D</span>
+        <h2 class="sec__title">Skills</h2>
+        <span class="sec__note">Parts list — backed by bullets above</span>
+      </div>
+
+      <div class="skills">
+        <div>
+          <p class="cat__label">Snowflake &amp; Data Platforms</p>
+          <p class="cat__items">
+            <span>Snowflake</span><span>Databricks</span><span>Cortex Agents</span><span>Cortex Analyst / Text-to-SQL</span><span>Cortex Search / Retrieval</span><span>Snowflake Semantic Views / Metrics Layer</span><span>Streamlit in Snowflake</span><span>Snowflake AI Observability (TruLens)</span>
+          </p>
+        </div>
+        <div>
+          <p class="cat__label">Data Engineering</p>
+          <p class="cat__items">
+            <span>Python</span><span>SQL</span><span>PySpark</span><span>ETL/ELT</span><span>Airflow</span><span>Azure Data Factory</span><span>Delta Lake</span><span>Docker</span>
+          </p>
+        </div>
+        <div>
+          <p class="cat__label">Applied AI Engineering</p>
+          <p class="cat__items">
+            <span>Custom agent workflows / Cortex Code SDK</span><span>Deterministic Retrieval Scoring</span><span>LLM-as-Judge</span><span>Agent-assisted failure analysis</span><span>Typed LLM outputs with Pydantic</span><span>Ablation Studies</span>
+          </p>
+        </div>
+        <div>
+          <p class="cat__label">Analytics &amp; Decision Systems</p>
+          <p class="cat__items">
+            <span>Forecasting</span><span>Time Series Analysis</span><span>Inventory Optimization</span><span>Tableau</span>
+          </p>
+        </div>
+        <div>
+          <p class="cat__label">Applications &amp; Delivery</p>
+          <p class="cat__items">
+            <span>Streamlit</span><span>FastAPI</span><span>React</span><span>TypeScript</span><span>CI/CD</span><span>Code Review</span><span>Technical Documentation</span><span>Stakeholder Management</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Education ========== -->
+    <section class="sec" id="education">
+      <div class="sec__head">
+        <span class="sec__num">§ E</span>
+        <h2 class="sec__title">Education</h2>
+        <span class="sec__note">Foundation</span>
+      </div>
+
+      <div class="edu">
+        <div class="edu__item">
+          <span class="edu__years">2011 — 2016</span>
+          <div>
+            <p class="edu__degree">B.Sc. Industrial Engineering <span class="edu__note">— Dual Diploma Program</span></p>
+            <p class="edu__school">Southern Illinois University Edwardsville, USA</p>
+            <p class="edu__detail">GPA 3.29</p>
+          </div>
+        </div>
+        <div class="edu__item">
+          <span class="edu__years">2011 — 2016</span>
+          <div>
+            <p class="edu__degree">B.Sc. Industrial Engineering <span class="edu__note">— Minor in Mathematics</span></p>
+            <p class="edu__school">Istanbul Technical University, Turkey</p>
+            <p class="edu__detail">GPA 3.03</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Architect's stamp ========== -->
+    <div class="stamp" aria-label="Document signature block">
+      <div class="stamp__block">
+        <div class="stamp__row"><span>DRAWING NO.</span><span>AY-01 · Sheet 01 of 01</span></div>
+        <div class="stamp__row"><span>REVISION</span><span>01 · May 2026</span></div>
+        <div class="stamp__row"><span>DRAWN BY</span><span>A. Yamangil</span></div>
+        <div class="stamp__row"><span>CHECKED BY</span><span>self</span></div>
+        <div class="stamp__row"><span>APPROVED BY</span><span>self</span></div>
+        <strong>Anıl Yamangil · Istanbul, TR</strong>
+      </div>
+
+      <div class="stamp__sig" aria-hidden="true">
+        <svg width="150" height="60" viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- Stylized "AY" signature stroke -->
+          <path d="M 10 45 C 18 10, 35 10, 40 45 M 18 32 L 32 32"
+                stroke="var(--accent-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 55 14 L 72 32 L 89 14 M 72 32 L 72 48"
+                stroke="var(--accent-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          <!-- trailing flourish -->
+          <path d="M 95 48 C 110 46, 125 44, 140 48"
+                stroke="var(--accent-2)" stroke-width="1" stroke-linecap="round" opacity="0.7" />
+          <!-- baseline -->
+          <line x1="5" y1="58" x2="145" y2="58" stroke="var(--rule)" stroke-width="0.5" />
+        </svg>
+        <div class="stamp__sig__line">Signature</div>
+      </div>
+    </div>
+
+    <p class="doc__foot">
+      This document — not to scale <span class="dot">·</span> figures as noted <span class="dot">·</span> all claims verifiable upon request
+    </p>
+
+  </main>
+</body>
+</html>

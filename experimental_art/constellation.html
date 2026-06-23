@@ -1,0 +1,285 @@
+<!--
+  experimental_art/constellation.html — career as a star map.
+
+  NOT the source of truth. NOT consumed by build/build_ats_pdf.py.
+  Stars = roles and projects. Star size ~ scope. Lines = genuine relations.
+  Side panel carries the "coordinates" — year and stack — in mono.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anıl Yamangil — Constellation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #0b0f1a;
+      --bg-2:  #121829;
+      --fg:    #e9edf5;
+      --fg-muted: #8a93a8;
+      --fg-soft:  #4a526b;
+      --rule:  #202640;
+      --star:  #f1e5b5;
+      --accent: #e08872;
+      --line-soft: rgba(233, 237, 245, 0.14);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: radial-gradient(ellipse at top, #1a2240 0%, var(--bg) 60%) var(--bg);
+      color: var(--fg);
+      font-family: "Inter", -apple-system, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 3rem 1.75rem 3rem; }
+
+    header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.75rem; border-bottom: 1px solid var(--rule); padding-bottom: 1.1rem; margin-bottom: 2.25rem; }
+    header h1 { margin: 0; font-size: 1.4rem; font-weight: 500; letter-spacing: 0.02em; }
+    header h1 em { font-style: normal; color: var(--fg-muted); font-weight: 400; }
+    header .meta { font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: var(--fg-soft); letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 2rem; align-items: start; }
+
+    .sky { position: relative; aspect-ratio: 4 / 3; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; background: linear-gradient(180deg, #0a0e1c 0%, #0b1124 100%); }
+    .sky svg { width: 100%; height: 100%; display: block; }
+    .sky .bg-stars circle { fill: var(--fg-muted); }
+    .sky .edge { stroke: var(--line-soft); stroke-width: 1; fill: none; }
+    .sky .star circle { fill: var(--star); }
+    .sky .star text { fill: var(--fg); font-family: "Inter", sans-serif; font-size: 11px; font-weight: 500; }
+    .sky .sub  { fill: var(--fg-muted); font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .sky .glow { fill: none; stroke: var(--star); stroke-opacity: 0.18; }
+
+    aside h2 { margin: 0 0 1rem; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg-muted); font-weight: 500; }
+    table.coords { width: 100%; border-collapse: collapse; font-family: "JetBrains Mono", monospace; font-size: 0.8rem; }
+    table.coords td { padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    table.coords td.id  { color: var(--accent); width: 2.2rem; font-weight: 500; letter-spacing: 0.05em; }
+    table.coords td.yr  { color: var(--fg-muted); width: 5rem; white-space: nowrap; }
+    table.coords td.nm  { color: var(--fg); font-weight: 500; }
+    table.coords td.st  { color: var(--fg-muted); font-size: 0.72rem; padding-top: 0.1rem; }
+    table.coords tr.main td { background: var(--bg-2); }
+
+    .legend { margin-top: 2rem; font-size: 0.82rem; color: var(--fg-muted); line-height: 1.55; border-left: 2px solid var(--accent); padding-left: 0.9rem; }
+
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: var(--fg-muted); letter-spacing: 0.06em; }
+    footer a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+    footer a:hover { color: var(--fg); }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .sky { aspect-ratio: 4 / 3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Anıl Yamangil <em>· career constellation</em></h1>
+      <span class="meta">CHART v1 · MAY 2026</span>
+    </header>
+
+    <div class="grid">
+      <!-- The sky -->
+      <div class="sky">
+        <svg viewBox="0 0 600 450" role="img" aria-label="A dark star chart with labeled stars representing roles and projects.">
+          <!-- Background stars (atmospheric) -->
+          <g class="bg-stars" opacity="0.45">
+            <circle cx="40"  cy="60"  r="0.7" />
+            <circle cx="95"  cy="30"  r="0.5" />
+            <circle cx="160" cy="90"  r="0.6" />
+            <circle cx="220" cy="45"  r="0.5" />
+            <circle cx="310" cy="100" r="0.7" />
+            <circle cx="380" cy="25"  r="0.6" />
+            <circle cx="460" cy="70"  r="0.5" />
+            <circle cx="550" cy="55"  r="0.7" />
+            <circle cx="30"  cy="200" r="0.6" />
+            <circle cx="115" cy="260" r="0.5" />
+            <circle cx="200" cy="330" r="0.7" />
+            <circle cx="275" cy="390" r="0.6" />
+            <circle cx="360" cy="320" r="0.5" />
+            <circle cx="430" cy="380" r="0.7" />
+            <circle cx="510" cy="300" r="0.6" />
+            <circle cx="570" cy="400" r="0.5" />
+            <circle cx="50"  cy="380" r="0.5" />
+            <circle cx="180" cy="180" r="0.5" />
+            <circle cx="490" cy="180" r="0.6" />
+            <circle cx="420" cy="210" r="0.5" />
+          </g>
+
+          <!-- Edges (relations) -->
+          <path class="edge" d="M 95 290 L 260 225" />
+          <path class="edge" d="M 260 225 L 420 100" />
+          <path class="edge" d="M 260 225 L 460 155" />
+          <path class="edge" d="M 420 100 L 500 55" />
+          <path class="edge" d="M 420 100 L 460 155" />
+          <path class="edge" d="M 460 155 L 520 215" />
+          <path class="edge" d="M 260 225 L 230 350" />
+          <path class="edge" d="M 230 350 L 360 395" />
+          <path class="edge" d="M 230 350 L 330 290" stroke-dasharray="2 4" />
+
+          <!-- Stars -->
+          <!-- 1. Invent -->
+          <g class="star">
+            <circle cx="95" cy="290" r="5" />
+            <circle class="glow" cx="95" cy="290" r="11" />
+            <text x="95" y="315" text-anchor="middle">Invent Analytics</text>
+            <text class="sub" x="95" y="328" text-anchor="middle">α · retail optimization</text>
+          </g>
+
+          <!-- 2. BlueCloud/JLL data -->
+          <g class="star">
+            <circle cx="260" cy="225" r="5.5" />
+            <circle class="glow" cx="260" cy="225" r="12" />
+            <text x="260" y="210" text-anchor="middle">BlueCloud · JLL</text>
+            <text class="sub" x="260" y="197" text-anchor="middle">β · data spine</text>
+          </g>
+
+          <!-- 3. AI/ML Role -->
+          <g class="star">
+            <circle cx="420" cy="100" r="6" />
+            <circle class="glow" cx="420" cy="100" r="14" />
+            <text x="420" y="85" text-anchor="middle">AI/ML Engineer I</text>
+            <text class="sub" x="420" y="72" text-anchor="middle">γ · applied AI</text>
+          </g>
+
+          <!-- 4. Cortex Search Eval -->
+          <g class="star">
+            <circle cx="500" cy="55" r="4" />
+            <text x="500" y="42" text-anchor="middle">Cortex Search Eval</text>
+            <text class="sub" x="500" y="30" text-anchor="middle">δ</text>
+          </g>
+
+          <!-- 5. Cortex Analyst Eval -->
+          <g class="star">
+            <circle cx="460" cy="155" r="4" />
+            <text x="520" y="155" text-anchor="start">Cortex Analyst Eval</text>
+            <text class="sub" x="520" y="168" text-anchor="start">ε</text>
+          </g>
+
+          <!-- 6. Semantic View Factory -->
+          <g class="star">
+            <circle cx="520" cy="215" r="3.5" />
+            <text x="525" y="230" text-anchor="start">Semantic View Factory</text>
+            <text class="sub" x="525" y="243" text-anchor="start">ζ</text>
+          </g>
+
+          <!-- 7. RAG Glassbox -->
+          <g class="star">
+            <circle cx="230" cy="350" r="3.5" />
+            <text x="230" y="370" text-anchor="middle">RAG Glassbox</text>
+            <text class="sub" x="230" y="383" text-anchor="middle">η · local prototype</text>
+          </g>
+
+          <!-- 8. Cognos Studio -->
+          <g class="star">
+            <circle cx="360" cy="395" r="3" />
+            <text x="360" y="415" text-anchor="middle">Cognos Studio</text>
+            <text class="sub" x="360" y="428" text-anchor="middle">θ · local prototype</text>
+          </g>
+
+          <!-- 9. Signal Ledger (faint) -->
+          <g class="star" opacity="0.85">
+            <circle cx="330" cy="290" r="2.5" />
+            <text x="330" y="280" text-anchor="middle">Signal Ledger</text>
+            <text class="sub" x="330" y="267" text-anchor="middle">ι · prototype</text>
+          </g>
+        </svg>
+      </div>
+
+      <aside>
+        <h2>Coordinates</h2>
+        <table class="coords">
+          <tr class="main">
+            <td class="id">α</td>
+            <td class="yr">2017–2022</td>
+            <td>
+              <div class="nm">Invent Analytics</div>
+              <div class="st">Python · SQL · forecasting · inventory optimization · Tableau</div>
+            </td>
+          </tr>
+          <tr class="main">
+            <td class="id">β</td>
+            <td class="yr">2022–2025</td>
+            <td>
+              <div class="nm">BlueCloud · JLL Technologies</div>
+              <div class="st">Snowflake · Databricks · PySpark · Tableau · governed metrics</div>
+            </td>
+          </tr>
+          <tr class="main">
+            <td class="id">γ</td>
+            <td class="yr">2026–</td>
+            <td>
+              <div class="nm">BlueCloud · Senior AI/ML Engineer I</div>
+              <div class="st">Cortex Analyst · Cortex Search · Semantic Views · TruLens · Streamlit</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="id">δ</td>
+            <td class="yr">2026</td>
+            <td>
+              <div class="nm">Cortex Search Evaluation Framework</div>
+              <div class="st">benchmark design · deterministic retrieval scoring · Snowflake persistence · TruLens / Snowsight observability</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="id">ε</td>
+            <td class="yr">2026</td>
+            <td>
+              <div class="nm">Cortex Analyst Evaluation Framework</div>
+              <div class="st">scoring for data · SQL logic · answer quality · judge-confidence overrides · failure attribution</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="id">ζ</td>
+            <td class="yr">2026</td>
+            <td>
+              <div class="nm">Semantic View Factory</div>
+              <div class="st">internal accelerator · Snowflake metric &amp; relationship modeling</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="id">η</td>
+            <td class="yr">ongoing</td>
+            <td>
+              <div class="nm">RAG Glassbox (local)</div>
+              <div class="st">laptop-local RAG workbench · traceable retrieval · case study</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="id">θ</td>
+            <td class="yr">ongoing</td>
+            <td>
+              <div class="nm">Cognos Studio (local)</div>
+              <div class="st">Turkish LLM judging game · prototype</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="id">ι</td>
+            <td class="yr">ongoing</td>
+            <td>
+              <div class="nm">Signal Ledger (local)</div>
+              <div class="st">source-traceable editorial pipeline prototype</div>
+            </td>
+          </tr>
+        </table>
+
+        <p class="legend">
+          Bright stars are employment; faint stars are local prototypes. Lines mark shared substrate — the Semantic View Factory feeds Cortex Analyst Eval; RAG Glassbox feeds the local prototype cluster.
+        </p>
+      </aside>
+    </div>
+
+    <footer>
+      <span>Senior AI/ML Engineer · Applied AI, Data Engineering &amp; Enterprise Analytics</span>
+      <span>
+        <a href="mailto:yamangilanil@gmail.com">yamangilanil@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/yamangilanil">linkedin/in/yamangilanil</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>
