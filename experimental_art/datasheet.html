@@ -1,0 +1,355 @@
+<!--
+  experimental_art/datasheet.html — career as an IC component datasheet.
+
+  NOT the source of truth. NOT consumed by build/build_ats_pdf.py.
+  Ultra precise. Anti-verbose. No adjective unless mandatory.
+  Every value sourced from docs/current-resume-positioning.md.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AYM-1 · Datasheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:   #ffffff;
+      --fg:   #000000;
+      --muted:#5f5f5f;
+      --rule: #000000;
+      --rule-soft: #c9c9c9;
+      --accent: #b00020;
+      --zebra: #f3f1ea;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:   #0a0a0a;
+        --fg:   #e8e8e8;
+        --muted:#9a9a9a;
+        --rule: #e8e8e8;
+        --rule-soft: #2e2e2e;
+        --accent: #ff6a5a;
+        --zebra: #141412;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+      font-size: 12.5px; line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+    .doc { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+
+    /* Masthead */
+    .mast { border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); padding: 0.5rem 0; display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .mast .l { text-align: left; color: var(--muted); }
+    .mast .c { text-align: center; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.25em; }
+    .mast .r { text-align: right; color: var(--muted); }
+
+    /* Part header */
+    .part { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: end; padding: 1.75rem 0 0.9rem; border-bottom: 1px solid var(--rule); }
+    .part h1 { margin: 0; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+    .part h1 small { display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; color: var(--muted); margin-top: 0.45rem; }
+    .part .rev { text-align: right; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+    .part .rev b { color: var(--fg); font-weight: 700; }
+
+    /* Description line (single, terse) */
+    .desc { padding: 0.75rem 0; border-bottom: 1px solid var(--rule); font-size: 0.95rem; font-weight: 500; }
+    .desc b { color: var(--accent); }
+
+    /* Section header */
+    h2 { margin: 1.75rem 0 0.5rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; border-bottom: 1px solid var(--rule); padding-bottom: 0.35rem; }
+    h2 .num { color: var(--accent); margin-right: 0.5rem; }
+
+    /* Two-col layout for top pages */
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+    @media (max-width: 720px) { .row { grid-template-columns: 1fr; } }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+    th, td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+    th { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.68rem; color: var(--muted); border-bottom: 1px solid var(--rule); }
+    tr:nth-child(even) td { background: var(--zebra); }
+    td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    td.c { color: var(--accent); font-weight: 700; }
+    td.mt { color: var(--muted); }
+
+    /* Features list */
+    ul.feat { list-style: none; padding: 0; margin: 0.5rem 0 0; font-size: 0.82rem; }
+    ul.feat li { padding: 0.15rem 0 0.15rem 1rem; position: relative; }
+    ul.feat li::before { content: "■"; position: absolute; left: 0; color: var(--accent); font-size: 0.55rem; top: 0.55rem; }
+
+    /* Pin diagram */
+    .pkg { margin-top: 0.5rem; }
+    .pkg svg { width: 100%; height: auto; display: block; max-width: 520px; margin: 0 auto; }
+    .pkg svg text { font-family: "JetBrains Mono", monospace; fill: var(--fg); }
+    .pkg .pin-num { font-size: 8px; fill: var(--muted); }
+    .pkg .pin-lbl { font-size: 9.5px; font-weight: 500; }
+
+    /* Electrical characteristics */
+    caption { caption-side: top; text-align: left; padding: 0.25rem 0; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    /* Note bar */
+    .note { margin-top: 0.5rem; font-size: 0.7rem; color: var(--muted); line-height: 1.45; }
+    .note b { color: var(--fg); }
+
+    /* Footer bar */
+    .foot { margin-top: 2rem; border-top: 2px solid var(--rule); padding-top: 0.6rem; display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .foot .c { text-align: center; }
+    .foot .r { text-align: right; }
+    .foot a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-soft); }
+    .foot a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+  <main class="doc">
+
+    <!-- Masthead -->
+    <div class="mast">
+      <span class="l">Human Engineer · IC-class</span>
+      <span class="c">AYM-1 Datasheet</span>
+      <span class="r">Doc DS-01 · Rev 2026-05</span>
+    </div>
+
+    <!-- Part header -->
+    <section class="part">
+      <div>
+        <h1>
+          AYM-1
+          <small>Senior AI/ML Engineer · Applied AI · Data · Retail</small>
+        </h1>
+      </div>
+      <div class="rev">
+        Pkg <b>LQFP-24</b><br />
+        Temp 0–40 °C<br />
+        Tenure 9 yr
+      </div>
+    </section>
+
+    <!-- One-line description -->
+    <p class="desc">
+      <b>Description.</b> Senior AI/ML engineer with data engineering, enterprise analytics, and retail optimization foundation. Builds applied AI systems and evaluation workflows on governed data platforms.
+    </p>
+
+    <!-- 1. Features -->
+    <h2><span class="num">1</span> Features</h2>
+    <div class="row">
+      <ul class="feat">
+        <li>Cortex Analyst evaluation — text-to-SQL scoring</li>
+        <li>Cortex Search evaluation — retrieval scoring</li>
+        <li>Semantic View Factory — metric modeling</li>
+        <li>Snowflake &amp; Databricks data pipelines</li>
+      </ul>
+      <ul class="feat">
+        <li>Retail forecasting, replenishment, decision logic</li>
+        <li>Governed metrics, schema standards, Tableau</li>
+        <li>Streamlit review tooling, TruLens observability</li>
+        <li>Client-facing delivery, squad lead 2–4</li>
+      </ul>
+    </div>
+
+    <!-- 2. Absolute maximum ratings -->
+    <h2><span class="num">2</span> Absolute Maximum Ratings</h2>
+    <table>
+      <thead><tr><th>Parameter</th><th>Sym</th><th class="n">Min</th><th class="n">Typ</th><th class="n">Max</th><th class="n">Unit</th></tr></thead>
+      <tbody>
+        <tr><td>Tenure, continuous</td><td>T<sub>c</sub></td><td class="n">—</td><td class="n">3.0</td><td class="n">4.5</td><td class="n">yr</td></tr>
+        <tr><td>Squad size led</td><td>N<sub>s</sub></td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">ppl</td></tr>
+        <tr><td>Clients delivered, Invent era</td><td>C<sub>r</sub></td><td class="n">—</td><td class="n">—</td><td class="n">multi</td><td class="n">—</td></tr>
+        <tr><td>Lost-sales reduction, elec. retailer</td><td>Δ<sub>ls</sub></td><td class="n">—</td><td class="n">3.0</td><td class="n">—</td><td class="n">%</td></tr>
+        <tr><td>Availability lift, elec. retailer</td><td>Δ<sub>av</sub></td><td class="n">7.0</td><td class="n">—</td><td class="n">—</td><td class="n">%</td></tr>
+        <tr><td>Inventory turnover lift, elec. retailer</td><td>Δ<sub>it</sub></td><td class="n">—</td><td class="n">10.0</td><td class="n">—</td><td class="n">%</td></tr>
+        <tr><td>AI/ML workstreams, concurrent</td><td>W<sub>ai</sub></td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">—</td></tr>
+        <tr><td>Production regressions shipped</td><td>R</td><td class="n">—</td><td class="n">—</td><td class="n">0</td><td class="n">aspirational</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><b>Note 1.</b> Metrics for Δ<sub>ls</sub>, Δ<sub>av</sub>, Δ<sub>it</sub> measured at one electronics retailer over ~12 mo. Not generalized.</p>
+
+    <!-- 3. Electrical characteristics / operating history -->
+    <h2><span class="num">3</span> Operating History</h2>
+    <table>
+      <thead><tr><th class="n">#</th><th>Period</th><th>Employer / Role</th><th>Domain</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td class="c">01</td><td>Aug 2017 – Aug 2022</td><td>Invent Analytics — Consultant</td><td>Retail optimization</td><td>Forecasting, replenishment, production decision logic</td></tr>
+        <tr><td class="c">02</td><td>Aug 2022 – Dec 2025</td><td>BlueCloud / JLL — Sr Analytics Consultant &amp; Engineer</td><td>Data &amp; analytics</td><td>Snowflake, Databricks, governed metrics, Tableau, reliability</td></tr>
+        <tr><td class="c">03</td><td>Jan 2026 – Present</td><td>BlueCloud — Sr AI/ML Engineer I</td><td>Applied AI</td><td>Cortex Analyst Eval, Cortex Search Eval, Semantic View Factory</td></tr>
+        <tr><td class="c">04</td><td>Ongoing</td><td>Independent — Local prototypes</td><td>Workbenches</td><td>RAG Glassbox, Cognos Studio, Signal Ledger</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 4. Pin configuration -->
+    <h2><span class="num">4</span> Pin Configuration</h2>
+
+    <div class="row" style="grid-template-columns: 1.1fr 1fr; gap: 2rem;">
+      <div class="pkg">
+        <svg viewBox="0 0 380 280" role="img" aria-label="24-pin package diagram with pins labeled by skill domain.">
+          <!-- body -->
+          <rect x="90" y="40" width="200" height="200" fill="var(--bg)" stroke="var(--fg)" stroke-width="1.6" />
+          <!-- notch -->
+          <path d="M 180 40 A 10 10 0 0 1 200 40" fill="var(--bg)" stroke="var(--fg)" stroke-width="1.4" />
+          <text x="190" y="145" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="3">AYM-1</text>
+          <text x="190" y="160" text-anchor="middle" font-size="7.5" letter-spacing="2" fill="var(--muted)">LQFP-24</text>
+          <text x="190" y="178" text-anchor="middle" font-size="7" letter-spacing="2" fill="var(--muted)">ISTANBUL</text>
+
+          <!-- Left pins 1-6 (top to bottom) -->
+          <!-- each pin: short line outside the body -->
+          <g>
+            <line x1="90" y1="70"  x2="70" y2="70"  stroke="var(--fg)" />
+            <text class="pin-num" x="66" y="72" text-anchor="end">1</text>
+            <text class="pin-lbl" x="95" y="72" text-anchor="start">SNFL</text>
+
+            <line x1="90" y1="97" x2="70" y2="97" stroke="var(--fg)" />
+            <text class="pin-num" x="66" y="99" text-anchor="end">2</text>
+            <text class="pin-lbl" x="95" y="99" text-anchor="start">DBX</text>
+
+            <line x1="90" y1="124" x2="70" y2="124" stroke="var(--fg)" />
+            <text class="pin-num" x="66" y="126" text-anchor="end">3</text>
+            <text class="pin-lbl" x="95" y="126" text-anchor="start">SQL</text>
+
+            <line x1="90" y1="151" x2="70" y2="151" stroke="var(--fg)" />
+            <text class="pin-num" x="66" y="153" text-anchor="end">4</text>
+            <text class="pin-lbl" x="95" y="153" text-anchor="start">PYSPK</text>
+
+            <line x1="90" y1="178" x2="70" y2="178" stroke="var(--fg)" />
+            <text class="pin-num" x="66" y="180" text-anchor="end">5</text>
+            <text class="pin-lbl" x="95" y="180" text-anchor="start">DBT</text>
+
+            <line x1="90" y1="205" x2="70" y2="205" stroke="var(--fg)" />
+            <text class="pin-num" x="66" y="207" text-anchor="end">6</text>
+            <text class="pin-lbl" x="95" y="207" text-anchor="start">TABL</text>
+          </g>
+
+          <!-- Bottom pins 7-12 (left to right) -->
+          <g>
+            <line x1="115" y1="240" x2="115" y2="260" stroke="var(--fg)" />
+            <text class="pin-num" x="115" y="272" text-anchor="middle">7</text>
+            <text class="pin-lbl" x="115" y="235" text-anchor="middle" transform="rotate(-90 115 235)">RAG</text>
+
+            <line x1="142" y1="240" x2="142" y2="260" stroke="var(--fg)" />
+            <text class="pin-num" x="142" y="272" text-anchor="middle">8</text>
+
+            <line x1="169" y1="240" x2="169" y2="260" stroke="var(--fg)" />
+            <text class="pin-num" x="169" y="272" text-anchor="middle">9</text>
+
+            <line x1="196" y1="240" x2="196" y2="260" stroke="var(--fg)" />
+            <text class="pin-num" x="196" y="272" text-anchor="middle">10</text>
+
+            <line x1="223" y1="240" x2="223" y2="260" stroke="var(--fg)" />
+            <text class="pin-num" x="223" y="272" text-anchor="middle">11</text>
+
+            <line x1="250" y1="240" x2="250" y2="260" stroke="var(--fg)" />
+            <text class="pin-num" x="250" y="272" text-anchor="middle">12</text>
+          </g>
+
+          <!-- Right pins 13-18 (bottom to top) -->
+          <g>
+            <line x1="290" y1="205" x2="310" y2="205" stroke="var(--fg)" />
+            <text class="pin-num" x="314" y="207" text-anchor="start">13</text>
+            <text class="pin-lbl" x="285" y="207" text-anchor="end">EVAL</text>
+
+            <line x1="290" y1="178" x2="310" y2="178" stroke="var(--fg)" />
+            <text class="pin-num" x="314" y="180" text-anchor="start">14</text>
+            <text class="pin-lbl" x="285" y="180" text-anchor="end">LLMJ</text>
+
+            <line x1="290" y1="151" x2="310" y2="151" stroke="var(--fg)" />
+            <text class="pin-num" x="314" y="153" text-anchor="start">15</text>
+            <text class="pin-lbl" x="285" y="153" text-anchor="end">TRL</text>
+
+            <line x1="290" y1="124" x2="310" y2="124" stroke="var(--fg)" />
+            <text class="pin-num" x="314" y="126" text-anchor="start">16</text>
+            <text class="pin-lbl" x="285" y="126" text-anchor="end">SEMV</text>
+
+            <line x1="290" y1="97" x2="310" y2="97" stroke="var(--fg)" />
+            <text class="pin-num" x="314" y="99" text-anchor="start">17</text>
+            <text class="pin-lbl" x="285" y="99" text-anchor="end">CORX</text>
+
+            <line x1="290" y1="70" x2="310" y2="70" stroke="var(--fg)" />
+            <text class="pin-num" x="314" y="72" text-anchor="start">18</text>
+            <text class="pin-lbl" x="285" y="72" text-anchor="end">STRM</text>
+          </g>
+
+          <!-- Top pins 19-24 (right to left) -->
+          <g>
+            <line x1="250" y1="40" x2="250" y2="20" stroke="var(--fg)" />
+            <text class="pin-num" x="250" y="14" text-anchor="middle">19</text>
+
+            <line x1="223" y1="40" x2="223" y2="20" stroke="var(--fg)" />
+            <text class="pin-num" x="223" y="14" text-anchor="middle">20</text>
+
+            <line x1="196" y1="40" x2="196" y2="20" stroke="var(--fg)" />
+            <text class="pin-num" x="196" y="14" text-anchor="middle">21</text>
+
+            <line x1="169" y1="40" x2="169" y2="20" stroke="var(--fg)" />
+            <text class="pin-num" x="169" y="14" text-anchor="middle">22</text>
+
+            <line x1="142" y1="40" x2="142" y2="20" stroke="var(--fg)" />
+            <text class="pin-num" x="142" y="14" text-anchor="middle">23</text>
+
+            <line x1="115" y1="40" x2="115" y2="20" stroke="var(--fg)" />
+            <text class="pin-num" x="115" y="14" text-anchor="middle">24</text>
+          </g>
+        </svg>
+      </div>
+
+      <div>
+        <table>
+          <thead><tr><th>Pin</th><th>Sym</th><th>Function</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td>SNFL</td><td>Snowflake — warehouses, streams, views</td></tr>
+            <tr><td class="n">2</td><td>DBX</td><td>Databricks — notebooks, clusters</td></tr>
+            <tr><td class="n">3</td><td>SQL</td><td>SQL, window fns, performance tuning</td></tr>
+            <tr><td class="n">4</td><td>PYSPK</td><td>PySpark, Pandas, Python</td></tr>
+            <tr><td class="n">5</td><td>DBT</td><td>dbt, governed transformations</td></tr>
+            <tr><td class="n">6</td><td>TABL</td><td>Tableau, semantic layer</td></tr>
+            <tr><td class="n">7–12</td><td>—</td><td>Airflow, CI/CD, React/TS, FastAPI</td></tr>
+            <tr><td class="n">13</td><td>EVAL</td><td>LLM eval harness, scoring gates</td></tr>
+            <tr><td class="n">14</td><td>LLMJ</td><td>LLM-as-judge, confidence overrides</td></tr>
+            <tr><td class="n">15</td><td>TRL</td><td>TruLens, Snowsight observability</td></tr>
+            <tr><td class="n">16</td><td>SEMV</td><td>Snowflake Semantic Views</td></tr>
+            <tr><td class="n">17</td><td>CORX</td><td>Cortex Analyst + Cortex Search</td></tr>
+            <tr><td class="n">18</td><td>STRM</td><td>Streamlit review tooling</td></tr>
+            <tr><td class="n">19–24</td><td>—</td><td>Forecasting, optimization, decision logic</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 5. Typical applications -->
+    <h2><span class="num">5</span> Typical Applications</h2>
+    <table>
+      <thead><tr><th>Use case</th><th>Recommended pins</th><th>Load</th></tr></thead>
+      <tbody>
+        <tr><td>Cortex Analyst / text-to-SQL evaluation</td><td>EVAL · LLMJ · CORX · SEMV · TRL</td><td>high</td></tr>
+        <tr><td>Cortex Search retrieval evaluation</td><td>EVAL · CORX · SNFL · TRL</td><td>high</td></tr>
+        <tr><td>Governed analytics on Snowflake + Databricks</td><td>SNFL · DBX · SQL · PYSPK · DBT</td><td>steady</td></tr>
+        <tr><td>Retail forecasting &amp; replenishment</td><td>19–24 · SQL · PYSPK · TABL</td><td>variable</td></tr>
+        <tr><td>Client delivery · squad lead 2–4</td><td>all pins</td><td>cyclic</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 6. Ordering -->
+    <h2><span class="num">6</span> Ordering Information</h2>
+    <table>
+      <thead><tr><th>Part</th><th>Channel</th><th>Address</th></tr></thead>
+      <tbody>
+        <tr><td>AYM-1</td><td>Email</td><td>yamangilanil@gmail.com</td></tr>
+        <tr><td>AYM-1</td><td>LinkedIn</td><td>linkedin.com/in/yamangilanil</td></tr>
+        <tr><td>AYM-1-DOC</td><td>Portfolio</td><td>anilymngl.github.io/resume</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><b>Note 2.</b> Packaging LQFP-24 is illustrative. Actual interface is a human conversation.</p>
+
+    <!-- Footer -->
+    <div class="foot">
+      <span class="l">AYM-1 · DS-01</span>
+      <span class="c">— End of datasheet —</span>
+      <span class="r">Rev 2026-05 · 1 / 1</span>
+    </div>
+  </main>
+</body>
+</html>

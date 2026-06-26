@@ -14,9 +14,9 @@ For wording rules, see `resume-editing-rules.md`.
 
 - [ ] Headline is recognizable and scannable in under five seconds.
 - [ ] Every vendor product name has a plain-English translation on first use.
-- [ ] Section names are standard (`Professional Experience`, `Education`, `Skills`, `Projects`).
+- [ ] Section names are standard or intentionally mapped for ATS (`Professional Experience`, `Education`, `Skills`, `Projects`).
 - [ ] No dense jargon or noun-stacks in the first 20% of the page.
-- [ ] Local projects are clearly scoped as prototypes / workbenches / case studies.
+- [ ] Local projects are clearly scoped as prototypes / workbenches / case studies, while Coding Agent Acceptance Lab is scoped as independent research.
 
 ### Senior Engineer / Hiring Manager
 
@@ -24,7 +24,7 @@ For wording rules, see `resume-editing-rules.md`.
 - [ ] Ownership verbs are strong but accurate — no "contributed to / supported / served as" hiding real work.
 - [ ] Each workstream or project names the specific surfaces, stacks, or metrics involved.
 - [ ] No invented labels ("multi-surface", "agentic root-cause", "dual-provider LLM bridge") without plain technical context.
-- [ ] Skills that appear as chips are also backed by at least one bullet or project.
+- [ ] Skill groups are backed by at least one bullet, project, or research entry.
 
 ### ATS / Parser
 
@@ -32,8 +32,8 @@ For wording rules, see `resume-editing-rules.md`.
 - [ ] No emojis in PDF text output.
 - [ ] No `→` arrows, smart quotes, or non-breaking spaces leaking through.
 - [ ] Contact info flattens to a single plain line in the PDF.
-- [ ] Skills flatten to comma-separated inline text under bold category labels.
-- [ ] Key terms present and extractable: `Cortex Analyst`, `Cortex Search`, `Snowflake Semantic Views`, `PySpark`, `Databricks`, `TruLens`, tested metrics.
+- [ ] Skills flatten to inline text under bold category labels.
+- [ ] Key terms present and extractable: `Cortex Analyst`, `Cortex Search`, `Snowflake Semantic Views`, `PySpark`, `Databricks`, `hidden acceptance testing`, tested metrics.
 
 ---
 
@@ -44,6 +44,7 @@ For wording rules, see `resume-editing-rules.md`.
 - [ ] No claim that makes real ownership sound adjacent.
 - [ ] No claim that makes partial ownership sound total.
 - [ ] Snowflake/Cortex is framed as a current evidence pillar, not the whole identity.
+- [ ] Coding Agent Acceptance Lab is prominent but not framed as peer-reviewed academic publication or a universal benchmark.
 - [ ] Invent Analytics retains multiple-clients + inventory-optimization + measured-outcomes framing.
 - [ ] Independent projects retain local/prototype framing — no SaaS or production claims.
 

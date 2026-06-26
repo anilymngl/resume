@@ -1,0 +1,288 @@
+<!--
+  experimental_art/field-notes.html — a note on the work.
+
+  NOT the source of truth. NOT consumed by build/build_ats_pdf.py.
+  Warm palette, serif body, quiet first-person voice. Credits the
+  collaborators the other variants leave out. Not a manifesto —
+  just the softer register of the same engineer.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anıl Yamangil — Field Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* warm, low-contrast palette */
+      --bg:        #f4ede0;   /* warm linen */
+      --bg-2:      #e8ddc9;   /* softer paper */
+      --bg-sage:   #e5e8d6;   /* washed sage */
+      --bg-rose:   #ecd9cf;   /* dusty peach */
+      --fg:        #2b2824;   /* warm charcoal, not black */
+      --fg-muted:  #7a7365;
+      --fg-soft:   #a89e8b;
+      --rule:      #d5cdb9;
+      --rule-soft: #e4dcc8;
+      --terracotta:#b36b4d;
+      --sage:      #7a8a67;
+      --clay:      #8a5a3c;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:        #14120e;
+        --bg-2:      #1c1a14;
+        --bg-sage:   #1a1f17;
+        --bg-rose:   #22181a;
+        --fg:        #ece4d4;
+        --fg-muted:  #9a907f;
+        --fg-soft:   #6a6150;
+        --rule:      #2d281f;
+        --rule-soft: #221e17;
+        --terracotta:#d98867;
+        --sage:      #9eab8b;
+        --clay:      #c48263;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Newsreader", Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.65;
+      font-variation-settings: "opsz" 24;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--terracotta); color: var(--bg); }
+
+    .page { max-width: 680px; margin: 0 auto; padding: 5rem 1.75rem 4rem; }
+
+    /* Masthead: very quiet */
+    .mast { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 3rem; }
+    .mast svg { flex: none; width: 34px; height: 34px; }
+    .mast .title { font-family: "Work Sans", -apple-system, sans-serif; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-muted); font-weight: 500; }
+    .mast .title b { color: var(--fg); font-weight: 600; }
+
+    /* Opening */
+    h1 {
+      font-family: "Newsreader", serif;
+      font-weight: 500;
+      font-variation-settings: "opsz" 60;
+      font-size: clamp(2.2rem, 5vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      margin: 0 0 0.75rem;
+      color: var(--fg);
+    }
+    h1 em { font-style: italic; color: var(--terracotta); font-weight: 400; }
+    .sub {
+      font-style: italic;
+      color: var(--fg-muted);
+      font-size: 1.1rem;
+      margin: 0 0 2.5rem;
+      font-weight: 400;
+    }
+
+    /* Body prose */
+    .prose p { margin: 0 0 1.1rem; }
+    .prose p:first-child::first-letter {
+      font-family: "Newsreader", serif;
+      font-weight: 500;
+      font-size: 3.6rem;
+      float: left;
+      line-height: 0.85;
+      padding: 0.35rem 0.55rem 0 0;
+      color: var(--clay);
+      font-variation-settings: "opsz" 72;
+    }
+    .prose em { color: var(--fg); }
+    .prose b { font-weight: 600; color: var(--fg); }
+
+    /* Section divider — small ornament */
+    .ornament { display: flex; justify-content: center; align-items: center; gap: 0.6rem; margin: 3rem 0; color: var(--fg-soft); }
+    .ornament span { width: 3px; height: 3px; border-radius: 50%; background: var(--fg-soft); opacity: 0.6; }
+    .ornament span:nth-child(2) { background: var(--terracotta); opacity: 0.8; width: 4px; height: 4px; }
+
+    /* Section heading — lowercase, soft */
+    h2 {
+      font-family: "Work Sans", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin: 0 0 1.25rem;
+    }
+    h2 em { font-style: normal; color: var(--terracotta); }
+
+    /* Credits: named groups, not names */
+    .credits { background: var(--bg-sage); border-radius: 4px; padding: 1.75rem 1.75rem 1.5rem; margin: 0 -0.25rem; }
+    .credits ul { list-style: none; padding: 0; margin: 0; }
+    .credits li { padding: 0.65rem 0; border-bottom: 1px solid var(--rule-soft); font-size: 1rem; line-height: 1.55; }
+    .credits li:last-child { border-bottom: none; }
+    .credits li b { display: block; font-weight: 600; color: var(--fg); margin-bottom: 0.1rem; font-size: 0.92rem; }
+    .credits li span { color: var(--fg-muted); }
+
+    /* Practice notes: quiet dashes */
+    .practice { padding: 0; margin: 0; }
+    .practice li { list-style: none; padding: 0.5rem 0 0.5rem 1.5rem; position: relative; font-size: 1.02rem; line-height: 1.55; border-bottom: 1px solid var(--rule-soft); color: var(--fg); }
+    .practice li:last-child { border-bottom: none; }
+    .practice li::before { content: "—"; position: absolute; left: 0; color: var(--terracotta); font-weight: 500; }
+    .practice li em { font-style: italic; color: var(--fg-muted); }
+
+    /* Short work spine */
+    .spine { background: var(--bg-rose); border-radius: 4px; padding: 1.5rem 1.75rem; margin: 0 -0.25rem; }
+    .spine dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.55rem 1.25rem; font-size: 0.96rem; }
+    .spine dt { font-family: "Work Sans", sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--clay); letter-spacing: 0.04em; white-space: nowrap; padding-top: 0.15rem; }
+    .spine dd { margin: 0; color: var(--fg); }
+    .spine dd b { font-weight: 600; }
+    .spine dd i { font-style: italic; color: var(--fg-muted); }
+
+    /* Closing */
+    .sign {
+      margin-top: 3rem;
+      font-family: "Newsreader", serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--fg);
+    }
+    .sign .me { font-style: normal; color: var(--terracotta); font-weight: 500; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-family: "Work Sans", sans-serif;
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+    }
+    footer a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color 150ms; }
+    footer a:hover { border-color: var(--terracotta); color: var(--fg); }
+
+    @media (max-width: 520px) {
+      .spine dl { grid-template-columns: 1fr; gap: 0.1rem 0; }
+      .spine dt { padding-top: 0.6rem; }
+      .credits, .spine { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Masthead: warm sun ornament -->
+    <header class="mast">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="6.5" fill="none" stroke="var(--terracotta)" stroke-width="1.4" />
+        <circle cx="20" cy="20" r="2.2" fill="var(--terracotta)" />
+        <g stroke="var(--sage)" stroke-width="1.2" stroke-linecap="round" opacity="0.85">
+          <line x1="20" y1="3"  x2="20" y2="8.5" />
+          <line x1="20" y1="31.5" x2="20" y2="37" />
+          <line x1="3"  y1="20" x2="8.5" y2="20" />
+          <line x1="31.5" y1="20" x2="37" y2="20" />
+          <line x1="8" y1="8"   x2="12" y2="12" />
+          <line x1="28" y1="28" x2="32" y2="32" />
+          <line x1="32" y1="8"  x2="28" y2="12" />
+          <line x1="12" y1="28" x2="8" y2="32" />
+        </g>
+      </svg>
+      <span class="title"><b>Anıl Yamangil</b> · field notes · may 2026</span>
+    </header>
+
+    <!-- Title -->
+    <h1>A note <em>on the work</em>, and <em>who it was with</em>.</h1>
+    <p class="sub">The résumé version is clean; this one is true.</p>
+
+    <article class="prose">
+      <p>
+        The short answer is that I build applied AI systems and evaluation workflows on governed data platforms. The longer answer is that the work has almost never been solo. Forecasting a retailer's stock is a conversation with a merchandiser. Scoring a Cortex Analyst answer is a conversation with the analyst who cared enough to say <em>this is wrong, and here is why</em>. What I have learned, across nine years, is that the engineering is the easy part.
+      </p>
+      <p>
+        Staying legible to the people who use the work — the merchandiser on Monday, the analyst on Friday, the teammate who will read the pull request next week — is the part that takes practice. I am still practicing.
+      </p>
+    </article>
+
+    <div class="ornament" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <!-- Work spine: quiet, named -->
+    <h2>the work, <em>briefly</em></h2>
+    <div class="spine">
+      <dl>
+        <dt>2017 – 2022</dt>
+        <dd><b>Invent Analytics.</b> Retail optimization, forecasting, replenishment, production decision logic. <i>Multiple clients, squads of two to four.</i></dd>
+        <dt>2022 – 2025</dt>
+        <dd><b>BlueCloud, for JLL Technologies.</b> Snowflake &amp; Databricks pipelines, governed metrics, schema standards, reliability.</dd>
+        <dt>2026 –</dt>
+        <dd><b>BlueCloud, AI/ML.</b> Cortex Analyst and Cortex Search evaluation frameworks, plus the Semantic View Factory.</dd>
+        <dt>ongoing</dt>
+        <dd><b>Local prototypes.</b> <i>Workbenches, not products.</i> RAG Glassbox, Cognos Studio, Signal Ledger.</dd>
+      </dl>
+    </div>
+
+    <div class="ornament" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <!-- Credits -->
+    <h2>with, <em>&amp; learned from</em></h2>
+    <div class="credits">
+      <ul>
+        <li>
+          <b>My Invent squads, 2017 – 2022.</b>
+          <span>Who taught me that an optimization is only as good as the person who has to trust it on Monday morning.</span>
+        </li>
+        <li>
+          <b>The BlueCloud data team, 2022 – present.</b>
+          <span>Who taught me that reliability is the most underrated form of respect.</span>
+        </li>
+        <li>
+          <b>Collaborators on the AI/ML side.</b>
+          <span>Who push back when an evaluation looks too clean to be real.</span>
+        </li>
+        <li>
+          <b>The quiet maintainers.</b>
+          <span>dbt, Streamlit, TruLens, PySpark, Pandas, countless others — tools I used today and will use tomorrow, built by people I will never meet.</span>
+        </li>
+        <li>
+          <b>Everyone who has been senior to me, and everyone who has been junior.</b>
+          <span>I am still learning both directions.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="ornament" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <!-- Practice notes -->
+    <h2>practice, <em>in small things</em></h2>
+    <ul class="practice">
+      <li>Credit people by name when the work was not mine alone.</li>
+      <li>Optimize for the person reading the code next, not for looking clever.</li>
+      <li>Push back early; apologize later only if it is earned.</li>
+      <li>Let the women in the room finish their sentences.</li>
+      <li>Mentor quietly. <em>Loud mentorship is usually about the mentor.</em></li>
+      <li>Ask more questions on day one than on day one hundred.</li>
+      <li>Say <em>I don't know</em>, out loud, when I don't.</li>
+    </ul>
+
+    <p class="sign">
+      — <span class="me">Anıl</span>, from Istanbul, with warmth.
+    </p>
+
+    <footer>
+      <span>Senior AI/ML Engineer · Applied AI, Data Engineering &amp; Enterprise Analytics</span>
+      <span>
+        <a href="mailto:yamangilanil@gmail.com">yamangilanil@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/yamangilanil">linkedin/in/yamangilanil</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>

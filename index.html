@@ -177,6 +177,40 @@
         font-weight: 600;
         color: #1e293b;
       }
+      .project-links {
+        display: block;
+        font-size: 0.875rem;
+        margin-top: 0.1rem;
+      }
+      .project-links a {
+        color: #0f172a;
+        border-bottom: 1px solid #cbd5e1;
+        text-decoration: none;
+        margin-right: 0.35rem;
+      }
+
+      /* Compact skill groups */
+      .skill-groups {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.85rem 1.25rem;
+      }
+      .skill-group {
+        margin: 0;
+        color: #475569;
+        line-height: 1.5;
+      }
+      .skill-group strong {
+        display: block;
+        color: #1e293b;
+        font-weight: 600;
+        margin-bottom: 0.15rem;
+      }
+      @media (max-width: 720px) {
+        .skill-groups {
+          grid-template-columns: 1fr;
+        }
+      }
 
       /* ===== Skills: 2-col grid, flatter pills ===== */
       .skills-grid > div {
@@ -304,7 +338,8 @@
         font-weight: 400 !important;
       }
 
-      /* Two-column skills in print too */
+      /* Two-column compact skills in print too */
+      .skill-groups,
       .skills-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
@@ -377,7 +412,7 @@
     <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
       <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Professional Summary</h2>
       <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-        Senior AI/ML Engineer with 8+ years across enterprise data engineering, analytics, retail optimization, decision systems, and applied AI. Experienced in translating messy business constraints into reliable pipelines, governed metrics, and decision-ready datasets on Snowflake and Databricks. Recent work focuses on Snowflake-based applied AI, including Cortex Analyst, Snowflake's text-to-SQL engine over Semantic Views; Cortex Search, Snowflake's managed fuzzy/semantic search and retrieval service; retrieval evaluation tooling; Snowflake-persisted scoring workflows; and Streamlit-based review interfaces. Earlier work includes production retail optimization, forecasting, replenishment systems, and enterprise analytics delivery across real estate technology and retail.
+        Senior AI/ML Engineer with 8+ years across retail optimization, enterprise data engineering, and applied AI. Built production forecasting and inventory systems under real client pressure, then spent more than three years keeping Snowflake and Databricks data platforms reliable for enterprise analytics. Current professional work focuses on evaluating Snowflake's AI and semantic systems; independently, I build and publish research on coding-agent acceptance reliability.
       </p>
     </div>
 
@@ -392,81 +427,96 @@
           </h3>
           <div class="mt-4">
             <h4 class="font-medium text-slate-800">Senior AI/ML Engineer <span class="text-slate-600 font-normal">| Jan 2026 – Present</span></h4>
-            <p class="role-blurb">AI/ML Team — Cortex Analyst text-to-SQL, Cortex Search retrieval, and Snowflake Semantic Views</p>
+            <p class="role-blurb">AI/ML Team — evaluation systems, semantic modeling, and governed AI workflows on Snowflake.</p>
             <div class="pl-4 border-l-2 border-slate-200 mt-2">
               <div class="role-workstreams">
                 <div class="workstream">
-                  <h5 class="workstream-title">Cortex Search Evaluation Framework — managed search/retrieval</h5>
+                  <h5 class="workstream-title">AI Evaluation Systems</h5>
                   <ul class="list-disc pl-5 space-y-2 text-slate-600">
                     <li>
-                      Built the benchmark design, deterministic retrieval scoring, Snowflake persistence layer, and TruLens/Snowsight observability integration for a client-facing Cortex Search evaluation framework.
+                      Built benchmark, scoring, review, and failure-diagnosis workflows for Cortex Search, Snowflake's managed fuzzy/semantic retrieval service, and Cortex Analyst, Snowflake's text-to-SQL engine over Semantic Views.
                     </li>
                     <li>
-                      Implemented corpus-first benchmark cases built from known source records, retrieval scorers for target hit@k, rank, filter correctness, duplicate saturation, and latency, plus Snowflake tables for evaluation runs, test cases, and scores.
+                      Separated retrieval, generated-SQL, returned-data, and answer-quality evaluation; persisted runs, test cases, scores, and review evidence in Snowflake for cross-run comparison and tuning.
                     </li>
                     <li>
-                      Built a Cortex Code Agent SDK workflow for classifying evaluation failures using read-only SQL tool guardrails, structured findings with confidence scores, SQL evidence references, and four failure categories: benchmark, evaluator, service, and workflow.
+                      Built Streamlit review surfaces for benchmark browsing, evidence inspection, cross-run comparison, golden-SQL validation, EXPLAIN-plan review, and structured failure classification.
                     </li>
                   </ul>
                 </div>
                 <div class="workstream">
-                  <h5 class="workstream-title">Cortex Analyst Evaluation Framework — text-to-SQL over Semantic Views</h5>
+                  <h5 class="workstream-title">Semantic Systems &amp; Governed Context</h5>
                   <ul class="list-disc pl-5 space-y-2 text-slate-600">
                     <li>
-                      Built scoring, review, and failure-classification workflows for a Cortex Analyst evaluation harness over Snowflake Semantic Views.
+                      Prototyped Snowflake Semantic View workflows using staged schema discovery, join/grain checks, deterministic YAML assembly, quality gates, and regression tests.
                     </li>
                     <li>
-                      Separated scoring for data results, SQL logic, and answer quality; added semantic judge checks, high-confidence override rules, and structured tuning backlogs for Semantic View fixes.
-                    </li>
-                    <li>
-                      Built a Streamlit operator console for benchmark browsing, batch and single-question runs, generated-SQL / response / result inspection, cross-run comparison, performance analytics, golden-SQL validation, and EXPLAIN-plan review.
+                      Designed governed context patterns that separate certified metric contracts, source/reference evidence, and warehouse-observed metadata.
                     </li>
                   </ul>
                 </div>
                 <div class="workstream">
-                  <h5 class="workstream-title">Semantic View Factory — internal accelerator for Snowflake metric/relationship modeling</h5>
+                  <h5 class="workstream-title">Technical Investigation &amp; Client Enablement</h5>
                   <ul class="list-disc pl-5 space-y-2 text-slate-600">
                     <li>
-                      Prototyped an internal Snowflake Semantic View accelerator using staged schema discovery, join/grain checks, deterministic YAML assembly, quality gates, and golden-test / regression-test workflows.
-                    </li>
-                  </ul>
-                </div>
-                <div class="workstream">
-                  <h5 class="workstream-title">Research, Documentation &amp; Client Enablement</h5>
-                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                    <li>
-                      Authored client-facing research and technical deliverables across both Cortex Search and Cortex Analyst workstreams — benchmark design specs, scoring architecture documents, notes on judge behavior and model upgrades, stress-test cases for non-additive metrics and fan-out risks, technical and c-level presentations, operations runbooks, and console documentation.
+                      Authored benchmark specs, scoring architecture documents, judge-behavior notes, model-upgrade analyses, non-additive metric stress cases, runbooks, client presentations, and console documentation.
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="mt-6">
+        <!-- Independent Research -->
+        <div class="space-y-4">
+          <h3 class="font-semibold text-slate-800">
+            Independent Research &amp; Open-Source Engineering
+          </h3>
+          <h4 class="font-medium text-slate-800">Coding Agent Acceptance Lab <span class="text-slate-600 font-normal">| 2026</span></h4>
+          <p class="role-blurb">A reproducible evaluation system for checking whether coding-agent patches satisfy hidden acceptance, not only visible CI.</p>
+          <div class="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+              <li>
+                Designed and open-sourced a deterministic evaluation harness that runs coding agents against visible tests, captures patches, injects hidden acceptance tests after agent exit, and records false-greens.
+              </li>
+              <li>
+                Authored 33 scenarios and analyzed 391 retained attempts; under sparse prompts, 84 of 194 public-green patches still failed hidden acceptance, compared with 17 of 191 when the contract was visible.
+              </li>
+              <li>
+                Built the release pipeline: isolated worktrees, SQLite and CSV data, evaluator-review validation, SHA-256 checks, CI-enforced metric recomputation, scenario catalog, evidence matrix, and technical report.
+              </li>
+            </ul>
+            <p class="project-links">
+              <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/" target="_blank" rel="noopener noreferrer">Research Site</a>
+              |
+              <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/paper.html" target="_blank" rel="noopener noreferrer">Technical Report</a>
+              |
+              <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/evidence-index.html" target="_blank" rel="noopener noreferrer">Evidence</a>
+              |
+              <a href="https://github.com/anilymngl/coding-agent-acceptance-lab" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- BlueCloud / JLL -->
+        <div class="space-y-4">
+          <h3 class="font-semibold text-slate-800">
+            BlueCloud, Tampa, US (Remote) | Client: JLL Technologies
+          </h3>
+          <div class="mt-4">
             <h4 class="font-medium text-slate-800">Senior Analytics Consultant & Engineer <span class="text-slate-600 font-normal">| Client: JLL Technologies | Aug 2022 – Dec 2025</span></h4>
+            <p class="role-blurb">Embedded across enterprise analytics and data-platform work for reliable pipelines, interpretable metrics, and usable reporting.</p>
             <div class="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
               <ul class="list-disc pl-5 space-y-2 text-slate-600">
                 <li>
-                  Maintained and improved reliability for Snowflake and Databricks analytics pipelines used across multiple teams and business domains.
+                  Built and maintained Snowflake and Databricks pipelines using SQL, Python, PySpark, and job/orchestration patterns; added data-quality checks that surfaced schema and metric regressions before reporting.
                 </li>
                 <li>
-                  Built and optimized ELT/ETL workflows using SQL, Python, PySpark, and Databricks job/orchestration patterns, focusing on performance, stability, and maintainability.
+                  Defined schema, modeling, and metric standards; delivered Tableau reporting over governed data layers for executive and operational workflows.
                 </li>
                 <li>
-                  Defined and improved schema design and data modeling standards, aligning stakeholders on metric definitions and reducing downstream reporting ambiguity.
-                </li>
-                <li>
-                  Introduced data quality validation and monitoring patterns to reduce silent reporting regressions.
-                </li>
-                <li>
-                  Delivered Tableau reporting on top of governed metric layers for executive visibility, operational reporting, and planning workflows.
-                </li>
-                <li>
-                  Acted as an embedded data architecture advisor, helping define modeling standards, data quality patterns, ownership boundaries, and Snowflake and Databricks delivery practices.
-                </li>
-                <li>
-                  Mentored engineers and analysts through design reviews, technical training, and delivery support.
+                  Acted as an embedded architecture and delivery advisor while mentoring engineers and analysts through design reviews, implementation support, and production troubleshooting.
                 </li>
               </ul>
             </div>
@@ -486,22 +536,13 @@
           <div class="pl-4 border-l-2 border-slate-200 space-y-4">
             <ul class="list-disc pl-5 space-y-2 text-slate-600">
               <li>
-                Delivered client-facing analytics, forecasting, and optimization implementations for multiple retail clients across inventory, replenishment, fulfillment, and pricing use cases.
+                Delivered forecasting and optimization implementations for multiple retail clients across inventory, replenishment, fulfillment, and pricing use cases.
               </li>
               <li>
-                Designed and deployed a custom inventory optimization system for a large electronics retailer transitioning to a central-warehouse model, modeling operational constraints as production decision logic.
+                Designed and deployed a custom inventory optimization system for a large electronics retailer moving to a central-warehouse model, delivering ~3% lost-sales reduction, 7%+ availability improvement, and ~10% inventory-turnover improvement over roughly one year.
               </li>
               <li>
-                Delivered a production inventory optimization system with measured outcomes over roughly one year, including ~3% lost-sales reduction, 7%+ availability improvement, and ~10% inventory-turnover improvement.
-              </li>
-              <li>
-                Built Python/SQL ETL, ML, simulation, forecasting, reporting, and integration pipelines within Invent's broader SaaS optimization platform.
-              </li>
-              <li>
-                Led end-to-end client implementation work from data onboarding and configuration through rollout, UAT, production support, and stakeholder alignment.
-              </li>
-              <li>
-                Partnered with product and engineering teams to refine optimization algorithms while balancing client-specific requirements with platform maintainability.
+                Built Python and SQL pipelines across data onboarding, ML, simulation, forecasting, optimization, reporting, integration, UAT, and production support.
               </li>
               <li>
                 Led squads of 2–4 people across concurrent client engagements and mentored junior consultants through code reviews and micro-trainings.
@@ -510,43 +551,51 @@
           </div>
         </div>
 
-        <!-- Smartiks -->
+        <!-- Earlier Work -->
         <div class="space-y-4">
           <h3 class="font-semibold text-slate-800">
-            Smartiks Information Technologies, Istanbul, Turkey
+            Earlier Work
           </h3>
-          <p class="text-slate-600">CRM Solutions Consultant &amp; Business Analyst</p>
-          <span class="text-slate-600">Aug 2017 – Feb 2018</span>
           <div class="pl-4 border-l-2 border-slate-200 space-y-4">
             <ul class="list-disc pl-5 space-y-2 text-slate-600">
               <li>
-                Supported Oracle Service Cloud implementations for clients in the UAE and Turkey.
+                Smartiks Information Technologies — CRM Solutions Consultant &amp; Business Analyst, Aug 2017 – Feb 2018. Supported Oracle Service Cloud implementations and portal/mobile development across the UAE and Turkey.
               </li>
               <li>
-                Coordinated vendor web portal and mobile application development.
+                Internships: Supply Chain Management Intern, Mavi Jeans, Summer 2015; Production Intern, BASF Construction Chemicals, Summer 2014.
               </li>
             </ul>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Additional Early Roles & Internships -->
-        <div>
-          <h3 class="font-semibold text-slate-800 mb-3">
-            Additional Early Roles &amp; Internships
-          </h3>
-          <div class="pl-4 border-l-2 border-slate-200 space-y-2">
-            <div class="flex justify-between text-slate-600">
-              <span>Supply Chain Management Intern, Mavi Jeans (Istanbul, Turkey)</span>
-              <span>Summer 2015</span>
-            </div>
-            <div class="flex justify-between text-slate-600">
-              <span>
-                Production Intern, BASF Construction Chemicals (Istanbul, Turkey)
-              </span>
-              <span>Summer 2014</span>
-            </div>
+    <!-- Selected Technical Work -->
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-xl font-semibold text-slate-800">Selected Technical Work</h2>
+      <div class="space-y-4 mt-4">
+        <div class="projects-list">
+          <div class="project-item">
+            <div class="project-title">RAG Glassbox / Local RAG Case Study</div>
+            <p class="project-desc">A laptop-local RAG evaluation workbench using hybrid retrieval, reranking, exact-match/F1 scoring, guarded LLM judging, SQLite telemetry, and Streamlit audit views.</p>
+            <p class="project-meta"><strong>Result:</strong> Recall@10 on fictional-entity queries improved from ~0.43 to ~0.85.</p>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Cognos Studio — Turkish-first thinking-game engine</div>
+            <p class="project-desc">A Turkish-first thinking-game app with React, TypeScript, Capacitor, Gemini/local Ollama provider switching, style-blind judging, arbiter logic, JSON recovery, and judge-calibration tests.</p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Core Competencies -->
+    <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-6">Core Competencies</h2>
+      <div class="skill-groups">
+        <p class="skill-group"><strong>AI Evaluation</strong> Benchmark design, hidden acceptance testing, retrieval and text-to-SQL evaluation, LLM judges, failure analysis.</p>
+        <p class="skill-group"><strong>Data &amp; Semantic Systems</strong> Python, SQL, PySpark, Snowflake, Databricks, ETL/ELT, data modeling, Snowflake Semantic Views, governed metrics.</p>
+        <p class="skill-group"><strong>Decision Systems</strong> Forecasting, inventory optimization, simulation, retail analytics, KPI design, Tableau.</p>
+        <p class="skill-group"><strong>Engineering &amp; Delivery</strong> Streamlit, FastAPI, React, TypeScript, Git, CI/CD, Docker, Azure, technical docs, architecture reviews.</p>
       </div>
     </div>
 
@@ -558,132 +607,14 @@
           <h3 class="font-medium text-slate-800">
             Bachelor of Science in Industrial Engineering (Dual Diploma Program)
           </h3>
-          <p class="text-slate-600">
-            Southern Illinois University Edwardsville, USA (2011–2016)
-          </p>
-          <p class="text-slate-600">GPA: 3.29</p>
+          <p class="text-slate-600">Southern Illinois University Edwardsville, USA (2011–2016)</p>
         </div>
         <div>
           <h3 class="font-medium text-slate-800">
             Bachelor of Science in Industrial Engineering
           </h3>
-          <p class="text-slate-600">
-            Istanbul Technical University, Turkey (2011–2016)
-          </p>
-          <p class="text-slate-600">Minor in Mathematics </p>
-          <p class="text-slate-600">GPA: 3.03 </p>
+          <p class="text-slate-600">Istanbul Technical University, Turkey (2011–2016) | Minor in Mathematics</p>
         </div>
-      </div>
-    </div>
-
-    <!-- Selected Independent Technical Projects -->
-    <div class="bg-white shadow-md rounded-lg p-4">
-      <h2 class="text-xl font-semibold text-slate-800">Independent Fun & Technical Projects — Local Prototypes</h2>
-      <div class="space-y-4 mt-4">
-        <div class="projects-list">
-          <div class="project-item">
-            <div class="project-title">RAG Glassbox / Local RAG Case Study</div>
-            <p class="project-desc">A laptop-local workbench for testing RAG systems and comparing retrieval strategies with measurable results.</p>
-            <p class="project-meta"><strong>Stack:</strong> BM25 + Milvus Lite hybrid retrieval, cross-encoder reranking, span-aware exact-match/F1 scoring, guarded LLM judge with exact-answer checks, SQLite telemetry, SHA256 signatures to detect index drift, Streamlit run-diff and context-audit views.</p>
-            <p class="project-meta"><strong>Result:</strong> Recall@10 on fictional-entity queries improved from ~0.43 (dense-only) to ~0.85 (sparse + rerank).</p>
-          </div>
-          <div class="project-item">
-            <div class="project-title">Cognos Studio — Turkish-first thinking-game engine</div>
-            <p class="project-desc">A mobile/web app where players solve short intellectual challenges in Turkish and receive fair, explainable AI scoring.</p>
-            <p class="project-meta"><strong>Stack:</strong> React 19, TypeScript, Capacitor, Gemini, local Ollama, Playwright.</p>
-            <p class="project-meta"><strong>Architecture:</strong> provider layer for switching between Gemini and local Ollama, strict/style-blind judging flow with arbiter logic, scoring rules tied to rubric thresholds, structured JSON recovery, call budgeting, and a UI that shows judging steps during slow local inference.</p>
-            <p class="project-meta"><strong>Tests:</strong> unit, typed-contract, Playwright e2e, and a headless judge-calibration harness ("Evalception").</p>
-          </div>
-          <div class="project-item">
-            <div class="project-title">Signal Ledger — source-traceable editorial pipeline prototype</div>
-            <p class="project-desc">A pipeline that turns raw social-media posts into a traceable daily news brief — every AI output can be traced back to its original source post.</p>
-            <p class="project-meta"><strong>Stack:</strong> SQLAlchemy/Alembic schema, raw post-payload persistence, PydanticAI-typed signal extraction on local Ollama (gemma3), and rule-based anchor-consistency logic for repairing story groups — preventing runaway merges where loosely related stories collapse into one cluster.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Core Competencies -->
-    <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
-      <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-6">Core Competencies</h2>
-      <div class="skills-grid">
-
-      <!-- Snowflake & Applied AI -->
-      <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
-          Snowflake &amp; Data Platforms
-        </h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Agents</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Analyst / Text-to-SQL</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Search / Retrieval</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake Semantic Views / Metrics Layer</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Streamlit in Snowflake</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake AI Observability (TruLens)</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Databricks</span>
-        </div>
-      </div>
-
-      <!-- Data Engineering -->
-      <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
-          Data Engineering
-        </h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Python</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">SQL</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">PySpark</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">ETL/ELT</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Airflow</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Azure Data Factory</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Delta Lake</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Docker</span>
-        </div>
-      </div>
-
-      <!-- Applied AI Engineering -->
-      <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
-          Applied AI Engineering
-        </h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Custom agent workflows / Cortex Code SDK</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Deterministic Retrieval Scoring</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">LLM-as-Judge</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Agent-assisted failure analysis</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Typed LLM outputs with Pydantic</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Ablation Studies</span>
-        </div>
-      </div>
-
-      <!-- Analytics & ML -->
-      <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
-          Analytics &amp; Decision Systems
-        </h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Forecasting</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Time Series Analysis</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Inventory Optimization</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Tableau</span>
-        </div>
-      </div>
-
-      <!-- Applications & Delivery -->
-      <div class="mb-6">
-        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">Applications &amp; Delivery</h3>
-        <div class="flex flex-wrap gap-2">
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Streamlit</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">FastAPI</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">React</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">TypeScript</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">CI/CD</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Code Review</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Technical Documentation</span>
-          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Stakeholder Management</span>
-        </div>
-      </div>
       </div>
     </div>
   </div>

@@ -17,8 +17,9 @@ Career arc:
 
 1. **Invent Analytics** — retail optimization, forecasting, replenishment, production decision logic, client delivery, squad leadership.
 2. **BlueCloud / JLL Technologies** — Snowflake, Databricks, ETL/ELT, governed metrics, Tableau, reliability, schema standards, data quality patterns.
-3. **BlueCloud AI/ML** — Cortex Analyst, Cortex Search, Snowflake Semantic Views, retrieval evaluation, text-to-SQL evaluation, Streamlit review tooling, TruLens / Snowsight observability, client-facing research and documentation.
-4. **Independent local projects** — fun prototypes exploring RAG, LLM judging, local/cloud model workflows, traceability, structured outputs, and AI-assisted development.
+3. **BlueCloud AI/ML** — Cortex Analyst, Cortex Search, Snowflake Semantic Views, retrieval evaluation, text-to-SQL evaluation, Streamlit review tooling, client-facing research, and documentation.
+4. **Independent research** — Coding Agent Acceptance Lab, a public open-source research release on coding-agent acceptance reliability.
+5. **Selected local projects** — prototypes exploring RAG, LLM judging, local/cloud model workflows, traceability, and structured outputs.
 
 ---
 
@@ -37,6 +38,32 @@ Do not narrow the profile to any single label: Snowflake engineer, Cortex specia
 
 ---
 
+## Current Resume Shape
+
+The current version is a disciplined edit of V3, not a full identity redesign or manifesto.
+
+Order:
+
+1. Header
+2. Three-sentence professional summary
+3. Professional Experience
+   - current BlueCloud AI/ML role
+   - Independent Research & Open-Source Engineering as a sibling block immediately after the current role
+   - BlueCloud / JLL Technologies
+   - Invent Analytics
+   - earlier work
+4. Selected Technical Work
+5. Core Competencies
+6. Education
+
+Rationale:
+
+- preserve V3's personality and career continuity
+- avoid turning the resume into a grand unifying theory
+- elevate Coding Agent Acceptance Lab without letting it swallow the professional record
+- keep independent research visibly separate from BlueCloud employer work
+- keep the headline stable until the body works
+
 ## Professional Experience — Structure
 
 ### BlueCloud (one employer, two sub-roles)
@@ -44,16 +71,40 @@ Do not narrow the profile to any single label: Snowflake engineer, Cortex specia
 - **Senior AI/ML Engineer I** — Jan 2026 – Present
 - **Senior Analytics Consultant & Engineer** — Client: JLL Technologies, Aug 2022 – Dec 2025
 
-Header uses the market-normalized `Senior AI/ML Engineer` (no "I"); the role block inside experience carries the official `Senior AI/ML Engineer I`.
+Header and resume body use the market-normalized `Senior AI/ML Engineer` without the official level suffix. Restore `Senior AI/ML Engineer I` only if title precision is more important than skim readability for a given version.
 
 ### AI/ML workstreams
 
-Four named sub-project blocks under the Senior AI/ML Engineer I role:
+The current role is grouped by problem area, not internal project inventory:
 
-1. **Cortex Search Evaluation Framework** — managed search/retrieval
-2. **Cortex Analyst Evaluation Framework** — text-to-SQL over Semantic Views
-3. **Semantic View Factory** — internal accelerator for Snowflake metric/relationship modeling
-4. **Research, Documentation & Client Enablement** — cross-cutting deliverables
+1. **AI Evaluation Systems**
+2. **Semantic Systems & Governed Context**
+3. **Technical Investigation & Client Enablement**
+
+This preserves Cortex Analyst, Cortex Search, Semantic Views, Streamlit review tooling, benchmark design, and client-facing research while reducing the "internal project inventory" feeling.
+
+### Coding Agent Acceptance Lab — independent research
+
+Positioned directly after the current AI/ML role as its own `Independent Research & Open-Source Engineering` block, not nested under BlueCloud. This avoids implying that the research was a BlueCloud assignment.
+
+Claim boundary:
+
+- independent technical report and open-source research release
+- not peer-reviewed academic publication
+- not a public benchmark leaderboard
+- evidence is specific to the harness, scenarios, prompt lanes, models, and runtime conditions
+
+Keep visible:
+
+- reproducible coding-agent evaluation harness
+- visible CI vs hidden acceptance distinction
+- false-green / trust-gap framing
+- 33 scenarios and 391 retained attempts
+- sparse false-green rate 84 / 194 = 43.3%
+- contract-visible false-green rate 17 / 191 = 8.9%
+- public research site, technical report, evidence matrix, and GitHub repository links
+
+Do not add a standalone Technical Writing section for this single report. Restore that section only when there is a second strong, public-safe writing item.
 
 ### Invent Analytics — protected content
 
@@ -70,27 +121,26 @@ Keep visible:
 - squads of 2–4 people
 - measured electronics retailer outcome (~3% lost-sales reduction, 7%+ availability improvement, ~10% inventory-turnover improvement)
 
-### Skills section — current order
+### Skills section — current shape
 
-Five category buckets in this order (the 2-col grid's `:last-child` full-width span depends on Applications & Delivery staying last):
+Compact text groups, not chip walls:
 
-1. Snowflake & Data Platforms
-2. Data Engineering
-3. Applied AI Engineering
-4. Analytics & Decision Systems
-5. Applications & Delivery
+1. AI Evaluation
+2. Data & Semantic Systems
+3. Decision Systems
+4. Engineering & Delivery
 
 ---
 
-## Independent Projects
+## Selected Technical Work
 
-Section title: **Independent Fun & Technical Projects — Local Prototypes.**
+Section title: **Selected Technical Work.**
 
 Projects and naming:
 
 - **RAG Glassbox / Local RAG Case Study** — combines the productized workbench and its antecedent case study.
 - **Turkish LLM Judging Game (Cognos Studio)** — for the ATS PDF. Disambiguates from IBM Cognos.
-- **Signal Ledger — source-traceable editorial pipeline prototype** — explicitly labeled prototype.
+- **Signal Ledger — source-traceable editorial pipeline prototype** — keep only when space allows; explicitly local/prototype.
 
 Each project uses this layout:
 
@@ -107,7 +157,7 @@ Architecture / Tests / Result: additional labeled lines as warranted.
 
 Two formats, one source of truth.
 
-- **Web `index.html`** carries rich structure: workstream hierarchy, pill chips, visual layout, personality.
+- **Web `index.html`** carries rich structure: role hierarchy, research/project links, compact skill groups, visual layout, personality.
 - **ATS PDF** flattens to parser-safe formatting: plain contact line, inline comma-separated skills, ASCII-safe characters, standard section names (`Skills`, `Projects`).
 
 Content is maintained once in `index.html`; the PDF is regenerated by `build/build_ats_pdf.py`, never hand-edited. Transformation list lives in `README.md`.
@@ -118,5 +168,6 @@ Content is maintained once in `index.html`; the PDF is regenerated by `build/bui
 
 - **Jan 2026 – Present AI/ML role** is still recent; avoid overclaiming volume or tenure. Workstream framing earns the seniority signal without padding.
 - **JLL has no quantified metrics** (intentionally parked). Resume body must stay credible on verbs and scope alone until metrics are added.
+- **Coding Agent Acceptance Lab** is serious independent research, but must not be framed as peer-reviewed academic publication or universal model benchmark.
 - **Cognos name collision** with IBM Cognos. Web version keeps "Cognos Studio — Turkish-first thinking-game engine"; ATS PDF expands to "Turkish LLM Judging Game (Cognos Studio)".
-- **Skill order rigidity.** The 2-col grid depends on Applications & Delivery being last. Reordering breaks the full-width last row.
+- **Signal Ledger scope.** Keep local/prototype framing; do not let it compete with the Coding Agent Acceptance Lab research signal.

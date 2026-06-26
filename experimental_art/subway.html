@@ -1,0 +1,210 @@
+n<!--
+  experimental_art/subway.html — career as a transit map.
+
+  NOT the source of truth. NOT consumed by build/build_ats_pdf.py.
+  Radically distilled; respects docs/current-resume-positioning.md.
+  Three lines: Retail/Decision · Data · AI. Interchange = BlueCloud.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anıl Yamangil — Transit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --fg: #18181b;
+      --fg-muted: #6b6a66;
+      --rule: #d9d5cc;
+      --line-retail: #2e7d53;
+      --line-data:   #2a4d7a;
+      --line-ai:     #b83a2c;
+      --station:     #faf9f5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0e0b;
+        --fg: #ece8df;
+        --fg-muted: #9a9488;
+        --rule: #2a2620;
+        --line-retail: #6fbf93;
+        --line-data:   #7aa6d6;
+        --line-ai:     #e08872;
+        --station: #0d0e0b;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 3.5rem 1.75rem 4rem; }
+    header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 0.75rem; }
+    header h1 { font-size: 1.5rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+    header .sub { color: var(--fg-muted); font-size: 0.9rem; font-family: "JetBrains Mono", monospace; }
+
+    .map { width: 100%; height: auto; display: block; }
+    .map text { font-family: "Inter", sans-serif; fill: var(--fg); }
+    .map .yr { font-family: "JetBrains Mono", monospace; font-size: 10px; fill: var(--fg-muted); letter-spacing: 0.05em; }
+    .map .stn { font-size: 12px; font-weight: 500; }
+    .map .stn-sub { font-size: 10.5px; fill: var(--fg-muted); }
+    .map .term { font-size: 13px; font-weight: 600; letter-spacing: -0.005em; }
+
+    .legend { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+    .legend .key { display: flex; gap: 0.6rem; align-items: flex-start; }
+    .legend .swatch { width: 14px; height: 14px; border-radius: 50%; margin-top: 3px; flex: none; }
+    .legend h3 { margin: 0 0 0.2rem; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+    .legend p { margin: 0; color: var(--fg-muted); font-size: 0.88rem; }
+
+    .caption { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--fg-muted); font-size: 0.92rem; max-width: 68ch; }
+    .caption strong { color: var(--fg); font-weight: 600; }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: var(--fg-muted); letter-spacing: 0.03em; text-transform: uppercase; }
+    footer a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+    footer a:hover { color: var(--fg); }
+
+    @media (max-width: 780px) {
+      .legend { grid-template-columns: 1fr; gap: 1rem; }
+      header h1 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Anıl Yamangil — Career Transit</h1>
+      <span class="sub">EXPERIMENTAL · v1 · may 2026</span>
+    </header>
+
+    <svg class="map" viewBox="0 0 1100 440" role="img" aria-label="Career as a three-line transit map: Retail/Decision, Data, and AI.">
+      <!-- Year grid -->
+      <g class="yr">
+        <line x1="100" y1="360" x2="1040" y2="360" stroke="currentColor" stroke-opacity="0.08" />
+        <g>
+          <line x1="100" y1="355" x2="100" y2="365" stroke="currentColor" stroke-opacity="0.2" />
+          <text x="100" y="385" text-anchor="middle">2017</text>
+        </g>
+        <g>
+          <line x1="370" y1="355" x2="370" y2="365" stroke="currentColor" stroke-opacity="0.2" />
+          <text x="370" y="385" text-anchor="middle">2020</text>
+        </g>
+        <g>
+          <line x1="580" y1="355" x2="580" y2="365" stroke="currentColor" stroke-opacity="0.2" />
+          <text x="580" y="385" text-anchor="middle">2022</text>
+        </g>
+        <g>
+          <line x1="870" y1="355" x2="870" y2="365" stroke="currentColor" stroke-opacity="0.2" />
+          <text x="870" y="385" text-anchor="middle">2026</text>
+        </g>
+        <g>
+          <line x1="1020" y1="355" x2="1020" y2="365" stroke="currentColor" stroke-opacity="0.2" />
+          <text x="1020" y="385" text-anchor="middle">NOW</text>
+        </g>
+      </g>
+
+      <!-- Retail/Decision line (green): 2017 → 2022, then thin revival through local projects -->
+      <path d="M 100 180 L 580 180" stroke="var(--line-retail)" stroke-width="6" fill="none" stroke-linecap="round" />
+      <path d="M 580 180 C 680 180 700 290 820 290" stroke="var(--line-retail)" stroke-width="3" stroke-dasharray="2 6" fill="none" stroke-linecap="round" opacity="0.55" />
+      <path d="M 820 290 L 1020 290" stroke="var(--line-retail)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.75" />
+
+      <!-- Data line (blue): 2022 → now -->
+      <path d="M 580 230 L 1020 230" stroke="var(--line-data)" stroke-width="6" fill="none" stroke-linecap="round" />
+
+      <!-- AI line (red): small local 2025, strong from 2026 -->
+      <path d="M 780 140 C 820 140 830 140 870 140" stroke="var(--line-ai)" stroke-width="3" stroke-dasharray="2 6" fill="none" stroke-linecap="round" opacity="0.6" />
+      <path d="M 870 140 L 1020 140" stroke="var(--line-ai)" stroke-width="6" fill="none" stroke-linecap="round" />
+
+      <!-- Interchange rings -->
+      <!-- BlueCloud interchange (Retail ends, Data begins) -->
+      <rect x="565" y="170" width="30" height="75" rx="15" fill="none" stroke="currentColor" stroke-width="1.25" opacity="0.55" />
+      <!-- AI/ML promotion interchange (Data continues, AI mainline begins) -->
+      <rect x="855" y="130" width="30" height="115" rx="15" fill="none" stroke="currentColor" stroke-width="1.25" opacity="0.55" />
+
+      <!-- Stations: Retail -->
+      <circle cx="100" cy="180" r="7"  fill="var(--station)" stroke="var(--line-retail)" stroke-width="3.5" />
+      <text class="term" x="100" y="155" text-anchor="middle">Invent Analytics</text>
+      <text class="stn-sub" x="100" y="142" text-anchor="middle">retail optimization · terminus</text>
+
+      <circle cx="310" cy="180" r="5" fill="var(--station)" stroke="var(--line-retail)" stroke-width="3" />
+      <text class="stn" x="310" y="165" text-anchor="middle">Forecasting &amp; Replenishment</text>
+
+      <circle cx="470" cy="180" r="5" fill="var(--station)" stroke="var(--line-retail)" stroke-width="3" />
+      <text class="stn" x="470" y="165" text-anchor="middle">Production Decision Logic</text>
+
+      <!-- Interchange station: BlueCloud -->
+      <circle cx="580" cy="205" r="8.5" fill="var(--station)" stroke="currentColor" stroke-width="2.25" />
+      <text class="term" x="580" y="268" text-anchor="middle">BlueCloud</text>
+      <text class="stn-sub" x="580" y="282" text-anchor="middle">interchange · one employer, two roles</text>
+
+      <!-- Data stations -->
+      <circle cx="720" cy="230" r="5" fill="var(--station)" stroke="var(--line-data)" stroke-width="3" />
+      <text class="stn" x="720" y="260" text-anchor="middle">JLL · Snowflake &amp; Databricks</text>
+
+      <circle cx="820" cy="230" r="5" fill="var(--station)" stroke="var(--line-data)" stroke-width="3" />
+      <text class="stn" x="820" y="260" text-anchor="middle">Governed Metrics &amp; Reliability</text>
+
+      <!-- Interchange: AI/ML promotion -->
+      <circle cx="870" cy="185" r="8.5" fill="var(--station)" stroke="currentColor" stroke-width="2.25" />
+      <text class="term" x="870" y="115" text-anchor="middle">AI/ML Promotion</text>
+      <text class="stn-sub" x="870" y="101" text-anchor="middle">Jan 2026</text>
+
+      <!-- AI stations on the mainline -->
+      <circle cx="945" cy="140" r="5" fill="var(--station)" stroke="var(--line-ai)" stroke-width="3" />
+      <text class="stn" x="945" y="125" text-anchor="middle">Cortex Analyst Eval</text>
+
+      <circle cx="1020" cy="140" r="7" fill="var(--station)" stroke="var(--line-ai)" stroke-width="3.5" />
+      <text class="stn" x="1020" y="125" text-anchor="middle">Cortex Search Eval</text>
+      <text class="stn-sub" x="1020" y="112" text-anchor="middle">+ Semantic View Factory</text>
+
+      <!-- Retail revival (local prototypes / Cognos) -->
+      <circle cx="900" cy="290" r="4" fill="var(--station)" stroke="var(--line-retail)" stroke-width="2.5" opacity="0.85" />
+      <text class="stn-sub" x="900" y="312" text-anchor="middle">Cognos Studio (local)</text>
+
+      <circle cx="1020" cy="290" r="4" fill="var(--station)" stroke="var(--line-retail)" stroke-width="2.5" opacity="0.85" />
+      <text class="stn-sub" x="1020" y="312" text-anchor="middle">RAG Glassbox · Signal Ledger</text>
+    </svg>
+
+    <div class="legend">
+      <div class="key">
+        <span class="swatch" style="background: var(--line-retail)"></span>
+        <div>
+          <h3>Retail / Decision</h3>
+          <p>Forecasting, replenishment, custom production decision logic at Invent Analytics. Dormant through the data engineering years; resurfaces in local prototypes.</p>
+        </div>
+      </div>
+      <div class="key">
+        <span class="swatch" style="background: var(--line-data)"></span>
+        <div>
+          <h3>Data</h3>
+          <p>Snowflake &amp; Databricks pipelines, governed metrics, schema standards, Tableau, and reliability work at BlueCloud for JLL Technologies.</p>
+        </div>
+      </div>
+      <div class="key">
+        <span class="swatch" style="background: var(--line-ai)"></span>
+        <div>
+          <h3>AI</h3>
+          <p>Evaluation frameworks for Cortex Analyst (text-to-SQL over Semantic Views) and Cortex Search (managed retrieval), plus the internal Semantic View Factory.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="caption">
+      <strong>Reading the map.</strong> The green line is the retail-optimization foundation that started the journey in 2017. The blue line is the data engineering spine picked up at BlueCloud in 2022. The red line is the applied-AI work that surfaces formally in 2026. The interchange at BlueCloud is where two identities compound into one engineer — not a pivot, an accumulation.
+    </p>
+
+    <footer>
+      <span>Anıl Yamangil · Senior AI/ML Engineer</span>
+      <span>
+        <a href="mailto:yamangilanil@gmail.com">yamangilanil@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/yamangilanil">linkedin/in/yamangilanil</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>

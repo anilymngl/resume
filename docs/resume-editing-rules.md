@@ -80,6 +80,24 @@ Do not write "Snowflake Cortex" alone when a specific product is meant.
 
 ---
 
+## Independent Research And Local Projects
+
+Coding Agent Acceptance Lab is **independent research and open-source engineering**, not a local prototype. Use:
+
+- independent technical report
+- open-source research release
+- reproducible evaluation system
+- public research suite
+
+Do not call it peer-reviewed, academic publication, production SaaS, or a universal benchmark leaderboard.
+
+Use exact denominators when citing the headline result:
+
+- 33 coding scenarios
+- 391 retained attempts
+- sparse false-green rate: 84 / 194 = 43.3%
+- contract-visible false-green rate: 17 / 191 = 8.9%
+
 ## Local Projects
 
 Allowed scope language:
@@ -116,11 +134,13 @@ Keep titles honest — if the folder name is `cognos-game`, the web title can be
 | Web form | ATS PDF form | Why |
 |---|---|---|
 | Core Competencies | Skills | ATS section taxonomy standard |
-| Independent Fun & Technical Projects — Local Prototypes | Projects | ATS friendly; keeps intent in `current-resume-positioning.md` |
+| Selected Technical Work | Projects | ATS friendly; local/prototype scope belongs in item text |
 | Professional Experience | Professional Experience | already standard |
 | Education | Education | already standard |
 
 When a section name changes in `index.html`, also update `SECTION_RENAMES` in `build/build_ats_pdf.py`.
+
+Do not create a standalone `Technical Writing` section for one duplicated report link. Use it only when there is a real collection of at least two strong, public-safe writing items.
 
 ---
 
@@ -130,6 +150,7 @@ When a section name changes in `index.html`, also update `SECTION_RENAMES` in `b
 - Emojis belong only in the web header's contact row; the build script strips them and replaces with labels.
 - Bullet lists are real `<ul>` / `<li>` — don't fake bullets with `•` glyphs in plain text.
 - Dates use `Mon YYYY – Mon YYYY` or `Mon YYYY – Present`.
+- Skills use compact grouped text in the web resume and flatten to inline category lines in the ATS PDF; avoid rebuilding a dense chip wall.
 
 ---
 

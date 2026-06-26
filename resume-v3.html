@@ -1,0 +1,832 @@
+<!--
+  resume-v3.html — Signal Edition with original color palette.
+
+  Combines:
+    - Original index.html slate/gray professional styling (Tailwind)
+    - Signal structure: Turn narrative, scope notes, concrete anchors, limitations
+    - Two new entries: Metric Governance workstream + Trust Gap Research project
+    - Section renamed: "Independent Research & Technical Projects"
+
+  NOT the source of truth. index.html remains production.
+  NOT consumed by build/build_ats_pdf.py.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="date=no">
+  <title>Anil Yamangil's Resume — Signal Edition</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    @media screen {
+      body {
+        font-size: 15px;
+        line-height: 1.55;
+        color: #334155;
+      }
+
+      .resume-root {
+        padding: 2rem 1.5rem !important;
+      }
+
+      .resume-header {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0;
+        box-shadow: none !important;
+        border-radius: 0.5rem !important;
+        padding: 1.5rem 1.5rem !important;
+      }
+
+      .resume-root > div:not(.resume-header) {
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 1.25rem 0 !important;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .resume-root > div:not(.resume-header):last-child {
+        border-bottom: none;
+      }
+
+      .resume-root h2 {
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #475569 !important;
+        margin-bottom: 0.9rem !important;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid #cbd5e1;
+      }
+
+      .professional-experience h3 {
+        font-size: 1.05rem !important;
+        color: #0f172a !important;
+        margin-bottom: 0.25rem;
+      }
+
+      .professional-experience h4 {
+        font-size: 0.975rem !important;
+        color: #1e293b !important;
+        margin-top: 0.25rem;
+      }
+      .professional-experience h4 span {
+        font-weight: 400 !important;
+        color: #64748b !important;
+      }
+
+      .professional-experience .mt-6 {
+        margin-top: 1.75rem !important;
+      }
+
+      .resume-header p.text-lg {
+        font-size: 0.95rem !important;
+        font-weight: 400 !important;
+        color: #64748b !important;
+        letter-spacing: 0.01em;
+        margin-bottom: 0.85rem !important;
+      }
+
+      .professional-experience ul {
+        padding-left: 1.1rem !important;
+      }
+      .professional-experience li {
+        margin-bottom: 0.5rem !important;
+        line-height: 1.62 !important;
+      }
+
+      .professional-experience .italic.bg-slate-50 {
+        background: transparent !important;
+        padding: 0 !important;
+        margin-top: 0.35rem !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 0.875rem;
+        color: #64748b !important;
+      }
+
+      .professional-experience .border-l-2 {
+        border-left-width: 2px !important;
+        border-color: #e2e8f0 !important;
+        padding-left: 0.85rem !important;
+      }
+
+      .role-blurb {
+        color: #64748b !important;
+        font-size: 0.875rem !important;
+        font-style: italic;
+        margin: 0.25rem 0 0.75rem !important;
+      }
+
+      .role-workstreams {
+        display: flex;
+        flex-direction: column;
+        gap: 1.65rem;
+      }
+      .workstream-title {
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+        margin: 0 0 0.35rem 0 !important;
+        letter-spacing: 0.01em;
+      }
+      .workstream ul {
+        margin: 0 !important;
+        padding-left: 1.1rem !important;
+      }
+      .workstream li {
+        margin-bottom: 0.4rem !important;
+        line-height: 1.62 !important;
+      }
+
+      /* Scope note */
+      .scope-note {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        font-style: italic;
+        margin: 0.15rem 0 0.75rem;
+        padding: 0.3rem 0.6rem;
+        background: #f8fafc;
+        border-radius: 0.25rem;
+        display: inline-block;
+      }
+
+      /* Concrete anchor callout */
+      .anchor-callout {
+        margin: 0.75rem 0;
+        padding: 0.7rem 0.9rem;
+        border-left: 3px solid #475569;
+        background: #f8fafc;
+        border-radius: 0 0.25rem 0.25rem 0;
+        font-size: 0.88rem;
+        line-height: 1.55;
+        color: #334155;
+      }
+      .anchor-callout .anchor-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #475569;
+        margin-bottom: 0.3rem;
+        display: block;
+      }
+      .anchor-callout strong {
+        font-weight: 600;
+        color: #0f172a;
+      }
+
+      /* Career arc (The Turn) */
+      .career-arc {
+        padding: 1rem 1.25rem;
+        border-left: 3px solid #475569;
+        background: #f8fafc;
+        border-radius: 0 0.35rem 0.35rem 0;
+        margin-bottom: 0;
+      }
+      .career-arc .arc-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #475569;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+      .career-arc p {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: #1e293b;
+        margin: 0;
+      }
+
+      /* Limitations */
+      .limitations-box {
+        padding: 1rem 1.25rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.35rem;
+        background: #f8fafc;
+      }
+      .limitations-box .lim-title {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #94a3b8;
+        margin-bottom: 0.6rem;
+        display: block;
+      }
+      .limitations-box ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .limitations-box li {
+        position: relative;
+        padding-left: 1rem;
+        font-size: 0.82rem;
+        color: #64748b;
+        margin-bottom: 0.35rem;
+        line-height: 1.5;
+      }
+      .limitations-box li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: #94a3b8;
+      }
+      .limitations-box li strong {
+        font-weight: 600;
+        color: #334155;
+      }
+
+      /* Projects */
+      .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+      }
+      .project-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .project-title {
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+      }
+      .project-desc {
+        color: #334155;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .project-meta {
+        font-size: 0.875rem;
+        color: #475569;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .project-meta strong {
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      /* Skills grid */
+      .skills-grid > div {
+        margin-bottom: 0.75rem !important;
+      }
+      @media (min-width: 768px) {
+        .skills-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 2rem;
+          row-gap: 0.75rem;
+        }
+        .skills-grid > div {
+          margin-bottom: 0.25rem !important;
+        }
+        .skills-grid > div:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+      .skills-grid h3 {
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #475569 !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .skills-grid .flex.flex-wrap.gap-2 {
+        gap: 0.35rem !important;
+      }
+      .skills-grid .flex.flex-wrap.gap-2 span {
+        background: #f1f5f9 !important;
+        color: #334155 !important;
+        border-radius: 0.25rem !important;
+        padding: 0.2rem 0.5rem !important;
+        font-size: 0.78rem !important;
+        font-weight: 400 !important;
+        transition: none !important;
+      }
+      .skills-grid .flex.flex-wrap.gap-2 span:hover {
+        background: #f1f5f9 !important;
+      }
+    }
+
+    @media print {
+      body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: white !important;
+        color: black !important;
+        font-size: 10.5pt;
+        line-height: 1.4;
+      }
+
+      .resume-root {
+        max-width: none !important;
+        padding: 0.6in 0.7in !important;
+        margin: 0 auto !important;
+      }
+
+      .resume-root > div {
+        background: white !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0.5rem 0 !important;
+        border-bottom: 1px solid #cbd5e1 !important;
+      }
+      .resume-root > div:last-child { border-bottom: none !important; }
+
+      .resume-header {
+        border: none !important;
+        padding: 0 0 0.5rem 0 !important;
+        margin-bottom: 0.25rem !important;
+      }
+
+      h1 { font-size: 18pt !important; margin-bottom: 0.15rem !important; }
+      .resume-header p.text-lg { font-size: 11pt !important; margin-bottom: 0.35rem !important; }
+      h2 {
+        font-size: 10pt !important;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        border-bottom: 1px solid #64748b !important;
+        padding-bottom: 0.1rem;
+        margin: 0.6rem 0 0.35rem !important;
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+      }
+      h3 { font-size: 11pt !important; margin-top: 0.25rem !important; }
+      h4 { font-size: 10.5pt !important; }
+
+      .list-disc {
+        margin-left: 1rem !important;
+        page-break-inside: avoid !important;
+      }
+      .list-disc li {
+        margin-bottom: 0.25rem !important;
+        line-height: 1.35 !important;
+      }
+
+      .professional-experience > div {
+        page-break-inside: avoid !important;
+      }
+      .professional-experience .italic.bg-slate-50 {
+        background: transparent !important;
+        padding: 0 !important;
+        font-size: 9.5pt !important;
+      }
+      .professional-experience .border-l-2 {
+        border-left: none !important;
+        padding-left: 0 !important;
+      }
+
+      .flex.flex-wrap.gap-2 span {
+        padding: 0.1rem 0.45rem !important;
+        margin: 0.1rem 0.2rem 0.1rem 0 !important;
+        border: 1px solid #94a3b8 !important;
+        background: white !important;
+        color: black !important;
+        border-radius: 0.2rem !important;
+        font-size: 9pt !important;
+        font-weight: 400 !important;
+      }
+
+      .skills-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        column-gap: 1.25rem !important;
+        row-gap: 0.25rem !important;
+      }
+
+      .flex.flex-wrap.justify-center.gap-4 {
+        justify-content: space-around !important;
+        margin-bottom: 0.25rem !important;
+        font-size: 9.5pt !important;
+      }
+
+      a {
+        text-decoration: none !important;
+        color: black !important;
+        word-break: break-all !important;
+      }
+
+      .bg-white, .bg-slate-50, .bg-slate-100,
+      .dark\:bg-gray-900, .dark\:bg-slate-800, .dark\:bg-slate-700 {
+        background-color: white !important;
+      }
+      .dark\:text-slate-100, .dark\:text-slate-200, .dark\:text-slate-300,
+      .text-slate-600, .text-slate-700, .text-slate-800 {
+        color: black !important;
+      }
+      .shadow-md, .shadow-sm { box-shadow: none !important; }
+      .rounded-lg, .rounded-full { border-radius: 0 !important; }
+    }
+  </style>
+  <script>
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark')
+    }
+  </script>
+</head>
+<body class="bg-white dark:bg-gray-900">
+  <div class="resume-root max-w-4xl mx-auto p-6 space-y-6">
+    <!-- Header Section -->
+    <div class="resume-header bg-slate-50 dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+      <div class="text-center mb-6">
+        <h1 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">ANIL YAMANGIL</h1>
+        <p class="text-lg text-slate-600 dark:text-slate-300 mb-4">
+          Senior AI/ML Engineer | Applied AI, Data Engineering &amp; Enterprise Analytics
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-600 dark:text-slate-300">
+          <a href="mailto:yamangilanil@gmail.com" class="flex items-center gap-1 hover:text-slate-500 dark:hover:text-slate-400 transition-colors">
+            <span>📧</span><span>yamangilanil@gmail.com</span>
+          </a>
+          <a href="tel:+905416220393" class="flex items-center gap-1 hover:text-slate-500 dark:hover:text-slate-400 transition-colors">
+            <span>📞</span><span>+90 541 622 03 93</span>
+          </a>
+          <div class="flex items-center gap-1">
+            <span>📍</span><span>Istanbul, Turkey</span>
+          </div>
+          <a
+            class="flex items-center gap-1 hover:text-slate-500 dark:hover:text-slate-400 transition-colors"
+            href="https://www.linkedin.com/in/yamangilanil"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>🔗</span><span>linkedin.com/in/yamangilanil</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Summary -->
+    <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Professional Summary</h2>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+        Senior AI/ML Engineer with 8+ years across retail optimization, enterprise data engineering, and applied AI. Cut teeth at a fast-growing retail-analytics startup building production inventory and forecasting systems under real client pressure, then spent three years keeping a global company's data platforms reliable and their dashboards honest. Now builds evaluation and review workflows for Snowflake's AI products — the systems that prove whether AI answers are actually correct, not just plausible. Independently researches how coding agents fail at the same trust problem: making tests green without fixing the bug.
+      </p>
+    </div>
+
+    <!-- Professional Experience -->
+    <div class="bg-white shadow-md rounded-lg p-4 professional-experience">
+      <h2 class="text-xl font-semibold text-slate-800">Professional Experience</h2>
+      <div class="space-y-8 mt-4">
+        <!-- BlueCloud AI/ML -->
+        <div class="space-y-4">
+          <h3 class="font-semibold text-slate-800">
+            BlueCloud, Tampa, US (Remote) | Aug 2022 – Present
+          </h3>
+          <div class="mt-4">
+            <h4 class="font-medium text-slate-800">Senior AI/ML Engineer <span class="text-slate-600 font-normal">| Jan 2026 – Present</span></h4>
+            <p class="text-slate-700 text-sm mb-3" style="font-style:italic; color:#475569;">I build the testing systems that prove whether Snowflake's AI products give clients correct answers — not just plausible-looking ones.</p>
+            <div class="pl-4 border-l-2 border-slate-200 mt-2">
+              <div class="role-workstreams">
+                <div class="workstream">
+                  <h5 class="workstream-title">Cortex Search Evaluation Framework — managed search/retrieval</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Built the benchmark design, deterministic retrieval scoring, Snowflake persistence layer, and TruLens/Snowsight observability integration for a client-facing Cortex Search evaluation framework.
+                    </li>
+                    <li>
+                      Implemented corpus-first benchmark cases built from known source records, retrieval scorers for target hit@k, rank, filter correctness, duplicate saturation, and latency, plus Snowflake tables for evaluation runs, test cases, and scores.
+                    </li>
+                    <li>
+                      Built a Cortex Code Agent SDK workflow for classifying evaluation failures using read-only SQL tool guardrails, structured findings with confidence scores, SQL evidence references, and four failure categories: benchmark, evaluator, service, and workflow.
+                    </li>
+                  </ul>
+                </div>
+                <div class="workstream">
+                  <h5 class="workstream-title">Cortex Analyst Evaluation Framework — text-to-SQL over Semantic Views</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Built scoring, review, and failure-classification workflows for a Cortex Analyst evaluation harness over Snowflake Semantic Views.
+                    </li>
+                    <li>
+                      Separated scoring for data results, SQL logic, and answer quality; added semantic judge checks, high-confidence override rules, and structured tuning backlogs for Semantic View fixes.
+                    </li>
+                    <li>
+                      Built a Streamlit operator console for benchmark browsing, batch and single-question runs, generated-SQL / response / result inspection, cross-run comparison, performance analytics, golden-SQL validation, and EXPLAIN-plan review.
+                    </li>
+                  </ul>
+                </div>
+                <div class="workstream">
+                  <h5 class="workstream-title">Semantic View Factory — internal accelerator for Snowflake metric/relationship modeling</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Prototyped an internal Snowflake Semantic View accelerator using staged schema discovery, join/grain checks, deterministic YAML assembly, quality gates, and golden-test / regression-test workflows.
+                    </li>
+                  </ul>
+                </div>
+                <div class="workstream">
+                  <h5 class="workstream-title">Metric Governance Context Engine — governed metric contracts and evidence separation</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Built a Snowflake-native three-lane evidence architecture separating certified metric contracts, source/reference evidence, and warehouse-observed metadata to prevent AI agents from blending conflicting metric definitions.
+                    </li>
+                    <li>
+                      Implemented governed metric registry with deterministic contract lookup, curated source evidence ingestion with fixed-commit provenance, and Cortex Search services for metric discovery and source evidence retrieval.
+                    </li>
+                    <li>
+                      Built local MCP bridges and hosted Cortex Agent orchestration with native Snowflake tools, bounded read-only SQL execution, and alias-aware search with explicit trust labels.
+                    </li>
+                    <li>
+                      Authored architecture documentation, external advisor briefs, hackathon retrospectives, and production readiness assessments covering security, governance workflow gaps, and corpus coverage reality.
+                    </li>
+                  </ul>
+                </div>
+                <div class="workstream">
+                  <h5 class="workstream-title">Research, Documentation &amp; Client Enablement</h5>
+                  <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li>
+                      Authored client-facing research and technical deliverables across both Cortex Search and Cortex Analyst workstreams — benchmark design specs, scoring architecture documents, notes on judge behavior and model upgrades, stress-test cases for non-additive metrics and fan-out risks, technical and c-level presentations, operations runbooks, and console documentation.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <h4 class="font-medium text-slate-800">Senior Analytics Consultant & Engineer <span class="text-slate-600 font-normal">| Client: JLL Technologies | Aug 2022 – Dec 2025</span></h4>
+            <p class="text-slate-700 text-sm mb-2" style="font-style:italic; color:#475569;">For three and a half years I was the embedded engineer who kept a global real estate company's data pipelines running and their executive dashboards honest.</p>
+            <div class="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
+              <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li>
+                  Maintained and improved reliability for Snowflake and Databricks analytics pipelines used across multiple teams and business domains.
+                </li>
+                <li>
+                  Built and optimized ELT/ETL workflows using SQL, Python, PySpark, and Databricks job/orchestration patterns, focusing on performance, stability, and maintainability.
+                </li>
+                <li>
+                  Defined and improved schema design and data modeling standards, aligning stakeholders on metric definitions and reducing downstream reporting ambiguity.
+                </li>
+                <li>
+                  Introduced data quality validation and monitoring patterns to reduce silent reporting regressions.
+                </li>
+                <li>
+                  Delivered Tableau reporting on top of governed metric layers for executive visibility, operational reporting, and planning workflows.
+                </li>
+                <li>
+                  Acted as an embedded data architecture advisor, helping define modeling standards, data quality patterns, ownership boundaries, and Snowflake and Databricks delivery practices.
+                </li>
+                <li>
+                  Mentored engineers and analysts through design reviews, technical training, and delivery support.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Concrete anchor -->
+            <div class="anchor-callout">
+              <span class="anchor-label">Concrete Pattern</span>
+              <strong>Data quality validation that caught silent reporting regressions.</strong> Introduced validation and monitoring patterns that surfaced breaking schema changes and metric drift within the pipeline run — rather than weeks later during a business review. These patterns made regressions visible at build time, reducing downstream reporting ambiguity across multiple teams.
+            </div>
+          </div>
+        </div>
+
+        <!-- Invent Analytics -->
+        <div class="space-y-4">
+          <h3 class="font-semibold text-slate-800">
+            Invent Analytics (Now Invent AI), Istanbul, Turkey
+          </h3>
+          <p class="text-slate-600">Senior Analytics Consultant</p>
+          <span class="text-slate-600">Feb 2018 – Jun 2022</span>
+          <p class="text-slate-700 text-sm mt-2 mb-1" style="font-style:italic; color:#475569;">I spent four and a half years at a demanding retail-analytics startup — building the inventory and forecasting systems that decided how much product retailers should stock, onboarding and leading junior and mid-level consultants, engineers, and PMs through clients, products, and company workflows.</p>
+          <div class="pl-4 border-l-2 border-slate-200 space-y-4">
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+              <li>
+                Delivered client-facing analytics, forecasting, and optimization implementations for multiple retail clients across inventory, replenishment, fulfillment, and pricing use cases.
+              </li>
+              <li>
+                Designed and deployed a custom inventory optimization system for a large electronics retailer transitioning to a central-warehouse model, modeling operational constraints as production decision logic.
+              </li>
+              <li>
+                Delivered a production inventory optimization system with measured outcomes over roughly one year, including ~3% lost-sales reduction, 7%+ availability improvement, and ~10% inventory-turnover improvement.
+              </li>
+              <li>
+                Built Python/SQL ETL, ML, simulation, forecasting, reporting, and integration pipelines within Invent's broader SaaS optimization platform.
+              </li>
+              <li>
+                Led end-to-end client implementation work from data onboarding and configuration through rollout, UAT, production support, and stakeholder alignment.
+              </li>
+              <li>
+                Partnered with product and engineering teams to refine optimization algorithms while balancing client-specific requirements with platform maintainability.
+              </li>
+              <li>
+                Led squads of 2–4 people across concurrent client engagements and mentored junior consultants through code reviews and micro-trainings.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Smartiks -->
+        <div class="space-y-4">
+          <h3 class="font-semibold text-slate-800">
+            Smartiks Information Technologies, Istanbul, Turkey
+          </h3>
+          <p class="text-slate-600">CRM Solutions Consultant &amp; Business Analyst</p>
+          <span class="text-slate-600">Aug 2017 – Feb 2018</span>
+          <p class="text-slate-700 text-sm mt-2 mb-1" style="font-style:italic; color:#475569;">I supported Oracle CRM rollouts and coordinated app development for clients in the UAE and Turkey.</p>
+          <div class="pl-4 border-l-2 border-slate-200 space-y-4">
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+              <li>
+                Supported Oracle Service Cloud implementations for clients in the UAE and Turkey.
+              </li>
+              <li>
+                Coordinated vendor web portal and mobile application development.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Additional Early Roles & Internships -->
+        <div>
+          <h3 class="font-semibold text-slate-800 mb-3">
+            Additional Early Roles &amp; Internships
+          </h3>
+          <div class="pl-4 border-l-2 border-slate-200 space-y-2">
+            <div class="flex justify-between text-slate-600">
+              <span>Supply Chain Management Intern, Mavi Jeans (Istanbul, Turkey)</span>
+              <span>Summer 2015</span>
+            </div>
+            <div class="flex justify-between text-slate-600">
+              <span>
+                Production Intern, BASF Construction Chemicals (Istanbul, Turkey)
+              </span>
+              <span>Summer 2014</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-xl font-semibold text-slate-800">Education</h2>
+      <div class="space-y-4 mt-4">
+        <div>
+          <h3 class="font-medium text-slate-800">
+            Bachelor of Science in Industrial Engineering (Dual Diploma Program)
+          </h3>
+          <p class="text-slate-600">
+            Southern Illinois University Edwardsville, USA (2011–2016)
+          </p>
+          <p class="text-slate-600">GPA: 3.29</p>
+        </div>
+        <div>
+          <h3 class="font-medium text-slate-800">
+            Bachelor of Science in Industrial Engineering
+          </h3>
+          <p class="text-slate-600">
+            Istanbul Technical University, Turkey (2011–2016)
+          </p>
+          <p class="text-slate-600">Minor in Mathematics </p>
+          <p class="text-slate-600">GPA: 3.03 </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Independent Research & Technical Projects -->
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-xl font-semibold text-slate-800">Independent Research & Technical Projects</h2>
+      <div class="space-y-4 mt-4">
+        <div class="projects-list">
+          <div class="project-item">
+            <div class="project-title"><a href="https://github.com/anilymngl/north-mini-test" target="_blank" rel="noopener noreferrer" style="color:#0f172a; text-decoration:none; border-bottom:1px solid #cbd5e1;">Trust Gap Research</a> — coding agent reliability evaluation</div>
+            <p class="project-desc">An independent evaluation asking: when a coding agent makes CI green, how often is the bug actually fixed? 33 scenarios, 2 models, hidden acceptance tests injected after the agent exits.</p>
+            <p class="project-meta"><strong>Stack:</strong> 33 CI-repair scenarios with hidden acceptance tests, pass@3 evaluation across 2 models (Laguna XS.2, North Mini), evaluator agent (DeepSeek V4 Pro), SQLite persistence, SHA256 evidence integrity.</p>
+            <p class="project-meta"><strong>Result:</strong> Both models converge to identical 9/12 hidden pass at best-of-3. Contract-visible prompts collapse false-green rate from 28–31% to 5.6%. Business logic resists all interventions: 72.7% false-green, 7 of 11 scenarios unconquered. One model regressed from pass@1 to pass@2.</p>
+            <p class="project-meta"><strong>Published:</strong> Multi-page research suite — paper, evidence index, evaluator findings, scenario catalog, system inventory.</p>
+          </div>
+          <div class="project-item">
+            <div class="project-title"><a href="https://github.com/anilymngl/rag-glassbox" target="_blank" rel="noopener noreferrer" style="color:#0f172a; text-decoration:none; border-bottom:1px solid #cbd5e1;">RAG Glassbox</a> / Local RAG Case Study</div>
+            <p class="project-desc">A laptop-local workbench for testing RAG systems and comparing retrieval strategies with measurable results.</p>
+            <p class="project-meta"><strong>Stack:</strong> BM25 + Milvus Lite hybrid retrieval, cross-encoder reranking, span-aware exact-match/F1 scoring, guarded LLM judge with exact-answer checks, SQLite telemetry, SHA256 signatures to detect index drift, Streamlit run-diff and context-audit views.</p>
+            <p class="project-meta"><strong>Result:</strong> Recall@10 on fictional-entity queries improved from ~0.43 (dense-only) to ~0.85 (sparse + rerank).</p>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Cognos Studio — Turkish-first thinking-game engine</div>
+            <p class="project-desc">A mobile/web app where players solve short intellectual challenges in Turkish and receive fair, explainable AI scoring.</p>
+            <p class="project-meta"><strong>Stack:</strong> React 19, TypeScript, Capacitor, Gemini, local Ollama, Playwright.</p>
+            <p class="project-meta"><strong>Architecture:</strong> provider layer for switching between Gemini and local Ollama, strict/style-blind judging flow with arbiter logic, scoring rules tied to rubric thresholds, structured JSON recovery, call budgeting, and a UI that shows judging steps during slow local inference.</p>
+            <p class="project-meta"><strong>Tests:</strong> unit, typed-contract, Playwright e2e, and a headless judge-calibration harness ("Evalception").</p>
+          </div>
+          <div class="project-item">
+            <div class="project-title">Signal Ledger — source-traceable editorial pipeline prototype</div>
+            <p class="project-desc">A pipeline that turns raw social-media posts into a traceable daily news brief — every AI output can be traced back to its original source post.</p>
+            <p class="project-meta"><strong>Stack:</strong> SQLAlchemy/Alembic schema, raw post-payload persistence, PydanticAI-typed signal extraction on local Ollama (gemma3), and rule-based anchor-consistency logic for repairing story groups — preventing runaway merges where loosely related stories collapse into one cluster.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Competencies -->
+    <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-6">Core Competencies</h2>
+      <div class="skills-grid">
+
+      <!-- AI Evaluation & Review — the differentiator -->
+      <div class="mb-6">
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
+          AI Evaluation &amp; Review
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Benchmark design</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Deterministic retrieval scoring</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">LLM-as-Judge</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Agent-assisted failure analysis</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Hidden acceptance testing</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Pass@k evaluation</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Ablation studies</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Typed LLM outputs (Pydantic)</span>
+        </div>
+      </div>
+
+      <!-- Snowflake & Cortex — the current platform -->
+      <div class="mb-6">
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
+          Snowflake &amp; Cortex
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Snowflake</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Analyst / Text-to-SQL</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Search / Retrieval</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Cortex Agents</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Semantic Views / Metrics Layer</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Streamlit in Snowflake</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">TruLens / AI Observability</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">MCP (Model Context Protocol)</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Databricks</span>
+        </div>
+      </div>
+
+      <!-- Data Engineering — the foundation -->
+      <div class="mb-6">
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
+          Data Engineering
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Python</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">SQL</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">PySpark</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">ETL/ELT</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Airflow</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Azure Data Factory</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Delta Lake</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Docker</span>
+        </div>
+      </div>
+
+      <!-- Analytics & Decision Systems — the heritage -->
+      <div class="mb-6">
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">
+          Analytics &amp; Decision Systems
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Forecasting</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Time Series Analysis</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Inventory Optimization</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Tableau</span>
+        </div>
+      </div>
+
+      <!-- Engineering & Delivery — how you ship -->
+      <div class="mb-6">
+        <h3 class="text-md font-medium text-slate-800 dark:text-slate-200 mb-3">Engineering &amp; Delivery</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Streamlit</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">React</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">TypeScript</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">CI/CD</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Code Review</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Technical Documentation</span>
+          <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Stakeholder Management</span>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Honest Framing / Limitations -->
+    <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
+      <div class="limitations-box">
+        <span class="lim-title">Honest Framing — what this resume can and can't tell you</span>
+        <ul>
+          <li><strong>Evidence tier:</strong> All claims are from direct work observed by the author — Tier 1 (not externally audited, not a public benchmark).</li>
+          <li><strong>Quantified outcomes</strong> are limited to Invent Analytics (retail metrics were client-measured in production) and RAG Glassbox (benchmark results are local and reproducible). JLL has no quantified metrics in the resume.</li>
+          <li><strong>The AI/ML role</strong> is in active build phase — tenure at time of writing is ~6 months. Workstream framing earns the seniority signal without padding volume.</li>
+          <li><strong>Local projects</strong> are prototypes at laptop scale — not SaaS, not multi-user, not production services. They show curiosity and range.</li>
+          <li><strong>Snowflake/Cortex</strong> is a current evidence pillar, not the whole identity. The durable positioning spans data engineering, enterprise analytics, retail optimization, and applied AI.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

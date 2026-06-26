@@ -1,0 +1,425 @@
+<!--
+  signal-evidence-map.html — Companion evidence index for signal-resume.html.
+
+  Maps every skill claim to where it is demonstrated, with evidence status
+  and concrete references. Filterable by category and evidence tier.
+
+  Signal principles applied:
+    - Truth labels on every row (Built / Delivered / Active / Prototype)
+    - Color semantics — green (delivered), blue (active/built), amber (prototype)
+    - How-to-read legend
+    - Filter controls
+    - Evidence tier stated (Tier 1: direct work, not externally audited)
+
+  NOT the source of truth. Companion to signal-resume.html.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signal Evidence Map — Anıl Yamangil</title>
+  <style>
+    :root {
+      --fg:         #1a1a2e;
+      --fg-muted:   #4a4a5e;
+      --fg-soft:    #78788a;
+      --bg:         #fafaf8;
+      --bg-card:    #ffffff;
+      --rule:       #e2e2e0;
+
+      --c-built:    #2d6a4f;
+      --c-active:   #1e6091;
+      --c-prototype:#b5838d;
+      --c-delivered:#1a5c3a;
+
+      --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono:  ui-monospace, SFMono-Regular, Menlo, "Cascadia Code", monospace;
+
+      --content-w:  920px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg:        #e8e6e0;
+        --fg-muted:  #b8b6ae;
+        --fg-soft:   #888680;
+        --bg:        #121210;
+        --bg-card:   #1a1a16;
+        --rule:      #2a2a24;
+        --c-built:   #52b788;
+        --c-active:  #5ea8d6;
+        --c-prototype:#d4a0ac;
+        --c-delivered:#52b788;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+    }
+
+    .doc {
+      max-width: var(--content-w);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .header__title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .header__sub {
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+    }
+
+    .header__nav {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+    }
+
+    .header__nav a {
+      color: var(--c-active);
+      text-decoration: none;
+    }
+
+    /* ===== Legend ===== */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 0.3rem;
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      align-items: center;
+    }
+
+    .legend__title {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: var(--fg-soft);
+      margin-right: 0.5rem;
+    }
+
+    .legend__item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .legend__dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend__dot--built     { background: var(--c-built); }
+    .legend__dot--delivered { background: var(--c-delivered); }
+    .legend__dot--active    { background: var(--c-active); }
+    .legend__dot--prototype { background: var(--c-prototype); }
+
+    /* ===== Filters ===== */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-btn {
+      font-size: 0.76rem;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--rule);
+      border-radius: 0.25rem;
+      background: var(--bg-card);
+      color: var(--fg-muted);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 120ms;
+    }
+
+    .filter-btn:hover { border-color: var(--fg-soft); }
+    .filter-btn--active { background: var(--c-active); color: white; border-color: var(--c-active); }
+    .filter-btn--delivered.filter-btn--active { background: var(--c-delivered); border-color: var(--c-delivered); }
+    .filter-btn--built.filter-btn--active { background: var(--c-built); border-color: var(--c-built); }
+    .filter-btn--prototype.filter-btn--active { background: var(--c-prototype); border-color: var(--c-prototype); }
+
+    .filter-sep {
+      color: var(--rule);
+      font-size: 0.76rem;
+      padding: 0.3rem 0.2rem;
+    }
+
+    /* ===== Table ===== */
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--fg-soft);
+      padding: 0.5rem 0.75rem;
+      border-bottom: 2px solid var(--rule);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    tbody tr { transition: background 80ms; }
+    tbody tr:hover { background: var(--bg); }
+
+    tbody tr.hidden { display: none; }
+
+    .ev-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.1rem 0.4rem;
+      border-radius: 0.2rem;
+      white-space: nowrap;
+    }
+
+    .ev-badge--built     { background: #d8f3dc; color: var(--c-built); }
+    .ev-badge--delivered { background: #d8f3dc; color: var(--c-delivered); }
+    .ev-badge--active    { background: #d0e8f5; color: var(--c-active); }
+    .ev-badge--prototype { background: #f5e0e6; color: var(--c-prototype); }
+
+    @media (prefers-color-scheme: dark) {
+      .ev-badge--built     { background: #1a3a2a; }
+      .ev-badge--delivered { background: #1a3a2a; }
+      .ev-badge--active    { background: #1a2a3a; }
+      .ev-badge--prototype { background: #3a2a2e; }
+    }
+
+    .skill-name { font-weight: 600; color: var(--fg); white-space: nowrap; }
+    .cat-name    { color: var(--fg-soft); font-size: 0.78rem; }
+    .ref-cell    { color: var(--fg-muted); max-width: 320px; }
+
+    /* ===== Stats bar ===== */
+    .stats {
+      font-size: 0.76rem;
+      color: var(--fg-soft);
+      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.72rem;
+      color: var(--fg-soft);
+      font-family: var(--font-mono);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .doc { padding: 1.25rem 0.75rem 2rem; }
+      table { font-size: 0.76rem; }
+      thead th, tbody td { padding: 0.35rem 0.4rem; }
+    }
+
+    @media print {
+      :root { --bg: white; --bg-card: white; --fg: black; --fg-muted: #333; }
+      .filters, .legend { display: none; }
+      table { font-size: 8pt; }
+    }
+  </style>
+</head>
+<body>
+  <div class="doc">
+
+    <!-- ===== Header ===== -->
+    <header class="header">
+      <h1 class="header__title">Signal Evidence Map</h1>
+      <p class="header__sub">Skill → Evidence traceability for Anıl Yamangil's resume. Companion to <a href="signal-resume.html">signal-resume.html</a>.</p>
+      <p class="header__sub" style="margin-top:0.25rem;">Evidence tier: <strong>Tier 1</strong> — all claims from direct work observed by the author, not externally audited.</p>
+      <div class="header__nav">
+        <a href="signal-resume.html">← Signal Resume</a> &nbsp;·&nbsp; <a href="index.html">Production Resume</a>
+      </div>
+    </header>
+
+    <!-- ===== Legend ===== -->
+    <div class="legend">
+      <span class="legend__title">Evidence Status:</span>
+      <span class="legend__item"><span class="legend__dot legend__dot--built"></span> Built — implemented by author</span>
+      <span class="legend__item"><span class="legend__dot legend__dot--delivered"></span> Delivered — shipped to client/production</span>
+      <span class="legend__item"><span class="legend__dot legend__dot--active"></span> Active — in current work</span>
+      <span class="legend__item"><span class="legend__dot legend__dot--prototype"></span> Prototype — local/experimental</span>
+    </div>
+
+    <!-- ===== Filters ===== -->
+    <div class="filters" id="filters">
+      <button class="filter-btn filter-btn--active" data-filter="all">All skills</button>
+      <span class="filter-sep">|</span>
+      <button class="filter-btn filter-btn--delivered" data-filter="delivered">Delivered</button>
+      <button class="filter-btn filter-btn--built" data-filter="built">Built</button>
+      <button class="filter-btn filter-btn--active" data-filter="active">Active</button>
+      <button class="filter-btn filter-btn--prototype" data-filter="prototype">Prototype</button>
+      <span class="filter-sep">|</span>
+      <button class="filter-btn" data-filter="Snowflake">Snowflake &amp; Platforms</button>
+      <button class="filter-btn" data-filter="Data Engineering">Data Engineering</button>
+      <button class="filter-btn" data-filter="Applied AI">Applied AI</button>
+      <button class="filter-btn" data-filter="Analytics">Analytics &amp; Decision</button>
+      <button class="filter-btn" data-filter="Applications">Applications</button>
+    </div>
+
+    <div class="stats" id="stats">Showing 38 skills</div>
+
+    <!-- ===== Evidence Table ===== -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Category</th>
+            <th>Evidence</th>
+            <th>Demonstrated In</th>
+            <th>Concrete Reference</th>
+          </tr>
+        </thead>
+        <tbody id="evidence-body">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+      Signal Evidence Map — companion to signal-resume.html. Not the source of truth. Not consumed by the ATS PDF build script.
+    </footer>
+
+  </div>
+
+  <script>
+    const evidence = [
+      // Snowflake & Data Platforms
+      { skill: "Snowflake",            cat: "Snowflake",       ev: "active",     where: "BlueCloud AI/ML (2026–) · BlueCloud JLL (2022–2025)", ref: "Cortex eval frameworks, governed data platforms on Snowflake" },
+      { skill: "Cortex Agents",        cat: "Snowflake",       ev: "built",      where: "BlueCloud AI/ML (2026–)", ref: "Cortex Code Agent SDK workflow for evaluation failure classification" },
+      { skill: "Cortex Analyst",       cat: "Snowflake",       ev: "built",      where: "BlueCloud AI/ML (2026–)", ref: "Text-to-SQL evaluation harness with separate data/SQL/answer scoring over Semantic Views" },
+      { skill: "Cortex Search",        cat: "Snowflake",       ev: "built",      where: "BlueCloud AI/ML (2026–)", ref: "Managed search/retrieval evaluation framework with deterministic scoring" },
+      { skill: "Snowflake Semantic Views", cat: "Snowflake",   ev: "built",      where: "BlueCloud AI/ML (2026–)", ref: "Semantic View Factory accelerator, YAML assembly, quality gates" },
+      { skill: "Streamlit in Snowflake", cat: "Snowflake",     ev: "built",      where: "BlueCloud AI/ML (2026–)", ref: "Operator console for benchmark browsing, SQL inspection, cross-run comparison" },
+      { skill: "TruLens / Snowflake AI Observability", cat: "Snowflake", ev: "built", where: "BlueCloud AI/ML (2026–)", ref: "Observability integration for Cortex Search evaluation framework" },
+      { skill: "Databricks",           cat: "Snowflake",       ev: "delivered",  where: "BlueCloud JLL (2022–2025)", ref: "Analytics pipelines, PySpark jobs, Databricks orchestration patterns" },
+
+      // Data Engineering
+      { skill: "Python",               cat: "Data Engineering", ev: "delivered", where: "BlueCloud AI/ML · BlueCloud JLL · Invent Analytics", ref: "ETL, evaluation frameworks, optimization pipelines, ML, simulation" },
+      { skill: "SQL",                  cat: "Data Engineering", ev: "delivered", where: "BlueCloud AI/ML · BlueCloud JLL · Invent Analytics", ref: "Semantic View definitions, ELT/ETL, governed metrics, data modeling" },
+      { skill: "PySpark",              cat: "Data Engineering", ev: "delivered", where: "BlueCloud JLL (2022–2025)", ref: "Databricks job/orchestration patterns, performance optimization" },
+      { skill: "ETL/ELT",              cat: "Data Engineering", ev: "delivered", where: "BlueCloud JLL · Invent Analytics", ref: "Production pipelines for analytics and retail optimization" },
+      { skill: "Airflow",              cat: "Data Engineering", ev: "delivered", where: "BlueCloud JLL (2022–2025)", ref: "Orchestration for Snowflake/Databricks analytics pipelines" },
+      { skill: "Azure Data Factory",   cat: "Data Engineering", ev: "delivered", where: "BlueCloud JLL (2022–2025)", ref: "Cloud data movement and pipeline orchestration" },
+      { skill: "Delta Lake",           cat: "Data Engineering", ev: "delivered", where: "BlueCloud JLL (2022–2025)", ref: "Databricks storage layer for analytics workloads" },
+      { skill: "Docker",               cat: "Data Engineering", ev: "delivered", where: "BlueCloud JLL · Independent projects", ref: "Containerized analytics and local development environments" },
+
+      // Applied AI Engineering
+      { skill: "Agent workflows (Cortex Code SDK)", cat: "Applied AI", ev: "built", where: "BlueCloud AI/ML (2026–)", ref: "Read-only SQL tool guardrails, structured findings, failure classification" },
+      { skill: "Deterministic Retrieval Scoring", cat: "Applied AI", ev: "built", where: "BlueCloud AI/ML (2026–)", ref: "Hit@k, rank, filter correctness, duplicate saturation, latency scorers" },
+      { skill: "LLM-as-Judge",         cat: "Applied AI", ev: "built", where: "BlueCloud AI/ML · Cognos Studio", ref: "Semantic judge checks, arbiter logic, rubric-threshold-gated scoring" },
+      { skill: "Agent-assisted failure analysis", cat: "Applied AI", ev: "built", where: "BlueCloud AI/ML (2026–)", ref: "Cortex Code Agent SDK classifying eval failures into 4 categories" },
+      { skill: "Typed LLM outputs (Pydantic)", cat: "Applied AI", ev: "built", where: "BlueCloud AI/ML · Signal Ledger", ref: "Structured findings with confidence scores, PydanticAI signal extraction" },
+      { skill: "Ablation Studies",     cat: "Applied AI", ev: "built", where: "BlueCloud AI/ML (2026–)", ref: "Stress-test cases for non-additive metrics, fan-out risks, model upgrade analysis" },
+
+      // Analytics & Decision Systems
+      { skill: "Forecasting",          cat: "Analytics", ev: "delivered", where: "Invent Analytics (2018–2022)", ref: "Production forecasting for retail inventory and replenishment" },
+      { skill: "Time Series Analysis", cat: "Analytics", ev: "delivered", where: "Invent Analytics (2018–2022)", ref: "Retail demand patterns, seasonality modeling, simulation pipelines" },
+      { skill: "Inventory Optimization", cat: "Analytics", ev: "delivered", where: "Invent Analytics (2018–2022)", ref: "Custom system for electronics retailer — ~3% lost-sales reduction, 7%+ availability" },
+      { skill: "Tableau",              cat: "Analytics", ev: "delivered", where: "BlueCloud JLL (2022–2025)", ref: "Executive visibility, operational reporting, governed metric layers" },
+
+      // Applications & Delivery
+      { skill: "Streamlit",            cat: "Applications", ev: "built", where: "BlueCloud AI/ML · RAG Glassbox", ref: "Operator console (Cortex Analyst), run-diff/context-audit views (RAG Glassbox)" },
+      { skill: "FastAPI",              cat: "Applications", ev: "prototype", where: "Independent projects", ref: "API layer for local project backends" },
+      { skill: "React",                cat: "Applications", ev: "built", where: "Cognos Studio", ref: "React 19, TypeScript frontend for Turkish thinking-game engine" },
+      { skill: "TypeScript",           cat: "Applications", ev: "built", where: "Cognos Studio", ref: "Typed contracts, strict-mode TypeScript across the game engine" },
+      { skill: "CI/CD",                cat: "Applications", ev: "delivered", where: "BlueCloud · Independent projects", ref: "Standard delivery practices across roles and projects" },
+      { skill: "Code Review",          cat: "Applications", ev: "delivered", where: "BlueCloud JLL · Invent Analytics", ref: "Mentored engineers and analysts through design reviews and delivery support" },
+      { skill: "Technical Documentation", cat: "Applications", ev: "built", where: "BlueCloud AI/ML · BlueCloud JLL", ref: "Benchmark design specs, scoring architecture docs, operations runbooks, c-level presentations" },
+      { skill: "Stakeholder Management", cat: "Applications", ev: "delivered", where: "BlueCloud JLL · Invent Analytics", ref: "Stakeholder alignment on metrics, client rollout and UAT, embedded advisor role" },
+    ];
+
+    const tbody = document.getElementById('evidence-body');
+    const stats  = document.getElementById('stats');
+    let activeFilter = 'all';
+
+    function render() {
+      tbody.innerHTML = '';
+      let visible = 0;
+      evidence.forEach((row, i) => {
+        const match = activeFilter === 'all' ||
+                      activeFilter === row.ev ||
+                      activeFilter === row.cat;
+        const tr = document.createElement('tr');
+        if (!match) tr.classList.add('hidden');
+        else visible++;
+
+        tr.innerHTML = `
+          <td class="skill-name">${row.skill}</td>
+          <td class="cat-name">${row.cat}</td>
+          <td><span class="ev-badge ev-badge--${row.ev}">${row.ev}</span></td>
+          <td>${row.where}</td>
+          <td class="ref-cell">${row.ref}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      stats.textContent = `Showing ${visible} of ${evidence.length} skills`;
+    }
+
+    document.getElementById('filters').addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      activeFilter = btn.dataset.filter;
+
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-btn--active'));
+      btn.classList.add('filter-btn--active');
+
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

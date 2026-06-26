@@ -12,13 +12,14 @@ Or from anywhere:
 Transformations applied to produce a text-extractable, ATS-friendly PDF:
   1. Contact-row emojis (📧 📞 📍 🔗) → plain labels ("Email:", "Phone:",
      "Location:", "LinkedIn:") and the row is flattened to a single line.
-  2. Skill pill chips → comma-separated inline text under bold category
-     labels. Pills parse inconsistently across ATS; inline text is reliable.
+  2. Skill groups / pill chips → comma-separated inline text under bold
+     category labels. Dense visual skill layouts parse inconsistently across
+     ATS; inline text is reliable.
   3. 2-column skills grid → single column.
   4. Special characters (→, smart quotes) → plain ASCII equivalents.
   5. Section headers renamed to ATS-standard labels:
         "Core Competencies" → "Skills"
-        "Independent Fun & Technical Projects — Local Prototypes" → "Projects"
+        "Selected Technical Work" → "Projects"
   6. Cognos project title expanded to include the descriptive name:
         "Cognos Studio — Turkish-first thinking-game engine"
         → "Turkish LLM Judging Game (Cognos Studio) — Turkish-first thinking-game engine"
@@ -64,7 +65,7 @@ from bs4 import BeautifulSoup, NavigableString
 # ATS-safe stylesheet. Self-contained: no Tailwind needed.
 # ---------------------------------------------------------------------------
 ATS_CSS = """
-@page { size: Letter; margin: 0.6in 0.7in; }
+@page { size: Letter; margin: 0.5in 0.7in; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -184,6 +185,7 @@ CHAR_SWAPS = [
 
 SECTION_RENAMES = {
     "Core Competencies": "Skills",
+    "Selected Technical Work": "Projects",
     "Independent Fun & Technical Projects — Local Prototypes": "Projects",
     "Independent Fun & Technical Projects - Local Prototypes": "Projects",
 }
@@ -252,6 +254,34 @@ def strip_emojis_remaining(soup: BeautifulSoup) -> None:
 
 
 def flatten_skills(soup: BeautifulSoup) -> None:
+    grouped = soup.find(class_="skill-groups")
+    if grouped is not None:
+        lines = []
+        for group in grouped.find_all(class_="skill-group", recursive=False):
+            strong = group.find("strong")
+            if strong is None:
+                continue
+            label = strong.get_text(" ", strip=True)
+            text = group.get_text(" ", strip=True)
+            if text.startswith(label):
+                text = text[len(label):].strip()
+            text = re.sub(r"^\s*:\s*", "", text).strip()
+            if not text:
+                continue
+            p = soup.new_tag("p")
+            p["class"] = ["skill-category"]
+            new_strong = soup.new_tag("strong")
+            new_strong.string = f"{label}:"
+            p.append(new_strong)
+            p.append(f" {text}")
+            lines.append(p)
+        if lines:
+            container = soup.new_tag("div")
+            for p in lines:
+                container.append(p)
+            grouped.replace_with(container)
+        return
+
     grid = soup.find(class_="skills-grid")
     if grid is None:
         return
