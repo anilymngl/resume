@@ -48,10 +48,10 @@ Outputs:
 All content is preserved — no bullets dropped, no sections cut. The transformations are formatting-only, targeting ATS reliability:
 
 1. **Contact emojis → labels** (`📧` becomes `Email:`, etc.) and the row is flattened to a single plain line.
-2. **Skill pill chips → comma-separated inline text** under bold category labels. Pills parse inconsistently across ATS; inline text is reliable.
+2. **Skill groups / pill chips → comma-separated inline text** under bold category labels. Dense visual skill layouts parse inconsistently across ATS; inline text is reliable.
 3. **Multi-column grids → single column** everywhere.
 4. **Special characters → ASCII** (`→` to `to`, smart quotes to straight quotes, em/en dashes to hyphens).
-5. **Section headers renamed** to ATS-standard labels: `Core Competencies` → `Skills`, `Independent Fun & Technical Projects — Local Prototypes` → `Projects`.
+5. **Section headers renamed** to ATS-standard labels: `Core Competencies` → `Skills`, `Selected Technical Work` → `Projects`.
 6. **Cognos project title expanded** to include the descriptive name so ATS keyword matches land on both.
 7. **Tailwind link dropped**, portfolio `<style>` block replaced with a minimal single-column ATS stylesheet.
 
