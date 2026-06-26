@@ -48,20 +48,20 @@ Order:
 2. Three-sentence professional summary
 3. Professional Experience
    - current BlueCloud AI/ML role
-   - Coding Agent Acceptance Lab inserted immediately after the current role
+   - Independent Research & Open-Source Engineering as a sibling block immediately after the current role
    - BlueCloud / JLL Technologies
    - Invent Analytics
    - earlier work
 4. Selected Technical Work
-5. Technical Writing
-6. Core Competencies
-7. Education
+5. Core Competencies
+6. Education
 
 Rationale:
 
 - preserve V3's personality and career continuity
 - avoid turning the resume into a grand unifying theory
 - elevate Coding Agent Acceptance Lab without letting it swallow the professional record
+- keep independent research visibly separate from BlueCloud employer work
 - keep the headline stable until the body works
 
 ## Professional Experience — Structure
@@ -85,7 +85,7 @@ This preserves Cortex Analyst, Cortex Search, Semantic Views, Streamlit review t
 
 ### Coding Agent Acceptance Lab — independent research
 
-Positioned directly after the current AI/ML role.
+Positioned directly after the current AI/ML role as its own `Independent Research & Open-Source Engineering` block, not nested under BlueCloud. This avoids implying that the research was a BlueCloud assignment.
 
 Claim boundary:
 
@@ -103,6 +103,8 @@ Keep visible:
 - sparse false-green rate 84 / 194 = 43.3%
 - contract-visible false-green rate 17 / 191 = 8.9%
 - public research site, technical report, evidence matrix, and GitHub repository links
+
+Do not add a standalone Technical Writing section for this single report. Restore that section only when there is a second strong, public-safe writing item.
 
 ### Invent Analytics — protected content
 

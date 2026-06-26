@@ -14,7 +14,7 @@ For wording rules, see `resume-editing-rules.md`.
 
 - [ ] Headline is recognizable and scannable in under five seconds.
 - [ ] Every vendor product name has a plain-English translation on first use.
-- [ ] Section names are standard or intentionally mapped for ATS (`Professional Experience`, `Education`, `Skills`, `Projects`; `Technical Writing` remains truthful).
+- [ ] Section names are standard or intentionally mapped for ATS (`Professional Experience`, `Education`, `Skills`, `Projects`).
 - [ ] No dense jargon or noun-stacks in the first 20% of the page.
 - [ ] Local projects are clearly scoped as prototypes / workbenches / case studies, while Coding Agent Acceptance Lab is scoped as independent research.
 

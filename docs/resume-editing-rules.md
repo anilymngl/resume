@@ -135,11 +135,12 @@ Keep titles honest — if the folder name is `cognos-game`, the web title can be
 |---|---|---|
 | Core Competencies | Skills | ATS section taxonomy standard |
 | Selected Technical Work | Projects | ATS friendly; local/prototype scope belongs in item text |
-| Technical Writing | Technical Writing | truthful label; do not inflate to Publications unless public publication scope changes |
 | Professional Experience | Professional Experience | already standard |
 | Education | Education | already standard |
 
 When a section name changes in `index.html`, also update `SECTION_RENAMES` in `build/build_ats_pdf.py`.
+
+Do not create a standalone `Technical Writing` section for one duplicated report link. Use it only when there is a real collection of at least two strong, public-safe writing items.
 
 ---
 

@@ -65,7 +65,7 @@ from bs4 import BeautifulSoup, NavigableString
 # ATS-safe stylesheet. Self-contained: no Tailwind needed.
 # ---------------------------------------------------------------------------
 ATS_CSS = """
-@page { size: Letter; margin: 0.6in 0.7in; }
+@page { size: Letter; margin: 0.5in 0.7in; }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

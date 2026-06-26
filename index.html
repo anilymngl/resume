@@ -189,21 +189,7 @@
         margin-right: 0.35rem;
       }
 
-      /* Writing + compact skill groups */
-      .writing-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-      .writing-title {
-        font-weight: 600;
-        color: #0f172a;
-      }
-      .writing-title a {
-        color: #0f172a;
-        border-bottom: 1px solid #cbd5e1;
-        text-decoration: none;
-      }
+      /* Compact skill groups */
       .skill-groups {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -426,7 +412,7 @@
     <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
       <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Professional Summary</h2>
       <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-        Senior AI/ML Engineer with 8+ years across retail optimization, enterprise data engineering, and applied AI. Built production forecasting and inventory systems under real client pressure, then spent three years keeping Snowflake and Databricks data platforms reliable for enterprise analytics. Current work focuses on AI evaluation and review workflows for Snowflake Cortex Analyst, Cortex Search, Snowflake Semantic Views, and independent coding-agent reliability research.
+        Senior AI/ML Engineer with 8+ years across retail optimization, enterprise data engineering, and applied AI. Built production forecasting and inventory systems under real client pressure, then spent more than three years keeping Snowflake and Databricks data platforms reliable for enterprise analytics. Current professional work focuses on evaluating Snowflake's AI and semantic systems; independently, I build and publish research on coding-agent acceptance reliability.
       </p>
     </div>
 
@@ -480,35 +466,45 @@
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="mt-6">
-            <h4 class="font-medium text-slate-800">Coding Agent Acceptance Lab <span class="text-slate-600 font-normal">| Independent Research &amp; Open-Source Engineering | 2026</span></h4>
-            <p class="role-blurb">A reproducible evaluation system for checking whether coding-agent patches satisfy hidden acceptance, not only visible CI.</p>
-            <div class="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
-              <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                <li>
-                  Designed and open-sourced a deterministic evaluation harness that runs coding agents against visible tests, captures patches, injects hidden acceptance tests after agent exit, and records false-greens.
-                </li>
-                <li>
-                  Authored 33 scenarios and analyzed 391 retained attempts; under sparse prompts, 84 of 194 public-green patches still failed hidden acceptance, compared with 17 of 191 when the contract was visible.
-                </li>
-                <li>
-                  Built the release pipeline: isolated worktrees, SQLite and CSV data, evaluator-review validation, SHA-256 checks, CI-enforced metric recomputation, scenario catalog, evidence matrix, and technical report.
-                </li>
-              </ul>
-              <p class="project-links">
-                <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/" target="_blank" rel="noopener noreferrer">Research Site</a>
-                |
-                <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/paper.html" target="_blank" rel="noopener noreferrer">Technical Report</a>
-                |
-                <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/evidence-index.html" target="_blank" rel="noopener noreferrer">Evidence</a>
-                |
-                <a href="https://github.com/anilymngl/coding-agent-acceptance-lab" target="_blank" rel="noopener noreferrer">GitHub</a>
-              </p>
-            </div>
+        <!-- Independent Research -->
+        <div class="space-y-4">
+          <h3 class="font-semibold text-slate-800">
+            Independent Research &amp; Open-Source Engineering
+          </h3>
+          <h4 class="font-medium text-slate-800">Coding Agent Acceptance Lab <span class="text-slate-600 font-normal">| 2026</span></h4>
+          <p class="role-blurb">A reproducible evaluation system for checking whether coding-agent patches satisfy hidden acceptance, not only visible CI.</p>
+          <div class="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+              <li>
+                Designed and open-sourced a deterministic evaluation harness that runs coding agents against visible tests, captures patches, injects hidden acceptance tests after agent exit, and records false-greens.
+              </li>
+              <li>
+                Authored 33 scenarios and analyzed 391 retained attempts; under sparse prompts, 84 of 194 public-green patches still failed hidden acceptance, compared with 17 of 191 when the contract was visible.
+              </li>
+              <li>
+                Built the release pipeline: isolated worktrees, SQLite and CSV data, evaluator-review validation, SHA-256 checks, CI-enforced metric recomputation, scenario catalog, evidence matrix, and technical report.
+              </li>
+            </ul>
+            <p class="project-links">
+              <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/" target="_blank" rel="noopener noreferrer">Research Site</a>
+              |
+              <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/paper.html" target="_blank" rel="noopener noreferrer">Technical Report</a>
+              |
+              <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/evidence-index.html" target="_blank" rel="noopener noreferrer">Evidence</a>
+              |
+              <a href="https://github.com/anilymngl/coding-agent-acceptance-lab" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </p>
           </div>
+        </div>
 
-          <div class="mt-6">
+        <!-- BlueCloud / JLL -->
+        <div class="space-y-4">
+          <h3 class="font-semibold text-slate-800">
+            BlueCloud, Tampa, US (Remote) | Client: JLL Technologies
+          </h3>
+          <div class="mt-4">
             <h4 class="font-medium text-slate-800">Senior Analytics Consultant & Engineer <span class="text-slate-600 font-normal">| Client: JLL Technologies | Aug 2022 – Dec 2025</span></h4>
             <p class="role-blurb">Embedded across enterprise analytics and data-platform work for reliable pipelines, interpretable metrics, and usable reporting.</p>
             <div class="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
@@ -592,27 +588,12 @@
       </div>
     </div>
 
-    <!-- Technical Writing -->
-    <div class="bg-white shadow-md rounded-lg p-4">
-      <h2 class="text-xl font-semibold text-slate-800">Technical Writing</h2>
-      <div class="space-y-4 mt-4">
-        <div class="writing-list">
-          <div class="writing-item">
-            <div class="writing-title">
-              <a href="https://anilymngl.github.io/coding-agent-acceptance-lab/paper.html" target="_blank" rel="noopener noreferrer">Measuring Acceptance Reliability in Coding-Agent CI Repair</a>
-            </div>
-            <p class="project-meta">Independent technical report, June 2026. Documents the Coding Agent Acceptance Lab methodology, Study B results, limitations, and reproducible release data.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Core Competencies -->
     <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-6">
       <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-6">Core Competencies</h2>
       <div class="skill-groups">
         <p class="skill-group"><strong>AI Evaluation</strong> Benchmark design, hidden acceptance testing, retrieval and text-to-SQL evaluation, LLM judges, failure analysis.</p>
-        <p class="skill-group"><strong>Data &amp; Semantic Systems</strong> Python, SQL, PySpark, Snowflake, Databricks, ETL/ELT, data modeling, Semantic Views, governed metrics.</p>
+        <p class="skill-group"><strong>Data &amp; Semantic Systems</strong> Python, SQL, PySpark, Snowflake, Databricks, ETL/ELT, data modeling, Snowflake Semantic Views, governed metrics.</p>
         <p class="skill-group"><strong>Decision Systems</strong> Forecasting, inventory optimization, simulation, retail analytics, KPI design, Tableau.</p>
         <p class="skill-group"><strong>Engineering &amp; Delivery</strong> Streamlit, FastAPI, React, TypeScript, Git, CI/CD, Docker, Azure, technical docs, architecture reviews.</p>
       </div>
